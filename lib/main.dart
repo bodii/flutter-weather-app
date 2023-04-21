@@ -3,6 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:weather_app/weather_app.dart';
 
 void main() {
-  debugPaintSizeEnabled = false;
+  debugPaintSizeEnabled = true;
   runApp(const WeatherApp());
 }

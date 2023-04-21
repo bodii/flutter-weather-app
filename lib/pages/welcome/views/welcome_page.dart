@@ -30,7 +30,7 @@ class WelcomeView extends StatelessWidget {
           children: [
             const EuropeMapWidget(),
             const SizedBox(
-              height: 20,
+              height: 5,
             ),
             Stack(
               children: [

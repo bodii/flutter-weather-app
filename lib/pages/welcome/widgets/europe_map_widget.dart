@@ -8,82 +8,118 @@ class EuropeMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final ratio = screenWidth / 411;
+
     return Container(
-      width: double.infinity,
-      height: 300,
-      padding: const EdgeInsets.all(20.0),
+      width: screenWidth,
+      height: screenWidth - (100 * ratio),
+      padding: EdgeInsets.all(15.0 * ratio),
       child: Stack(
         children: [
           Image.asset(
             'assets/weather_icon/world/oz.jpg',
+            fit: BoxFit.fill,
+            width: screenWidth - (30 * ratio),
           ),
           Stack(
-            children: const [
+            children: [
               Positioned(
-                left: 20,
-                top: 20,
+                left: 20 * ratio,
+                top: 23 * ratio,
                 child: Text(
                   '雷克雅维克',
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(fontSize: (11 * ratio)),
                 ),
               ),
               Positioned(
-                left: 108,
-                top: 72,
-                child: Text('奥斯陆'),
+                left: 115 * ratio,
+                top: 75 * ratio,
+                child: Text(
+                  '奥斯陆',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 48,
-                top: 100,
-                child: Text('伦敦'),
+                left: 50 * ratio,
+                top: 110 * ratio,
+                child: Text(
+                  '伦敦',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 245,
-                top: 78,
-                child: Text('莫斯科'),
+                left: 262 * ratio,
+                top: 82 * ratio,
+                child: Text(
+                  '莫斯科',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 195,
-                top: 120,
-                child: Text('华沙'),
+                left: 205 * ratio,
+                top: 127 * ratio,
+                child: Text(
+                  '华沙',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 18,
-                top: 210,
-                child: Text('马德里'),
+                left: 20 * ratio,
+                top: 226 * ratio,
+                child: Text(
+                  '马德里',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 53,
-                top: 155,
-                child: Text('巴黎'),
+                left: 58 * ratio,
+                top: 165 * ratio,
+                child: Text(
+                  '巴黎',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 122,
-                top: 126,
-                child: Text('柏林'),
+                left: 131 * ratio,
+                top: 135 * ratio,
+                child: Text(
+                  '柏林',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 115,
-                top: 222,
-                child: Text('罗马'),
+                left: 122 * ratio,
+                top: 237 * ratio,
+                child: Text(
+                  '罗马',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 125,
-                top: 180,
-                child: Text('维也纳'),
+                left: 134 * ratio,
+                top: 190 * ratio,
+                child: Text(
+                  '维也纳',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
               Positioned(
-                left: 218,
-                top: 171,
+                left: 234 * ratio,
+                top: 185 * ratio,
                 child: Text(
                   '布加勒斯特',
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(fontSize: 10 * ratio),
                 ),
               ),
               Positioned(
-                left: 193,
-                top: 222,
-                child: Text('雅典'),
+                left: 207 * ratio,
+                top: 238 * ratio,
+                child: Text(
+                  '雅典',
+                  style: TextStyle(fontSize: 14 * ratio),
+                ),
               ),
             ],
           ),
