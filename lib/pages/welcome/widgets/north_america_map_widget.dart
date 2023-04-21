@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-// 亚洲
-class AsiaMapWidget extends StatelessWidget {
-  const AsiaMapWidget({
-    super.key,
-  });
+class NorthAmericaMapWidget extends StatelessWidget {
+  const NorthAmericaMapWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,105 +16,97 @@ class AsiaMapWidget extends StatelessWidget {
       child: Stack(
         children: [
           Image.asset(
-            'assets/weather_icon/world/yz.jpg',
+            'assets/weather_icon/world/bmz.jpg',
             fit: BoxFit.fill,
             width: screenWidth - (30 * ratio),
           ),
           Stack(
             children: [
               Positioned(
-                left: 21 * ratio,
+                left: 75 * ratio,
+                top: 92 * ratio,
+                child: Text(
+                  '温哥华',
+                  style: TextStyle(fontSize: (14 * ratio)),
+                ),
+              ),
+              Positioned(
+                left: 133 * ratio,
                 top: 78 * ratio,
                 child: Text(
-                  '德黑兰',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ),
-              ),
-              Positioned(
-                left: 91 * ratio,
-                top: 70 * ratio,
-                child: Text(
-                  '塔什干',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ),
-              ),
-              Positioned(
-                left: 203 * ratio,
-                top: 37 * ratio,
-                child: Text(
-                  '乌兰巴托',
+                  '埃德蒙顿',
                   style: TextStyle(fontSize: (13 * ratio)),
                 ),
               ),
               Positioned(
-                left: 254 * ratio,
-                top: 84 * ratio,
+                left: 205 * ratio,
+                top: 103 * ratio,
                 child: Text(
-                  '北京',
+                  '渥太华',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 323 * ratio,
-                top: 65 * ratio,
+                left: 264 * ratio,
+                top: 79 * ratio,
                 child: Text(
-                  '首尔',
+                  '蒙特利尔',
+                  style: TextStyle(fontSize: (13 * ratio)),
+                ),
+              ),
+              Positioned(
+                left: 279 * ratio,
+                top: 123 * ratio,
+                child: Text(
+                  '纽约',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 332 * ratio,
-                top: 104 * ratio,
+                left: 62 * ratio,
+                top: 138 * ratio,
                 child: Text(
-                  '东京',
+                  '旧金山',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 42 * ratio,
-                top: 153 * ratio,
+                left: 172 * ratio,
+                top: 205 * ratio,
                 child: Text(
-                  '利雅得',
+                  '休斯敦',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 117 * ratio,
-                top: 110 * ratio,
+                left: 96 * ratio,
+                top: 182 * ratio,
                 child: Text(
-                  '新德里',
+                  '洛杉矶',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 120 * ratio,
-                top: 212 * ratio,
+                left: 177 * ratio,
+                top: 155 * ratio,
                 child: Text(
-                  '马累',
+                  '芝加哥',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 212 * ratio,
-                top: 157 * ratio,
+                left: 255 * ratio,
+                top: 165 * ratio,
                 child: Text(
-                  '曼谷',
+                  '华盛顿',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
               Positioned(
-                left: 292 * ratio,
-                top: 174 * ratio,
+                left: 260 * ratio,
+                top: 213 * ratio,
                 child: Text(
-                  '马尼拉',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ),
-              ),
-              Positioned(
-                left: 245 * ratio,
-                top: 233 * ratio,
-                child: Text(
-                  '雅加达',
+                  '迈阿密',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ),
               ),
