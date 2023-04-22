@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/pages/get_location/index.dart';
 import 'package:weather_app/pages/welcome/bloc/continents_bloc.dart';
-import 'package:weather_app/pages/welcome/widgets/north_america_map_widget.dart';
+import 'package:weather_app/pages/welcome/widgets/africe_map_widget.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -28,7 +28,7 @@ class WelcomeView extends StatelessWidget {
         ),
         body: Column(
           children: [
-            const NorthAmericaMapWidget(),
+            const AfriceMapWidget(),
             const SizedBox(
               height: 5,
             ),
