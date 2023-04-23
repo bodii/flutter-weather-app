@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/pages/get_location/index.dart';
 import 'package:weather_app/pages/welcome/bloc/continents_bloc.dart';
-import 'package:weather_app/pages/welcome/widgets/worlds_widget.dart';
+import 'package:weather_app/pages/welcome/widgets/index.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -143,68 +143,4 @@ BlocBuilder<ContinentsBloc, ContinentsState>(
                     }),
 */
 
-class LoginWidget extends StatelessWidget {
-  const LoginWidget({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('登录'),
-      content: SizedBox(
-        height: 130,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "邮箱",
-                  border: const OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.mail,
-                    color: Theme.of(context).primaryColor,
-                    size: 18.0,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "密码",
-                  border: const OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Theme.of(context).primaryColor,
-                    size: 18.0,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        ElevatedButton(
-          child: const Text("取消"),
-          onPressed: () {
-            Navigator.of(context).pop(false);
-          },
-        ),
-        ElevatedButton(
-          child: const Text("确定"),
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
-        ),
-      ],
-    );
-  }
-}

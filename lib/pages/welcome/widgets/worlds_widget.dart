@@ -6,6 +6,7 @@ const worlds = [
   EuropeMapWidget(),
   NorthAmericaMapWidget(),
   SouthAmericaMapWidget(),
+  AfriceMapWidget(),
   OceaniaMapWidget(),
 ];
 
