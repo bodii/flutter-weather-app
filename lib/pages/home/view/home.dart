@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
+    /*
     try {
       getLocation().then((value) {
         LocationData? location = value;
@@ -37,18 +37,11 @@ class _HomePageState extends State<HomePage> {
             log(bGeoToAddress.toJson().toString());
           });
         }
-        // getAddress(location?.latitude, location?.longitude).then((value) {
-        //   // setState(() {
-        //   currentLocation = location;
-        //   address = value;
-        //   // });
-
-        //   log('city: ${address?.city}');
-        // });
       });
     } catch (e) {
       log('get location failure');
     }
+    */
   }
 
   @override

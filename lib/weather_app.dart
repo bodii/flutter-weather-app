@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/welcome/index.dart';
+import 'package:weather_app/pages/weather/views/weather_page.dart';
 import 'package:weather_app/common/color_schemes.g.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -14,7 +14,8 @@ class WeatherApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      home: const WelcomePage(),
+      // home: const WelcomePage(),
+      home: const WeatherPage(),
     );
   }
 }

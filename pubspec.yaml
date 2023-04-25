@@ -74,3 +74,7 @@ flutter:
   assets:
     - assets/weather_icon/
     - assets/weather_icon/world/
+    - assets/weather_icon/moon/
+    - assets/weather_icon/sun/
+    - assets/weather_icon/icons/
+

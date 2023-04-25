@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/pages/weather/views/weather_page.dart';
 
 class AfriceMapWidget extends StatelessWidget {
   const AfriceMapWidget({Key? key}) : super(key: key);
@@ -25,25 +26,41 @@ class AfriceMapWidget extends StatelessWidget {
               Positioned(
                 left: 115 * ratio,
                 top: 18 * ratio,
-                child: Text(
-                  '突尼斯',
-                  style: TextStyle(fontSize: (14 * ratio)),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const WeatherPage()));
+                  },
+                  child: Text(
+                    '突尼斯',
+                    style: TextStyle(fontSize: (14 * ratio)),
+                  ),
                 ),
               ),
               Positioned(
                 left: 217 * ratio,
                 top: 22 * ratio,
-                child: Text(
-                  '开罗',
-                  style: TextStyle(fontSize: (14 * ratio)),
+                child: InkWell(
+                  onTap: () {
+                    print("test");
+                  },
+                  child: Text(
+                    '开罗',
+                    style: TextStyle(fontSize: (14 * ratio)),
+                  ),
                 ),
               ),
               Positioned(
                 left: 40 * ratio,
                 top: 79 * ratio,
-                child: Text(
-                  '达喀尔',
-                  style: TextStyle(fontSize: (14 * ratio)),
+                child: InkWell(
+                  onTap: () {
+                    print("test");
+                  },
+                  child: Text(
+                    '达喀尔',
+                    style: TextStyle(fontSize: (14 * ratio)),
+                  ),
                 ),
               ),
               Positioned(
