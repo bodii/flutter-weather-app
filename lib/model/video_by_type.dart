@@ -36,18 +36,18 @@ class VideoByType {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["preview"] = preview;
-    _data["publishTime"] = publishTime;
-    _data["is_big_pic"] = isBigPic;
-    _data["videoUrl"] = videoUrl;
-    _data["isTop"] = isTop;
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["type"] = type;
-    _data["video_id"] = videoId;
-    _data["playAuth"] = playAuth;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["preview"] = preview;
+    data["publishTime"] = publishTime;
+    data["is_big_pic"] = isBigPic;
+    data["videoUrl"] = videoUrl;
+    data["isTop"] = isTop;
+    data["id"] = id;
+    data["title"] = title;
+    data["type"] = type;
+    data["video_id"] = videoId;
+    data["playAuth"] = playAuth;
+    return data;
   }
 
   VideoByType copyWith({

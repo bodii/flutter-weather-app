@@ -27,17 +27,17 @@ class WniHotCountryData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (current != null) {
-      _data["current"] = current?.toJson();
+      data["current"] = current?.toJson();
     }
     if (forecast72H != null) {
-      _data["forecast72h"] = forecast72H?.toJson();
+      data["forecast72h"] = forecast72H?.toJson();
     }
     if (forecast15D != null) {
-      _data["forecast15d"] = forecast15D?.toJson();
+      data["forecast15d"] = forecast15D?.toJson();
     }
-    return _data;
+    return data;
   }
 
   WniHotCountryData copyWith({
@@ -84,14 +84,14 @@ class Forecast15D {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["publishTime"] = publishTime;
-    _data["update_time"] = updateTime;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["publishTime"] = publishTime;
+    data["update_time"] = updateTime;
     if (forecast != null) {
-      _data["forecast"] = forecast?.map((e) => e.toJson()).toList();
+      data["forecast"] = forecast?.map((e) => e.toJson()).toList();
     }
-    _data["id"] = id;
-    return _data;
+    data["id"] = id;
+    return data;
   }
 
   Forecast15D copyWith({
@@ -245,33 +245,33 @@ class Forecast {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["night_icon"] = nightIcon;
-    _data["night_pop"] = nightPop;
-    _data["rise"] = rise;
-    _data["night_wPower"] = nightWPower;
-    _data["day_wDirTextCN"] = dayWDirTextCn;
-    _data["set"] = set;
-    _data["day_wSpeed"] = dayWSpeed;
-    _data["night_wSpeed"] = nightWSpeed;
-    _data["day_icon"] = dayIcon;
-    _data["day_humid"] = dayHumid;
-    _data["day_iconText"] = dayIconText;
-    _data["day_wPower"] = dayWPower;
-    _data["night_wDirText"] = nightWDirText;
-    _data["night_wDirTextCN"] = nightWDirTextCn;
-    _data["minTemp"] = minTemp;
-    _data["day_wDir"] = dayWDir;
-    _data["night_humid"] = nightHumid;
-    _data["validDate"] = validDate;
-    _data["day_wDirText"] = dayWDirText;
-    _data["night_iconText"] = nightIconText;
-    _data["maxTemp"] = maxTemp;
-    _data["night_wDir"] = nightWDir;
-    _data["week"] = week;
-    _data["validDateCN"] = validDateCn;
-    _data["day_pop"] = dayPop;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["night_icon"] = nightIcon;
+    data["night_pop"] = nightPop;
+    data["rise"] = rise;
+    data["night_wPower"] = nightWPower;
+    data["day_wDirTextCN"] = dayWDirTextCn;
+    data["set"] = set;
+    data["day_wSpeed"] = dayWSpeed;
+    data["night_wSpeed"] = nightWSpeed;
+    data["day_icon"] = dayIcon;
+    data["day_humid"] = dayHumid;
+    data["day_iconText"] = dayIconText;
+    data["day_wPower"] = dayWPower;
+    data["night_wDirText"] = nightWDirText;
+    data["night_wDirTextCN"] = nightWDirTextCn;
+    data["minTemp"] = minTemp;
+    data["day_wDir"] = dayWDir;
+    data["night_humid"] = nightHumid;
+    data["validDate"] = validDate;
+    data["day_wDirText"] = dayWDirText;
+    data["night_iconText"] = nightIconText;
+    data["maxTemp"] = maxTemp;
+    data["night_wDir"] = nightWDir;
+    data["week"] = week;
+    data["validDateCN"] = validDateCn;
+    data["day_pop"] = dayPop;
+    return data;
   }
 
   Forecast copyWith({
@@ -356,13 +356,13 @@ class Forecast72H {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["update_time"] = updateTime;
-    _data["id"] = id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["update_time"] = updateTime;
+    data["id"] = id;
     if (value != null) {
-      _data["value"] = value?.map((e) => e.toJson()).toList();
+      data["value"] = value?.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return data;
   }
 
   Forecast72H copyWith({
@@ -454,21 +454,21 @@ class Value {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["dateTime"] = dateTime;
-    _data["iconDecoder"] = iconDecoder;
-    _data["temp"] = temp;
-    _data["icon"] = icon;
-    _data["dateTime_db"] = dateTimeDb;
-    _data["wspeed"] = wspeed;
-    _data["humid"] = humid;
-    _data["pop"] = pop;
-    _data["feelsLike"] = feelsLike;
-    _data["wdirTextCN"] = wdirTextCn;
-    _data["wdirText"] = wdirText;
-    _data["dew"] = dew;
-    _data["iconPic"] = iconPic;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["dateTime"] = dateTime;
+    data["iconDecoder"] = iconDecoder;
+    data["temp"] = temp;
+    data["icon"] = icon;
+    data["dateTime_db"] = dateTimeDb;
+    data["wspeed"] = wspeed;
+    data["humid"] = humid;
+    data["pop"] = pop;
+    data["feelsLike"] = feelsLike;
+    data["wdirTextCN"] = wdirTextCn;
+    data["wdirText"] = wdirText;
+    data["dew"] = dew;
+    data["iconPic"] = iconPic;
+    return data;
   }
 
   Value copyWith({
@@ -625,30 +625,30 @@ class Current {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["date"] = date;
-    _data["uvindex"] = uvindex;
-    _data["temp"] = temp;
-    _data["wPower"] = wPower;
-    _data["iconDecoder"] = iconDecoder;
-    _data["visibility"] = visibility;
-    _data["wSpeed"] = wSpeed;
-    _data["pressure"] = pressure;
-    _data["humid"] = humid;
-    _data["dewPoint"] = dewPoint;
-    _data["tempMin24"] = tempMin24;
-    _data["wDirText"] = wDirText;
-    _data["feelsLike"] = feelsLike;
-    _data["wxIcon"] = wxIcon;
-    _data["precip24Amount"] = precip24Amount;
-    _data["ctindex"] = ctindex;
-    _data["id"] = id;
-    _data["tempMax24"] = tempMax24;
-    _data["iconPic"] = iconPic;
-    _data["key"] = key;
-    _data["wDirDecoder"] = wDirDecoder;
-    _data["reportTime"] = reportTime;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["date"] = date;
+    data["uvindex"] = uvindex;
+    data["temp"] = temp;
+    data["wPower"] = wPower;
+    data["iconDecoder"] = iconDecoder;
+    data["visibility"] = visibility;
+    data["wSpeed"] = wSpeed;
+    data["pressure"] = pressure;
+    data["humid"] = humid;
+    data["dewPoint"] = dewPoint;
+    data["tempMin24"] = tempMin24;
+    data["wDirText"] = wDirText;
+    data["feelsLike"] = feelsLike;
+    data["wxIcon"] = wxIcon;
+    data["precip24Amount"] = precip24Amount;
+    data["ctindex"] = ctindex;
+    data["id"] = id;
+    data["tempMax24"] = tempMax24;
+    data["iconPic"] = iconPic;
+    data["key"] = key;
+    data["wDirDecoder"] = wDirDecoder;
+    data["reportTime"] = reportTime;
+    return data;
   }
 
   Current copyWith({

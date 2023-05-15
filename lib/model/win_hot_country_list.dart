@@ -45,13 +45,11 @@ class WniHotCountry {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    if (data != null) {
-      _data["data"] = data?.map((e) => e.toJson()).toList();
-    }
-    _data["typeNum"] = typeNum;
-    _data["type"] = type;
-    return _data;
+    final Map<String, dynamic> dataMap = <String, dynamic>{};
+    dataMap["data"] = data?.map((e) => e.toJson()).toList();
+    dataMap["typeNum"] = typeNum;
+    dataMap["type"] = type;
+    return dataMap;
   }
 
   WniHotCountry copyWith({
@@ -88,12 +86,10 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["isparam"] = isparam;
-    if (data != null) {
-      _data["data"] = data?.map((e) => e.toJson()).toList();
-    }
-    return _data;
+    final Map<String, dynamic> dataMap = <String, dynamic>{};
+    dataMap["isparam"] = isparam;
+    dataMap["data"] = data?.map((e) => e.toJson()).toList();
+    return dataMap;
   }
 
   Data copyWith({
@@ -158,16 +154,16 @@ class Data1 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["isparam"] = isparam;
-    _data["country"] = country;
-    _data["continent_cn"] = continentCn;
-    _data["countryname"] = countryname;
-    _data["sdcn"] = sdcn;
-    _data["countrycn"] = countrycn;
-    _data["sddataid"] = sddataid;
-    _data["sden"] = sden;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["isparam"] = isparam;
+    data["country"] = country;
+    data["continent_cn"] = continentCn;
+    data["countryname"] = countryname;
+    data["sdcn"] = sdcn;
+    data["countrycn"] = countrycn;
+    data["sddataid"] = sddataid;
+    data["sden"] = sden;
+    return data;
   }
 
   Data1 copyWith({

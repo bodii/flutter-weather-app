@@ -10,12 +10,10 @@ class AmapGeoToAddress {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["status"] = status;
-    if (data != null) {
-      _data["data"] = data?.toJson();
-    }
-    return _data;
+    final Map<String, dynamic> dataMap = <String, dynamic>{};
+    dataMap["status"] = status;
+    dataMap["data"] = data?.toJson();
+    return dataMap;
   }
 
   AmapGeoToAddress copyWith({
@@ -109,36 +107,36 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["code"] = code;
-    _data["message"] = message;
-    _data["result"] = result;
-    _data["timestamp"] = timestamp;
-    _data["version"] = version;
-    _data["country"] = country;
-    _data["countrycode"] = countrycode;
-    _data["province"] = province;
-    _data["provinceadcode"] = provinceadcode;
-    _data["city"] = city;
-    _data["cityadcode"] = cityadcode;
-    _data["tel"] = tel;
-    _data["areacode"] = areacode;
-    _data["district"] = district;
-    _data["districtadcode"] = districtadcode;
-    _data["adcode"] = adcode;
-    _data["desc"] = desc;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["code"] = code;
+    data["message"] = message;
+    data["result"] = result;
+    data["timestamp"] = timestamp;
+    data["version"] = version;
+    data["country"] = country;
+    data["countrycode"] = countrycode;
+    data["province"] = province;
+    data["provinceadcode"] = provinceadcode;
+    data["city"] = city;
+    data["cityadcode"] = cityadcode;
+    data["tel"] = tel;
+    data["areacode"] = areacode;
+    data["district"] = district;
+    data["districtadcode"] = districtadcode;
+    data["adcode"] = adcode;
+    data["desc"] = desc;
     if (roadList != null) {
-      _data["road_list"] = roadList?.map((e) => e.toJson()).toList();
+      data["road_list"] = roadList?.map((e) => e.toJson()).toList();
     }
     if (crossList != null) {
-      _data["cross_list"] = crossList?.map((e) => e.toJson()).toList();
+      data["cross_list"] = crossList?.map((e) => e.toJson()).toList();
     }
-    _data["hn"] = hn;
+    data["hn"] = hn;
     if (seaArea != null) {
-      _data["sea_area"] = seaArea?.toJson();
+      data["sea_area"] = seaArea?.toJson();
     }
-    _data["pos"] = pos;
-    return _data;
+    data["pos"] = pos;
+    return data;
   }
 
   Data copyWith({
@@ -203,10 +201,10 @@ class SeaArea {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["adcode"] = adcode;
-    _data["name"] = name;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["adcode"] = adcode;
+    data["name"] = name;
+    return data;
   }
 
   SeaArea copyWith({
@@ -254,17 +252,17 @@ class CrossList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["crossid"] = crossid;
-    _data["direction"] = direction;
-    _data["distance"] = distance;
-    _data["latitude"] = latitude;
-    _data["level"] = level;
-    _data["longitude"] = longitude;
-    _data["name"] = name;
-    _data["weight"] = weight;
-    _data["width"] = width;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["crossid"] = crossid;
+    data["direction"] = direction;
+    data["distance"] = distance;
+    data["latitude"] = latitude;
+    data["level"] = level;
+    data["longitude"] = longitude;
+    data["name"] = name;
+    data["weight"] = weight;
+    data["width"] = width;
+    return data;
   }
 
   CrossList copyWith({
@@ -323,16 +321,16 @@ class RoadList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["direction"] = direction;
-    _data["distance"] = distance;
-    _data["latitude"] = latitude;
-    _data["level"] = level;
-    _data["longitude"] = longitude;
-    _data["name"] = name;
-    _data["roadid"] = roadid;
-    _data["width"] = width;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["direction"] = direction;
+    data["distance"] = distance;
+    data["latitude"] = latitude;
+    data["level"] = level;
+    data["longitude"] = longitude;
+    data["name"] = name;
+    data["roadid"] = roadid;
+    data["width"] = width;
+    return data;
   }
 
   RoadList copyWith({

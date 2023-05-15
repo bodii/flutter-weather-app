@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/weather/views/weather_page.dart';
+import 'package:go_router/go_router.dart';
 
 class AfriceMapWidget extends StatelessWidget {
   const AfriceMapWidget({Key? key}) : super(key: key);
@@ -28,8 +28,8 @@ class AfriceMapWidget extends StatelessWidget {
                 top: 18 * ratio,
                 child: InkWell(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const WeatherPage()));
+                    context
+                        .goNamed('wearther', pathParameters: {'city': '突尼斯'});
                   },
                   child: Text(
                     '突尼斯',

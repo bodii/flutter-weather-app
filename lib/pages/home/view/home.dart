@@ -1,10 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
-import 'package:weather_app/api/location.dart';
-import 'package:weather_app/api/response.dart';
-import 'package:weather_app/model/b_geo_to_address.dart';
+import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/home/widgets/search.dart';
 import 'package:weather_app/pages/home/widgets/weather_card.dart';
 
@@ -189,12 +184,16 @@ class _IndexState extends State<Index> {
               Map<String, String> data = weathers[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: WeatherCardWidget(
-                  provcn: data['provcn'] ?? '',
-                  city: data['city'] ?? '',
-                  weather: data['weather'] ?? '',
-                  pic: data['pic'] ?? '',
-                  temperature: data['temperature'] ?? '',
+                child: ElevatedButton(
+                  onPressed: () => context.goNamed('weather',
+                      pathParameters: {'city': data['city'] ?? '北京'}),
+                  child: WeatherCardWidget(
+                    provcn: data['provcn'] ?? '',
+                    city: data['city'] ?? '',
+                    weather: data['weather'] ?? '',
+                    pic: data['pic'] ?? '',
+                    temperature: data['temperature'] ?? '',
+                  ),
                 ),
               );
             },

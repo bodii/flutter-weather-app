@@ -15,14 +15,14 @@ class BAddressToGeo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (location != null) {
-      _data["location"] = location?.toJson();
+      data["location"] = location?.toJson();
     }
-    _data["precise"] = precise;
-    _data["confidence"] = confidence;
-    _data["level"] = level;
-    return _data;
+    data["precise"] = precise;
+    data["confidence"] = confidence;
+    data["level"] = level;
+    return data;
   }
 
   BAddressToGeo copyWith({
@@ -51,10 +51,10 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["lng"] = lng;
-    _data["lat"] = lat;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["lng"] = lng;
+    data["lat"] = lat;
+    return data;
   }
 
   Location copyWith({

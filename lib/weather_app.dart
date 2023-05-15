@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/weather/views/weather_page.dart';
+import 'package:weather_app/common/routes.dart';
 import 'package:weather_app/common/color_schemes.g.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -8,14 +8,14 @@ class WeatherApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
       themeMode: ThemeMode.system,
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       // home: const WelcomePage(),
-      home: const WeatherPage(),
+      routerConfig: AppRoutes.routes,
     );
   }
 }

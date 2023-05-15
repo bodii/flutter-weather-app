@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 class BGeoToAddress {
   Location? location;
@@ -26,17 +25,17 @@ class BGeoToAddress {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (location != null) {
-      _data["location"] = location?.toJson();
+      data["location"] = location?.toJson();
     }
-    _data["formatted_address"] = formattedAddress;
-    _data["business"] = business;
+    data["formatted_address"] = formattedAddress;
+    data["business"] = business;
     if (addressComponent != null) {
-      _data["addressComponent"] = addressComponent?.toJson();
+      data["addressComponent"] = addressComponent?.toJson();
     }
-    _data["cityCode"] = cityCode;
-    return _data;
+    data["cityCode"] = cityCode;
+    return data;
   }
 
   BGeoToAddress copyWith({
@@ -84,15 +83,15 @@ class AddressComponent {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["city"] = city;
-    _data["direction"] = direction;
-    _data["distance"] = distance;
-    _data["district"] = district;
-    _data["province"] = province;
-    _data["street"] = street;
-    _data["street_number"] = streetNumber;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["city"] = city;
+    data["direction"] = direction;
+    data["distance"] = distance;
+    data["district"] = district;
+    data["province"] = province;
+    data["street"] = street;
+    data["street_number"] = streetNumber;
+    return data;
   }
 
   AddressComponent copyWith({
@@ -127,10 +126,10 @@ class Location {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["lng"] = lng;
-    _data["lat"] = lat;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["lng"] = lng;
+    data["lat"] = lat;
+    return data;
   }
 
   Location copyWith({

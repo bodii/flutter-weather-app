@@ -14,12 +14,12 @@ class WniHotCountryObsCapl {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["iconDecoder"] = iconDecoder;
-    _data["temp"] = temp;
-    _data["id"] = id;
-    _data["iconPic"] = iconPic;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["iconDecoder"] = iconDecoder;
+    data["temp"] = temp;
+    data["id"] = id;
+    data["iconPic"] = iconPic;
+    return data;
   }
 
   WniHotCountryObsCapl copyWith({

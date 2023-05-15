@@ -16,13 +16,13 @@ class IpAndAddress {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["rs"] = rs;
-    _data["code"] = code;
-    _data["address"] = address;
-    _data["ip"] = ip;
-    _data["isDomain"] = isDomain;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["rs"] = rs;
+    data["code"] = code;
+    data["address"] = address;
+    data["ip"] = ip;
+    data["isDomain"] = isDomain;
+    return data;
   }
 
   IpAndAddress copyWith({

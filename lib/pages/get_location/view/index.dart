@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geocode/geocode.dart';
-import 'package:location/location.dart';
-import 'package:weather_app/api/location.dart';
 import 'package:weather_app/pages/home/index.dart';
-import 'package:weather_app/common/theme.dart';
 
 class GetLocation extends StatelessWidget {
   const GetLocation({super.key});
@@ -40,8 +36,8 @@ class GetLocation extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Column(
-                  children: const [
+                const Column(
+                  children: [
                     Text(
                       '需要定位权限',
                       style: TextStyle(
