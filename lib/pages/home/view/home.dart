@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:weather_app/pages/home/widgets/search.dart';
 import 'package:weather_app/pages/home/widgets/weather_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -80,8 +79,7 @@ class _HomePageState extends State<HomePage> {
                           iconSize: 25,
                           onPressed: () {
                             debugPrint("search");
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => const Search()));
+                            context.pushNamed('/location/search');
                           },
                           icon: const Icon(Icons.search),
                         ),
@@ -184,16 +182,12 @@ class _IndexState extends State<Index> {
               Map<String, String> data = weathers[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: ElevatedButton(
-                  onPressed: () => context.goNamed('weather',
-                      pathParameters: {'city': data['city'] ?? '北京'}),
-                  child: WeatherCardWidget(
-                    provcn: data['provcn'] ?? '',
-                    city: data['city'] ?? '',
-                    weather: data['weather'] ?? '',
-                    pic: data['pic'] ?? '',
-                    temperature: data['temperature'] ?? '',
-                  ),
+                child: WeatherCardWidget(
+                  provcn: data['provcn'] ?? '',
+                  city: data['city'] ?? '',
+                  weather: data['weather'] ?? '',
+                  pic: data['pic'] ?? '',
+                  temperature: data['temperature'] ?? '',
                 ),
               );
             },

@@ -21,7 +21,7 @@ class WeatherPage extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                print('check more_vert');
+                debugPrint('check more_vert');
               },
               icon: const Icon(Icons.more_vert),
             ),

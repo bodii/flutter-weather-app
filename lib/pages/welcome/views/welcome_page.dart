@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/pages/get_location/index.dart';
+import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/welcome/bloc/continents_bloc.dart';
 import 'package:weather_app/pages/welcome/widgets/index.dart';
 
@@ -59,8 +59,7 @@ class WelcomeView extends StatelessWidget {
                     height: 60,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => const GetLocation()));
+                        context.pushNamed('/location');
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

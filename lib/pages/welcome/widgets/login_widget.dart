@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({
@@ -52,13 +53,13 @@ class LoginWidget extends StatelessWidget {
         ElevatedButton(
           child: const Text("取消"),
           onPressed: () {
-            Navigator.of(context).pop(false);
+            context.pop(false);
           },
         ),
         ElevatedButton(
           child: const Text("确定"),
           onPressed: () {
-            Navigator.of(context).pop(true);
+            context.pop(true);
           },
         ),
       ],

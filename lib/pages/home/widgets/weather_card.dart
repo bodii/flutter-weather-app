@@ -32,58 +32,62 @@ class WeatherCardWidget extends StatelessWidget {
           Radius.circular(30),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                provcn,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+      child: InkWell(
+        onTap: () =>
+            context.pushNamed('weather', pathParameters: {'city': city}),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  provcn,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              Text(
-                city,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                Text(
+                  city,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              Text(
-                weather,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+                Text(
+                  weather,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: Image(
-                  image: AssetImage(pic),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image(
+                    image: AssetImage(pic),
+                  ),
                 ),
-              ),
-              Text(
-                '$temperature℃',
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+                Text(
+                  '$temperature℃',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

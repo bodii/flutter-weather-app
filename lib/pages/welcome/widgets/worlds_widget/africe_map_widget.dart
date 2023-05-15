@@ -42,7 +42,7 @@ class AfriceMapWidget extends StatelessWidget {
                 top: 22 * ratio,
                 child: InkWell(
                   onTap: () {
-                    print("test");
+                    debugPrint("test");
                   },
                   child: Text(
                     '开罗',
@@ -55,7 +55,7 @@ class AfriceMapWidget extends StatelessWidget {
                 top: 79 * ratio,
                 child: InkWell(
                   onTap: () {
-                    print("test");
+                    debugPrint("test");
                   },
                   child: Text(
                     '达喀尔',

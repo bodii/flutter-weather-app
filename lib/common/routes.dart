@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
 import 'package:weather_app/pages/get_location/view/index.dart';
 import 'package:weather_app/pages/home/view/home.dart';
+import 'package:weather_app/pages/home/widgets/search.dart';
 import 'package:weather_app/pages/weather/views/weather_page.dart';
 import 'package:weather_app/pages/welcome/views/welcome_page.dart';
 
@@ -11,15 +12,25 @@ class AppRoutes {
     initialLocation: '/welcome',
     routes: <GoRoute>[
       GoRoute(
+        name: '/welcome',
         path: '/welcome',
         builder: (BuildContext context, GoRouterState state) =>
             const WelcomePage(),
       ),
       GoRoute(
-        path: '/get_location',
+        name: '/location',
+        path: '/location',
         builder: (context, state) => const GetLocation(),
+        routes: [
+          GoRoute(
+            name: '/location/search',
+            path: 'search',
+            builder: (context, state) => const Search(),
+          ),
+        ],
       ),
       GoRoute(
+        name: '/home',
         path: '/home',
         builder: (context, state) => const HomePage(),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/home/index.dart';
+import 'package:go_router/go_router.dart';
 
 class GetLocation extends StatelessWidget {
   const GetLocation({super.key});
@@ -58,10 +58,7 @@ class GetLocation extends StatelessWidget {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
-                      );
+                      context.pushNamed('/home');
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
