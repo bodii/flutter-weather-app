@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
-import 'package:weather_app/pages/get_location/view/index.dart';
+import 'package:weather_app/pages/location/view/index.dart';
 import 'package:weather_app/pages/home/view/home.dart';
 import 'package:weather_app/pages/home/widgets/search.dart';
 import 'package:weather_app/pages/weather/views/weather_page.dart';
@@ -14,13 +14,12 @@ class AppRoutes {
       GoRoute(
         name: '/welcome',
         path: '/welcome',
-        builder: (BuildContext context, GoRouterState state) =>
-            const WelcomePage(),
+        builder: (context, state) => const WelcomePage(),
       ),
       GoRoute(
         name: '/location',
         path: '/location',
-        builder: (context, state) => const GetLocation(),
+        builder: (context, state) => const Location(),
         routes: [
           GoRoute(
             name: '/location/search',

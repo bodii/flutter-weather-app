@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/win_hot_country_list.dart';
@@ -29,7 +30,7 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     }
 
     emit(state.copyWith(status: ContinentsStatus.httpLoading));
-    print(state.status);
+    debugPrint(state.status.toString());
     try {
       final WniHotCountryList continents = await getWniHotCountryGroupBy();
       emit(
@@ -39,9 +40,9 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
         ),
       );
     } catch (e, stack) {
-      print("error:");
-      print(e);
-      print(stack);
+      debugPrint("error:");
+      debugPrint(e.toString());
+      debugPrint(stack.toString());
       emit(state.copyWith(status: ContinentsStatus.httpfailure));
     }
   }

@@ -45,7 +45,7 @@ Future<List<dynamic>> getJsJsonResult(
 // 天气接口 ｜ 编号对应的城市 省市分层
 Future<List<Area>> getAreas() async {
   List<dynamic> list = await getJsJsonResult(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'cctv/js/area.js',
   );
   return list.map((e) => Area.fromJson(e)).toList();
@@ -54,7 +54,7 @@ Future<List<Area>> getAreas() async {
 // 天气接口 | 编号对应的城市 省市不分层
 Future<List<City>> getChinaAllCityList() async {
   List<dynamic> list = await getJsJsonResult(
-    CFG_WEATHER_API_HOST,
+    cfgWeatherApiHost,
     'js/arealist.js',
   );
   List<City> citys = list.map((city) => City.fromJson(city)).toList();
@@ -66,7 +66,10 @@ Future<List<City>> getChinaAllCityList() async {
 // 天气接口 | 获取城市的经纬度
 Future<CityInfo> getCityInfo(String cityid) async {
   var url = Uri.https(
-      WEATHER_API_HOST, 'api/getCityInfo', {'type': 'cityid', 'id': cityid});
+    weatherApiHost,
+    'api/getCityInfo',
+    {'type': 'cityid', 'id': cityid},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -79,7 +82,10 @@ Future<CityInfo> getCityInfo(String cityid) async {
 // 天气接口 | 获取当前天气 ＆ 15天 & 24小时
 Future<Weather> getCurrAnd15dAnd24h(String cityid) async {
   var url = Uri.https(
-      WEATHER_API_HOST, 'api/home/getCurrAnd15dAnd24h', {'id': cityid});
+    weatherApiHost,
+    'api/home/getCurrAnd15dAnd24h',
+    {'id': cityid},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -91,8 +97,11 @@ Future<Weather> getCurrAnd15dAnd24h(String cityid) async {
 
 // 天气接口 | 获取每个区的天气
 Future<RelatedWeather> getRelatedWeather(String cityid) async {
-  var url =
-      Uri.https(WEATHER_API_HOST, 'api/home/getRelatedWeather', {'id': cityid});
+  var url = Uri.https(
+    weatherApiHost,
+    'api/home/getRelatedWeather',
+    {'id': cityid},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -105,7 +114,10 @@ Future<RelatedWeather> getRelatedWeather(String cityid) async {
 // 天气接口 | 获取日月和指数
 Future<SunAndMoonAndIndex> getSunMoonAndIndex(String cityid) async {
   var url = Uri.https(
-      WEATHER_API_HOST, 'api/home/getSunMoonAndIndex', {'id': cityid});
+    weatherApiHost,
+    'api/home/getSunMoonAndIndex',
+    {'id': cityid},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -118,7 +130,10 @@ Future<SunAndMoonAndIndex> getSunMoonAndIndex(String cityid) async {
 // 天气接口 | 获取天气污染的10个城市
 Future<AirQuality> getAirOrder([String ordery = 'ASC']) async {
   var url = Uri.https(
-      WEATHER_API_HOST, 'api/getAirOrder', {'order': ordery, 'number': 10});
+    weatherApiHost,
+    'api/getAirOrder',
+    {'order': ordery, 'number': 10},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -131,7 +146,10 @@ Future<AirQuality> getAirOrder([String ordery = 'ASC']) async {
 // 天气接口 | 根据省份城市获取各区市编号
 Future<City> getCityStationDisData(String provcn) async {
   var url = Uri.https(
-      WEATHER_API_HOST, 'api/getCityStationDisData', {'provcn': 'provcn'});
+    weatherApiHost,
+    'api/getCityStationDisData',
+    {'provcn': 'provcn'},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -143,8 +161,11 @@ Future<City> getCityStationDisData(String provcn) async {
 
 // 天气接口 | 获取到相关城市的著名景点位置信息
 Future<CityidToAttractions> getD3aJQStation(String cityid) async {
-  var url =
-      Uri.https(WEATHER_API_HOST, 'api/d3a/getD3aJQStation', {'id': cityid});
+  var url = Uri.https(
+    weatherApiHost,
+    'api/d3a/getD3aJQStation',
+    {'id': cityid},
+  );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
@@ -157,7 +178,7 @@ Future<CityidToAttractions> getD3aJQStation(String cityid) async {
 // 天气接口 | 获取相关新闻接口
 Future<WeatherNews> getWeatherNews() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/infor/getWeatherNews',
     {'tag': '', 'subject': '', 'limit': 8, 'page': 1, 'type': '1'},
   );
@@ -173,7 +194,7 @@ Future<WeatherNews> getWeatherNews() async {
 // 天气接口 | 附加视频
 Future<WeatherVideo> getVideoList() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/videoList',
     {'stationid': '', 'weather': '00', 'type': '', 'videopar': ''},
   );
@@ -189,7 +210,7 @@ Future<WeatherVideo> getVideoList() async {
 // 天气接口 | 获取气相相关视频内容
 Future<WeatherVideo> getVideoDataByType() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/getVideoDataByType',
     {'limit': 9, 'page': 1, 'type': ''},
   );
@@ -205,7 +226,7 @@ Future<WeatherVideo> getVideoDataByType() async {
 // 天气接口 ｜ 获取一个推荐内容
 Future<Recommend> getSubjectOnLine() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/getSubjectOnLine',
     {'banner': 'Y'},
   );
@@ -221,7 +242,7 @@ Future<Recommend> getSubjectOnLine() async {
 // 六大洲及其包含国家数据
 Future<WniHotCountryList> getWniHotCountryGroupBy() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/getWniHotcountryGroupBy',
   );
   var response = await http.get(url, headers: {
@@ -239,7 +260,7 @@ Future<WniHotCountryList> getWniHotCountryGroupBy() async {
 // 国际热门城市数据
 Future<WniHotCity> getWniHotCity() async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'js/json/wni_hotCity.json',
   );
   var response = await http.get(url);
@@ -254,7 +275,7 @@ Future<WniHotCity> getWniHotCity() async {
 // 国际天气：当前主要天气信息
 Future<WniHotCountryObsCapl> getWniHotCountryOBSCaplData(String ids) async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/getWniHotcountryOBSCaplData',
     {'ids': ids},
   );
@@ -269,7 +290,7 @@ Future<WniHotCountryObsCapl> getWniHotCountryOBSCaplData(String ids) async {
 // 国际天气数据： 当天、72小时、15天
 Future<WniHotCountryData> getWniHotCountryData(String id) async {
   var url = Uri.https(
-    WEATHER_API_HOST,
+    weatherApiHost,
     'api/getWniHotcountryData',
     {'id': id},
   );
@@ -285,7 +306,7 @@ Future<WniHotCountryData> getWniHotCountryData(String id) async {
 Future<BGeoToAddress> getAmapGeoToAddress(
     double latitude, double longitude) async {
   var url = Uri.https(
-    AMAP_API_HOST,
+    amapApiHost,
     'service/regeo',
     {
       'longitude': '$longitude',
@@ -303,7 +324,7 @@ Future<BGeoToAddress> getAmapGeoToAddress(
 // 百度地图：通过geo返回地址信息
 Future<BGeoToAddress> getGeoToAddress(double latitude, double longitude) async {
   var url = Uri.https(
-    BD_MAP_API_HOST,
+    bdMapApiHost,
     'geocoder',
     {
       'output': 'json',
@@ -322,7 +343,7 @@ Future<BGeoToAddress> getGeoToAddress(double latitude, double longitude) async {
 // 百度地图：通过地址信息返回geo
 Future<BGeoToAddress> getAddressToGeo(String address) async {
   var url = Uri.https(
-    BD_MAP_API_HOST,
+    bdMapApiHost,
     'geocoder',
     {
       'output': 'json',
@@ -342,7 +363,7 @@ Future<BGeoToAddress> getAddressToGeo(String address) async {
 // ip.cn通过访问ip返回地址信息
 Future<IpAndAddress> getIpAndAddress() async {
   var url = Uri.https(
-    IP_CN_HOST,
+    ipCnHost,
     'api/index',
     {
       'type': '0', // 1时: 检测是不是自已的网络
