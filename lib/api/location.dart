@@ -29,10 +29,10 @@ Future<LocationData?> getLocation() async {
   return locationData;
 }
 
-Future<Address?> getAddress(double? lat, double? lang) async {
-  if (lat == null || lang == null) return null;
+Future<Address?> getAddress(double? lat, double? long) async {
+  if (lat == null || long == null) return null;
   GeoCode geoCode = GeoCode();
   Address address =
-      await geoCode.reverseGeocoding(latitude: lat, longitude: lang);
+      await geoCode.reverseGeocoding(latitude: lat, longitude: long);
   return address;
 }

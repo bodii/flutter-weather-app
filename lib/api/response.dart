@@ -31,11 +31,13 @@ Future<List<dynamic>> getJsJsonResult(
 ]) async {
   try {
     var url = Uri.https(authority, unencodedPath, queryParameters);
-    var response = await http.get(url);
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
     var body = response.body;
     int contentStartIndex = body.indexOf('[');
     var jsonData = body.substring(contentStartIndex);
-    List<dynamic> stringList = jsonDecode(jsonData);
+    List<dynamic> stringList = jsonDecode(utf8.decode(jsonData.runes.toList()));
 
     return stringList;
   } on Exception {
@@ -85,13 +87,12 @@ Future<Weather> getCurrAnd15dAnd24h(String cityid) async {
   var url = Uri.https(
     weatherApiHost,
     'api/home/getCurrAnd15dAnd24h',
-    {'id': cityid},
+    {'cityid': cityid},
   );
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   Weather weather = Weather.fromJson(resps['data']);
-  log(weather.current!.nongLi!);
 
   return weather;
 }

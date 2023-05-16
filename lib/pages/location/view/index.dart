@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:weather_app/api/amap_location.dart';
+import 'package:weather_app/api/location.dart';
+import 'package:weather_app/api/response.dart';
+import 'package:weather_app/model/city.dart';
+import 'package:weather_app/model/weather.dart';
 
 class Location extends StatelessWidget {
   const Location({super.key});
@@ -57,13 +62,52 @@ class Location extends StatelessWidget {
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {
-                      GetLocation amapLocation = GetLocation();
-                      amapLocation.init();
-                      amapLocation.start();
-                      if (null != amapLocation.locationResult) {
-                        debugPrint(amapLocation.locationResult.toString());
+                    onPressed: () async {
+                      // GetLocation amapLocation = GetLocation();
+                      // amapLocation.init();
+                      // amapLocation.start();
+                      // if (null != amapLocation.locationResult) {
+                      //   debugPrint(amapLocation.locationResult.toString());
+                      // }
+                      var location = await getLocation();
+                      // var address = await getAddress(
+                      var address = await getAmapGeoToAddress(
+                          location!.latitude ?? 0.0, location.longitude ?? 0.0);
+                      List<City> cityList = await getChinaAllCityList();
+                      print(address.addressData!.city);
+                      String addressProvince = address.addressData!.province!;
+                      if (addressProvince.length > 1) {
+                        addressProvince = addressProvince.substring(
+                            0, addressProvince.length - 1);
                       }
+                      String addressCity = address.addressData!.city!;
+                      if (addressCity.length > 1) {
+                        addressCity =
+                            addressCity.substring(0, addressCity.length - 1);
+                      }
+
+                      print(addressProvince);
+                      print(addressCity);
+
+                      if (cityList.isNotEmpty) {
+                        City? currentCity;
+
+                        for (City city in cityList) {
+                          if (city.provcn == addressProvince &&
+                              city.districtcn == addressCity &&
+                              city.namecn == addressCity) {
+                            currentCity = city;
+                          }
+                        }
+
+                        print(currentCity!.namecn);
+                        print(currentCity.stationid);
+
+                        Weather weather =
+                            await getCurrAnd15dAnd24h(currentCity.stationid!);
+                        print(jsonEncode(weather.toJson()));
+                      }
+
                       // context.pushNamed('/home');
                     },
                     style: ElevatedButton.styleFrom(
