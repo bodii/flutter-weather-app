@@ -4,6 +4,8 @@ const weatherApiHost = '';
 const cfgWeatherApiHost = '';
 // 高德地图api host
 const amapApiHost = 'ditu.amap.com';
+// 高德地图定位api key
+const amapLocationApiKey = '';
 // 百度地图api host
 const bdMapApiHost = 'api.map.baidu.com';
 // 获取ip host

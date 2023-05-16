@@ -53,6 +53,26 @@ android {
         versionName flutterVersionName
     }
 
+    //配置签名文件
+    signingConfigs {
+        debug {
+            //keystore中key的别名
+            keyAlias 'key'
+            //keystore中key的密码
+            keyPassword 'android'
+            //keystore的密码
+            storePassword 'android'
+            //keystore的文件路径，可以是绝对路径也可以是相对路径
+            storeFile file('../android_keystore/debug.jks')
+        }
+        release {
+            keyAlias 'key'
+            keyPassword 'android'
+            storePassword 'android'
+            storeFile file('../android_keystore/release.jks')
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -68,4 +88,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.amap.api:location:5.6.1'
 }

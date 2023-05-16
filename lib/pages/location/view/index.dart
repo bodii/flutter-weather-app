@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:weather_app/api/amap_location.dart';
 
 class Location extends StatelessWidget {
   const Location({super.key});
@@ -58,7 +58,13 @@ class Location extends StatelessWidget {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      context.pushNamed('/home');
+                      GetLocation amapLocation = GetLocation();
+                      amapLocation.init();
+                      amapLocation.start();
+                      if (null != amapLocation.locationResult) {
+                        debugPrint(amapLocation.locationResult.toString());
+                      }
+                      // context.pushNamed('/home');
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

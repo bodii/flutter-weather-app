@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 import 'package:weather_app/model/air_quality.dart';
+import 'package:weather_app/model/amap_geo_to_address.dart';
 import 'package:weather_app/model/area.dart';
 import 'package:weather_app/model/b_geo_to_address.dart';
 import 'package:weather_app/model/city.dart';
@@ -303,7 +304,7 @@ Future<WniHotCountryData> getWniHotCountryData(String id) async {
 }
 
 // 高德地图:通过geo返回地址信息
-Future<BGeoToAddress> getAmapGeoToAddress(
+Future<AmapGeoToAddress> getAmapGeoToAddress(
     double latitude, double longitude) async {
   var url = Uri.https(
     amapApiHost,
@@ -316,7 +317,7 @@ Future<BGeoToAddress> getAmapGeoToAddress(
   var response = await http.get(url);
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
-  BGeoToAddress data = BGeoToAddress.fromJson(resps['result']);
+  AmapGeoToAddress data = AmapGeoToAddress.fromJson(resps);
 
   return data;
 }

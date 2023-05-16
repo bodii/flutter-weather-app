@@ -1,32 +1,33 @@
 class AmapGeoToAddress {
   String? status;
-  Data? data;
+  AmapAddressData? addressData;
 
-  AmapGeoToAddress({this.status, this.data});
+  AmapGeoToAddress({this.status, this.addressData});
 
   AmapGeoToAddress.fromJson(Map<String, dynamic> json) {
     status = json["status"];
-    data = json["data"] == null ? null : Data.fromJson(json["data"]);
+    addressData =
+        json["data"] == null ? null : AmapAddressData.fromJson(json["data"]);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> dataMap = <String, dynamic>{};
     dataMap["status"] = status;
-    dataMap["data"] = data?.toJson();
+    dataMap["data"] = addressData?.toJson();
     return dataMap;
   }
 
   AmapGeoToAddress copyWith({
     String? status,
-    Data? data,
+    AmapAddressData? addressData,
   }) =>
       AmapGeoToAddress(
         status: status ?? this.status,
-        data: data ?? this.data,
+        addressData: addressData ?? this.addressData,
       );
 }
 
-class Data {
+class AmapAddressData {
   String? code;
   String? message;
   String? result;
@@ -50,7 +51,7 @@ class Data {
   SeaArea? seaArea;
   String? pos;
 
-  Data(
+  AmapAddressData(
       {this.code,
       this.message,
       this.result,
@@ -74,7 +75,7 @@ class Data {
       this.seaArea,
       this.pos});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  AmapAddressData.fromJson(Map<String, dynamic> json) {
     code = json["code"];
     message = json["message"];
     result = json["result"];
@@ -139,7 +140,7 @@ class Data {
     return data;
   }
 
-  Data copyWith({
+  AmapAddressData copyWith({
     String? code,
     String? message,
     String? result,
@@ -163,7 +164,7 @@ class Data {
     SeaArea? seaArea,
     String? pos,
   }) =>
-      Data(
+      AmapAddressData(
         code: code ?? this.code,
         message: message ?? this.message,
         result: result ?? this.result,

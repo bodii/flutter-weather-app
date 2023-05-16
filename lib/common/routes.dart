@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
 import 'package:weather_app/pages/location/view/index.dart';
