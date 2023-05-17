@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 // 欧洲
 class EuropeMapWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '雷克雅维克',
                   style: TextStyle(fontSize: (11 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 115 * ratio,
@@ -39,7 +40,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '奥斯陆',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 50 * ratio,
@@ -47,7 +48,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '伦敦',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 262 * ratio,
@@ -55,7 +56,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '莫斯科',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 205 * ratio,
@@ -63,7 +64,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '华沙',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 20 * ratio,
@@ -71,7 +72,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '马德里',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 58 * ratio,
@@ -79,7 +80,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '巴黎',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 131 * ratio,
@@ -87,7 +88,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '柏林',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 122 * ratio,
@@ -95,7 +96,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '罗马',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 134 * ratio,
@@ -103,7 +104,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '维也纳',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 234 * ratio,
@@ -111,7 +112,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '布加勒斯特',
                   style: TextStyle(fontSize: 10 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 207 * ratio,
@@ -119,7 +120,7 @@ class EuropeMapWidget extends StatelessWidget {
                 child: Text(
                   '雅典',
                   style: TextStyle(fontSize: 14 * ratio),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),

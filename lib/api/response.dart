@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/model/air_current.dart';
+import 'package:weather_app/model/air_forecast.dart';
+import 'package:weather_app/model/air_point.dart';
 
 import 'package:weather_app/model/air_quality.dart';
 import 'package:weather_app/model/amap_geo_to_address.dart';
@@ -8,6 +11,7 @@ import 'package:weather_app/model/area.dart';
 import 'package:weather_app/model/b_geo_to_address.dart';
 import 'package:weather_app/model/city.dart';
 import 'package:weather_app/model/city_info.dart';
+import 'package:weather_app/model/city_station_dis_data.dart';
 import 'package:weather_app/model/cityid_to_attractions.dart';
 import 'package:weather_app/model/ip_to_address.dart';
 import 'package:weather_app/model/recommend.dart';
@@ -97,6 +101,51 @@ Future<Weather> getCurrAnd15dAnd24h(String cityid) async {
   return weather;
 }
 
+// 天气接口 | 空气质量 | 获取当前气空质量参数
+Future<AirCurrent> getAirCurrent(String stationid) async {
+  var url = Uri.https(
+    weatherApiHost,
+    'api/getAirCurrent',
+    {'stationid': stationid},
+  );
+  var response = await http.get(url);
+  var body = response.body;
+  Map<String, dynamic> resps = jsonDecode(body);
+  AirCurrent airCurrent = AirCurrent.fromJson(resps['data']);
+
+  return airCurrent;
+}
+
+// 天气接口 | 空气质量 | 获取7天空气质量参数
+Future<AirForecast> getAirForecast(String stationid) async {
+  var url = Uri.https(
+    weatherApiHost,
+    'api/getAirForecast',
+    {'stationid': stationid},
+  );
+  var response = await http.get(url);
+  var body = response.body;
+  Map<String, dynamic> resps = jsonDecode(body);
+  AirForecast airForecast = AirForecast.fromJson(resps['data']);
+
+  return airForecast;
+}
+
+// 天气接口 | 空气质量 | 获取城市下相关区县列表的空气质量参数
+Future<AirPoint> getAirPoint(String stationid) async {
+  var url = Uri.https(
+    weatherApiHost,
+    'api/getAirPoint',
+    {'stationid': stationid},
+  );
+  var response = await http.get(url);
+  var body = response.body;
+  Map<String, dynamic> resps = jsonDecode(body);
+  AirPoint airPoint = AirPoint.fromJson(resps['data']);
+
+  return airPoint;
+}
+
 // 天气接口 | 获取每个区的天气
 Future<RelatedWeather> getRelatedWeather(String cityid) async {
   var url = Uri.https(
@@ -146,17 +195,16 @@ Future<AirQuality> getAirOrder([String ordery = 'ASC']) async {
 }
 
 // 天气接口 | 根据省份城市获取各区市编号
-Future<City> getCityStationDisData(String provcn) async {
+Future<CityStationDisDataList> getCityStationDisData(String provcn) async {
   var url = Uri.https(
     weatherApiHost,
     'api/getCityStationDisData',
-    {'provcn': 'provcn'},
+    {'provcn': provcn},
   );
   var response = await http.get(url);
-  var body = response.body;
+  String body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
-  City data = City.fromJson(resps['data']);
-  log(data.districtcn!);
+  CityStationDisDataList data = CityStationDisDataList.fromJson(resps['data']);
 
   return data;
 }

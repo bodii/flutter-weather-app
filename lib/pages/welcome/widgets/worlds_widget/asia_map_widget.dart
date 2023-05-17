@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 /// AsiaMapWidget
 ///
@@ -33,7 +34,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '德黑兰',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 91 * ratio,
@@ -41,7 +42,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '塔什干',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 203 * ratio,
@@ -49,7 +50,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '乌兰巴托',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 254 * ratio,
@@ -57,7 +58,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '北京',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 323 * ratio,
@@ -65,7 +66,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '首尔',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 332 * ratio,
@@ -73,7 +74,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '东京',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 42 * ratio,
@@ -81,7 +82,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '利雅得',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 117 * ratio,
@@ -89,7 +90,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '新德里',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 120 * ratio,
@@ -97,7 +98,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '马累',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 212 * ratio,
@@ -105,7 +106,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '曼谷',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 292 * ratio,
@@ -113,7 +114,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '马尼拉',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 245 * ratio,
@@ -121,7 +122,7 @@ class AsiaMapWidget extends StatelessWidget {
                 child: Text(
                   '雅加达',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 // 亚洲
 class OceaniaMapWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '达尔文',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 233 * ratio,
@@ -39,7 +40,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '莫尔斯比港',
                   style: TextStyle(fontSize: (11 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 195 * ratio,
@@ -47,7 +48,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '布里斯班',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 313 * ratio,
@@ -55,7 +56,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '苏瓦',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 28 * ratio,
@@ -63,7 +64,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '珀斯',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 198 * ratio,
@@ -71,7 +72,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '堪培拉',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 238 * ratio,
@@ -79,7 +80,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '悉尼',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 317 * ratio,
@@ -87,7 +88,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '惠灵顿',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 188 * ratio,
@@ -95,7 +96,7 @@ class OceaniaMapWidget extends StatelessWidget {
                 child: Text(
                   '霍巴特',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),

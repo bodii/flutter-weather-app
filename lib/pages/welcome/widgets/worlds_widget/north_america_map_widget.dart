@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 class NorthAmericaMapWidget extends StatelessWidget {
   const NorthAmericaMapWidget({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '温哥华',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 133 * ratio,
@@ -36,7 +37,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '埃德蒙顿',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 205 * ratio,
@@ -44,7 +45,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '渥太华',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 264 * ratio,
@@ -52,7 +53,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '蒙特利尔',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 279 * ratio,
@@ -60,7 +61,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '纽约',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 62 * ratio,
@@ -68,7 +69,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '旧金山',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 172 * ratio,
@@ -76,7 +77,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '休斯敦',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 96 * ratio,
@@ -84,7 +85,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '洛杉矶',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 177 * ratio,
@@ -92,7 +93,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '芝加哥',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 255 * ratio,
@@ -100,7 +101,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '华盛顿',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 260 * ratio,
@@ -108,7 +109,7 @@ class NorthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '迈阿密',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),

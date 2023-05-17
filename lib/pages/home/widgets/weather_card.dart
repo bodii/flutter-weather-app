@@ -34,7 +34,7 @@ class WeatherCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () =>
-            context.pushNamed('weather', pathParameters: {'city': city}),
+            context.pushNamed('/weather/china', pathParameters: {'city': city}),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

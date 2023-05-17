@@ -57,10 +57,6 @@ class GetLocation {
 
   /// 设置定位参数
   void setOption() {
-    if (null == location) {
-      return;
-    }
-
     AMapLocationOption option = AMapLocationOption();
 
     /// 是否单次定位

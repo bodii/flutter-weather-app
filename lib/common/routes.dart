@@ -33,11 +33,19 @@ class AppRoutes {
         builder: (context, state) => const HomePage(),
       ),
       GoRoute(
-        name: 'weather',
-        path: '/weather/:city',
+        name: '/weather/china',
+        path: '/weather/china/:city',
         builder: (context, state) =>
             WeatherPage(city: state.pathParameters['city'] ?? '北京'),
       ),
+      GoRoute(
+        name: '/weather/international',
+        path: '/weather/international/:city',
+        builder: (context, state) => WeatherPage(
+          city: state.pathParameters['city'] ?? '纽约',
+          isChina: false,
+        ),
+      )
     ],
     errorBuilder: (context, state) => ErrorPage(state.error!),
     debugLogDiagnostics: true,

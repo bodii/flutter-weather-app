@@ -1,10 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:weather_app/api/location.dart';
-import 'package:weather_app/api/response.dart';
-import 'package:weather_app/model/city.dart';
-import 'package:weather_app/model/weather.dart';
+import 'package:go_router/go_router.dart';
 
 class Location extends StatelessWidget {
   const Location({super.key});
@@ -69,6 +64,7 @@ class Location extends StatelessWidget {
                       // if (null != amapLocation.locationResult) {
                       //   debugPrint(amapLocation.locationResult.toString());
                       // }
+                      /*
                       var location = await getLocation();
                       // var address = await getAddress(
                       var address = await getAmapGeoToAddress(
@@ -107,8 +103,9 @@ class Location extends StatelessWidget {
                             await getCurrAnd15dAnd24h(currentCity.stationid!);
                         print(jsonEncode(weather.toJson()));
                       }
+                      */
 
-                      // context.pushNamed('/home');
+                      context.pushNamed('/home');
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

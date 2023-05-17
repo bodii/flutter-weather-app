@@ -85,6 +85,9 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
       if (continentsStr != null) {
         WniHotCountryList continents =
             WniHotCountryList.fromJson(jsonDecode(continentsStr));
+        debugPrint("========");
+        debugPrint(continentsStr);
+
         emit(state.copyWith(
           status: ContinentsStatus.storeGetSuccess,
           continents: continents,

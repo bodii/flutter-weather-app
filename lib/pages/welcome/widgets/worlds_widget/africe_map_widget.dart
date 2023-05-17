@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 class AfriceMapWidget extends StatelessWidget {
   const AfriceMapWidget({Key? key}) : super(key: key);
@@ -26,42 +26,26 @@ class AfriceMapWidget extends StatelessWidget {
               Positioned(
                 left: 115 * ratio,
                 top: 18 * ratio,
-                child: InkWell(
-                  onTap: () {
-                    context
-                        .goNamed('wearther', pathParameters: {'city': '突尼斯'});
-                  },
-                  child: Text(
-                    '突尼斯',
-                    style: TextStyle(fontSize: (14 * ratio)),
-                  ),
-                ),
+                child: Text(
+                  '突尼斯',
+                  style: TextStyle(fontSize: (14 * ratio)),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 217 * ratio,
                 top: 22 * ratio,
-                child: InkWell(
-                  onTap: () {
-                    debugPrint("test");
-                  },
-                  child: Text(
-                    '开罗',
-                    style: TextStyle(fontSize: (14 * ratio)),
-                  ),
-                ),
+                child: Text(
+                  '开罗',
+                  style: TextStyle(fontSize: (14 * ratio)),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 40 * ratio,
                 top: 79 * ratio,
-                child: InkWell(
-                  onTap: () {
-                    debugPrint("test");
-                  },
-                  child: Text(
-                    '达喀尔',
-                    style: TextStyle(fontSize: (14 * ratio)),
-                  ),
-                ),
+                child: Text(
+                  '达喀尔',
+                  style: TextStyle(fontSize: (14 * ratio)),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 149 * ratio,
@@ -69,7 +53,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '班吉',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 197 * ratio,
@@ -77,7 +61,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '恩贾梅纳',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 248 * ratio,
@@ -85,7 +69,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '内罗华',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 198 * ratio,
@@ -93,7 +77,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '哈拉雷',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 147 * ratio,
@@ -101,7 +85,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '开普敦',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 288 * ratio,
@@ -109,7 +93,7 @@ class AfriceMapWidget extends StatelessWidget {
                 child: Text(
                   '塔那那利佛',
                   style: TextStyle(fontSize: (10 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),

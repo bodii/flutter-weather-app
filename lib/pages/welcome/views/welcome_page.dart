@@ -21,87 +21,98 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('欢迎'),
-        ),
-        body: Column(
-          children: [
-            const WorldsWidget(),
-            Container(
-              alignment: Alignment.center,
-              width: 350,
-              height: 350,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(45)),
-                color: Colors.white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Spacer(flex: 1),
-                  const SizedBox(
-                    width: 320,
-                    child: Text(
-                      '关注天气变化，应对冷暖人生\n'
-                      '有时，忙碌的生活，从日出到日落\n'
-                      '有一种温度，会让你感知到生命在悄然的变化\n'
-                      '有一种风景，会使你被大自然的力量所引领...\n',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        context.pushNamed('/location');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60),
-                        ),
-                        backgroundColor: Theme.of(context).primaryColor,
-                      ),
-                      child: const Text(
-                        '开始',
+    return BlocListener<ContinentsBloc, ContinentsState>(
+      listenWhen: (previous, current) =>
+          previous.status != current.status &&
+          current.status == ContinentsStatus.storeGetSuccess,
+      listener: (context, state) {
+        debugPrint(state.status.toString());
+        debugPrint("++++");
+      },
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('欢迎'),
+          ),
+          body: Column(
+            children: [
+              const WorldsWidget(),
+              Container(
+                alignment: Alignment.center,
+                width: 350,
+                height: 350,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(45)),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Spacer(flex: 1),
+                    const SizedBox(
+                      width: 320,
+                      child: Text(
+                        '四季交迭，风雨变换\n'
+                        '天气冷暖，草木皆知\n'
+                        '享受生活中每一个美好的时刻\n'
+                        '也或者坏天气\n'
+                        '无论是，春夏秋冬',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 16,
+                          color: Colors.grey,
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Already have an account ? '),
-                      TextButton(
+                    const Spacer(flex: 1),
+                    SizedBox(
+                      width: 300,
+                      height: 60,
+                      child: ElevatedButton(
                         onPressed: () {
-                          // Future<List<City>> citys = getChinaAllCityList();
-                          _dialogLogin(context);
+                          context.pushNamed('/location');
                         },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.white,
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60),
+                          ),
+                          backgroundColor: Theme.of(context).primaryColor,
                         ),
                         child: const Text(
-                          'Log in',
+                          '开始',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.white,
+                            fontSize: 18,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Already have an account ? '),
+                        TextButton(
+                          onPressed: () {
+                            // Future<List<City>> citys = getChinaAllCityList();
+                            _dialogLogin(context);
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Text(
+                            'Log in',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

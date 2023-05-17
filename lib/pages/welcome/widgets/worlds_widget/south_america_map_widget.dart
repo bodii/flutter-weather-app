@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/text_extension.dart';
 
 class SouthAmericaMapWidget extends StatelessWidget {
   const SouthAmericaMapWidget({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '波哥大',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 208 * ratio,
@@ -36,7 +37,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '乔治敦',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 111 * ratio,
@@ -44,7 +45,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '基多',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 118 * ratio,
@@ -52,7 +53,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '利马',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 179 * ratio,
@@ -60,7 +61,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '苏克雷',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 239 * ratio,
@@ -68,7 +69,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '巴西利亚',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 202 * ratio,
@@ -76,7 +77,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '亚松森',
                   style: TextStyle(fontSize: (14 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 113 * ratio,
@@ -84,7 +85,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '圣地亚哥',
                   style: TextStyle(fontSize: (13 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
               Positioned(
                 left: 198 * ratio,
@@ -92,7 +93,7 @@ class SouthAmericaMapWidget extends StatelessWidget {
                 child: Text(
                   '布宜诺斯艾利斯',
                   style: TextStyle(fontSize: (8 * ratio)),
-                ),
+                ).inkWellToWeatherInternational(context),
               ),
             ],
           ),
