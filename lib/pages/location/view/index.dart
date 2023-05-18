@@ -105,7 +105,10 @@ class Location extends StatelessWidget {
                       }
                       */
 
-                      context.pushNamed('/home');
+                      context.pushNamed('/weather/list', pathParameters: {
+                        'city': '',
+                        'cityId': '',
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

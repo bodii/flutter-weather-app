@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:weather_app/pages/home/widgets/weather_card.dart';
+import 'package:weather_app/pages/weather_list/widgets/weather_card.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class WeatherListPage extends StatefulWidget {
+  const WeatherListPage({
+    super.key,
+    required this.city,
+    required this.cityId,
+  });
+
+  final String city;
+  final String cityId;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<WeatherListPage> createState() => WeatherListPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class WeatherListPageState extends State<WeatherListPage> {
   // LocationData? currentLocation;
   // Address? address;
 
@@ -185,6 +192,7 @@ class _IndexState extends State<Index> {
                 child: WeatherCardWidget(
                   provcn: data['provcn'] ?? '',
                   city: data['city'] ?? '',
+                  cityId: data['cityid'] ?? '',
                   weather: data['weather'] ?? '',
                   pic: data['pic'] ?? '',
                   temperature: data['temperature'] ?? '',
@@ -209,6 +217,7 @@ class _IndexState extends State<Index> {
                 child: WeatherCardWidget(
                   provcn: weathers[index]['provcn'] ?? '',
                   city: weathers[index]['city'] ?? '',
+                  cityId: weathers[index]['cityId'] ?? '',
                   weather: weathers[index]['weather'] ?? '',
                   pic: weathers[index]['pic'] ?? '',
                   temperature: weathers[index]['temperature'] ?? '',

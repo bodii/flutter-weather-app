@@ -6,6 +6,7 @@ class WeatherCardWidget extends StatelessWidget {
     super.key,
     required this.provcn,
     required this.city,
+    required this.cityId,
     required this.weather,
     required this.pic,
     required this.temperature,
@@ -13,6 +14,7 @@ class WeatherCardWidget extends StatelessWidget {
 
   final String provcn;
   final String city;
+  final String cityId;
   final String weather;
   final String pic;
   final String temperature;
@@ -34,7 +36,10 @@ class WeatherCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () =>
-            context.pushNamed('/weather/china', pathParameters: {'city': city}),
+            context.pushNamed('/weather/detail/china', pathParameters: {
+          'city': city,
+          'cityId': cityId,
+        }),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

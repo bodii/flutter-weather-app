@@ -4,29 +4,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/model/air_current.dart';
 import 'package:weather_app/model/sun_and_moon.dart';
 import 'package:weather_app/model/weather.dart';
-import 'package:weather_app/pages/weather/bloc/weather_response_bloc.dart';
-import 'package:weather_app/pages/weather/widgets/chart.dart';
+import 'package:weather_app/pages/weather_details/bloc/weather_response_bloc.dart';
+import 'package:weather_app/pages/weather_details/widgets/chart.dart';
 
-class WeatherPage extends StatelessWidget {
-  const WeatherPage({
+class WeatherDetailsCNPage extends StatelessWidget {
+  const WeatherDetailsCNPage({
     super.key,
+    required this.cityId,
     required this.city,
     this.isChina = true,
   });
 
+  final String cityId;
   final String city;
   final bool isChina;
-  final String provcn = '河南';
 
   @override
   Widget build(BuildContext context) {
-    const city = '郑州';
     return BlocProvider(
       create: (_) => WeatherResponseBloc(
         city: city,
-        provcn: provcn,
+        cityId: cityId,
+        isChina: isChina,
       )..add(const WeatherResponseLoadedEvent()),
-      child: const WeatherBlocWidget(city: city),
+      child: WeatherBlocWidget(cityId: cityId, city: city),
     );
   }
 }
@@ -34,9 +35,11 @@ class WeatherPage extends StatelessWidget {
 class WeatherBlocWidget extends StatelessWidget {
   const WeatherBlocWidget({
     super.key,
+    required this.cityId,
     required this.city,
   });
 
+  final String cityId;
   final String city;
 
   @override
@@ -48,7 +51,7 @@ class WeatherBlocWidget extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.status != current.status &&
           current.status == WeatherResponseStatus.httpSuccess,
-      child: WeatherDetailsWidget(city: city),
+      child: WeatherDetailsWidget(cityId: cityId, city: city),
     );
   }
 }
@@ -56,9 +59,11 @@ class WeatherBlocWidget extends StatelessWidget {
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget({
     super.key,
+    required this.cityId,
     required this.city,
   });
 
+  final String cityId;
   final String city;
 
   @override

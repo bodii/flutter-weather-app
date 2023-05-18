@@ -1,9 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
 import 'package:weather_app/pages/location/view/index.dart';
-import 'package:weather_app/pages/home/view/home.dart';
-import 'package:weather_app/pages/home/widgets/search.dart';
-import 'package:weather_app/pages/weather/views/weather_page.dart';
+import 'package:weather_app/pages/weather_details/views/weather_details.dart';
+import 'package:weather_app/pages/weather_list/view/weather_list.dart';
+import 'package:weather_app/pages/weather_list/widgets/search.dart';
 import 'package:weather_app/pages/welcome/views/welcome_page.dart';
 
 class AppRoutes {
@@ -28,24 +28,29 @@ class AppRoutes {
         ],
       ),
       GoRoute(
-        name: '/home',
-        path: '/home',
-        builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        name: '/weather/china',
-        path: '/weather/china/:city',
-        builder: (context, state) =>
-            WeatherPage(city: state.pathParameters['city'] ?? '北京'),
-      ),
-      GoRoute(
-        name: '/weather/international',
-        path: '/weather/international/:city',
-        builder: (context, state) => WeatherPage(
-          city: state.pathParameters['city'] ?? '纽约',
-          isChina: false,
+        name: '/weather/list',
+        path: '/weather/list/:city/:cityid',
+        builder: (context, state) => WeatherListPage(
+          city: state.pathParameters['city'] ?? '北京',
+          cityId: state.pathParameters['cityId'] ?? '101010100',
         ),
-      )
+      ),
+      GoRoute(
+        name: '/weather/detail/china',
+        path: '/weather/detail/china/:city/:cityid',
+        builder: (context, state) => WeatherDetailsCNPage(
+            city: state.pathParameters['city'] ?? '北京',
+            cityId: state.pathParameters['cityId'] ?? '101010100'),
+      ),
+      // GoRoute(
+      //   name: '/weather/detail/international',
+      //   path: '/weather/detail/international/:city/:cityid',
+      //   builder: (context, state) => WeatherDetailsInterPage(
+      //     city: state.pathParameters['city'] ?? '',
+      //     cityId: state.pathParameters['cityId'] ?? '',
+      //     isChina: false,
+      //   ),
+      // )
     ],
     errorBuilder: (context, state) => ErrorPage(state.error!),
     debugLogDiagnostics: true,

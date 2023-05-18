@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/response.dart';
-import 'package:weather_app/model/win_hot_country_list.dart';
+import 'package:weather_app/model/win_hot_city.dart';
 
 part 'continents_event.dart';
 part 'continents_state.dart';
@@ -21,18 +21,19 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     ContinentsLoaded event,
     Emitter<ContinentsState> emit,
   ) async {
-    if (![
-      ContinentsStatus.initial,
-      ContinentsStatus.storeGetFailure,
-      ContinentsStatus.storeSaveFailure,
-    ].contains(state.status)) {
-      return;
-    }
+    // if (![
+    //   ContinentsStatus.initial,
+    //   ContinentsStatus.storeGetFailure,
+    //   ContinentsStatus.storeSaveFailure,
+    // ].contains(state.status)) {
+    //   return;
+    // }
 
     emit(state.copyWith(status: ContinentsStatus.httpLoading));
+
     debugPrint(state.status.toString());
     try {
-      final WniHotCountryList continents = await getWniHotCountryGroupBy();
+      final WniHotCityList continents = await getWniHotCity();
       emit(
         state.copyWith(
           status: ContinentsStatus.httpSuccess,
@@ -51,9 +52,9 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     ContinentsSaved event,
     Emitter<ContinentsState> emit,
   ) async {
-    if (state.status != ContinentsStatus.httpSuccess) {
-      return;
-    }
+    // if (state.status != ContinentsStatus.httpSuccess) {
+    //   return;
+    // }
 
     emit(state.copyWith(status: ContinentsStatus.storeSaveInitial));
 
@@ -73,28 +74,29 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     ContinentsGeted event,
     Emitter<ContinentsState> emit,
   ) async {
-    if (state.status != ContinentsStatus.storeSaveSuccess) {
-      return;
-    }
+    // if (state.status != ContinentsStatus.storeSaveSuccess) {
+    //   return;
+    // }
 
     emit(state.copyWith(status: ContinentsStatus.storeGetInitial));
 
+    WniHotCityList? continents;
+
+    emit(state.copyWith(status: ContinentsStatus.storeGetting));
     SharedPreferences.getInstance().then((store) {
-      emit(state.copyWith(status: ContinentsStatus.storeGetting));
       final String? continentsStr = store.getString("continents");
       if (continentsStr != null) {
-        WniHotCountryList continents =
-            WniHotCountryList.fromJson(jsonDecode(continentsStr));
-        debugPrint("========");
-        debugPrint(continentsStr);
-
-        emit(state.copyWith(
-          status: ContinentsStatus.storeGetSuccess,
-          continents: continents,
-        ));
-      } else {
-        emit(state.copyWith(status: ContinentsStatus.storeGetFailure));
+        continents = WniHotCityList.fromJson(jsonDecode(continentsStr));
       }
     });
+
+    if (continents != null) {
+      emit(state.copyWith(
+        status: ContinentsStatus.storeGetSuccess,
+        continents: continents,
+      ));
+    } else {
+      emit(state.copyWith(status: ContinentsStatus.storeGetFailure));
+    }
   }
 }

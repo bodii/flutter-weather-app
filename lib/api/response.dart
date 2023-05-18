@@ -308,16 +308,15 @@ Future<WniHotCountryList> getWniHotCountryGroupBy() async {
 }
 
 // 国际热门城市数据
-Future<WniHotCity> getWniHotCity() async {
+Future<WniHotCityList> getWniHotCity() async {
   var url = Uri.https(
     weatherApiHost,
     'js/json/wni_hotCity.json',
   );
   var response = await http.get(url);
   var body = response.body;
-  Map<String, dynamic> resps = jsonDecode(body);
-  WniHotCity data = WniHotCity.fromJson(resps['data']);
-  log(data.name!);
+  List<dynamic> resps = jsonDecode(utf8.decode(body.runes.toList()));
+  WniHotCityList data = WniHotCityList.fromJson(resps);
 
   return data;
 }

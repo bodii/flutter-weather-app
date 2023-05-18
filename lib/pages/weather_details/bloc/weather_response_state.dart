@@ -11,7 +11,7 @@ enum WeatherResponseStatus {
 class WeatherResponseState extends Equatable {
   const WeatherResponseState({
     this.status = WeatherResponseStatus.initial,
-    this.provcn = '',
+    this.cityId = '',
     this.city = '',
     this.air,
     this.weather,
@@ -19,7 +19,7 @@ class WeatherResponseState extends Equatable {
   });
 
   final WeatherResponseStatus? status;
-  final String? provcn;
+  final String? cityId;
   final String? city;
   final AirCurrent? air;
   final Weather? weather;
@@ -27,7 +27,7 @@ class WeatherResponseState extends Equatable {
 
   WeatherResponseState copyWith({
     WeatherResponseStatus? status,
-    String? provcn,
+    String? cityId,
     String? city,
     AirCurrent? air,
     Weather? weather,
@@ -35,7 +35,7 @@ class WeatherResponseState extends Equatable {
   }) =>
       WeatherResponseState(
         status: status ?? this.status,
-        provcn: provcn ?? this.provcn,
+        cityId: cityId ?? this.cityId,
         city: city ?? this.city,
         air: air ?? this.air,
         weather: weather ?? this.weather,
@@ -45,7 +45,7 @@ class WeatherResponseState extends Equatable {
   @override
   List<Object?> get props => [
         status,
-        provcn,
+        cityId,
         city,
         air,
         weather,

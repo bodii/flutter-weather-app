@@ -22,11 +22,11 @@ class ContinentsState extends Equatable {
   });
 
   final ContinentsStatus status;
-  final WniHotCountryList? continents;
+  final WniHotCityList? continents;
 
   ContinentsState copyWith({
     ContinentsStatus? status,
-    WniHotCountryList? continents,
+    WniHotCityList? continents,
   }) {
     return ContinentsState(
       status: status ?? this.status,
