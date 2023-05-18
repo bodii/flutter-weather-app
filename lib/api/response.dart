@@ -167,7 +167,7 @@ Future<SunAndMoonAndIndex> getSunMoonAndIndex(String cityid) async {
   var url = Uri.https(
     weatherApiHost,
     'api/home/getSunMoonAndIndex',
-    {'id': cityid},
+    {'cityid': cityid},
   );
   var response = await http.get(url);
   var body = response.body;

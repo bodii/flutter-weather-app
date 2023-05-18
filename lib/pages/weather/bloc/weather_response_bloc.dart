@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/air_current.dart';
 import 'package:weather_app/model/city_station_dis_data.dart';
+import 'package:weather_app/model/sun_and_moon.dart';
 import 'package:weather_app/model/weather.dart';
 
 part 'weather_response_event.dart';
@@ -16,7 +17,7 @@ class WeatherResponseBloc
   WeatherResponseBloc({
     required this.city,
     required this.provcn,
-  }) : super(WeatherResponseState()) {
+  }) : super(const WeatherResponseState()) {
     on<WeatherResponseLoadedEvent>(_onRequested);
   }
 
@@ -45,25 +46,41 @@ class WeatherResponseBloc
       }
       if (stationid.isNotEmpty) {
         debugPrint("stationid: $stationid");
-        AirCurrent air = await getAirCurrent(stationid);
-        Weather weather = await getCurrAnd15dAnd24h(stationid);
-        debugPrint("air");
-        debugPrint(jsonEncode(air.toJson()));
+        final AirCurrent air = await getAirCurrent(stationid);
+        final Weather weather = await getCurrAnd15dAnd24h(stationid);
+        final SunAndMoonAndIndex sunAndMoonAndIndex =
+            await getSunMoonAndIndex(stationid);
 
-        debugPrint("weather");
-        debugPrint(jsonEncode(weather.toJson()));
+        if (air.dataTime == null ||
+            weather.current == null ||
+            sunAndMoonAndIndex.sunAndMoon == null) {
+          debugPrint("air or weather or sunAndMoonAndIndex is null");
+          emit(state.copyWith(
+            status: WeatherResponseStatus.httpFailure,
+          ));
+        } else {
+          debugPrint("air");
+          debugPrint(jsonEncode(air.toJson()));
 
-        emit(state.copyWith(
-          status: WeatherResponseStatus.httpSuccess,
-          air: air,
-          weather: weather,
-        ));
+          debugPrint("weather");
+          debugPrint(jsonEncode(weather.toJson()));
+
+          debugPrint("sunAndMoonAndIndex");
+          debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
+
+          emit(state.copyWith(
+            status: WeatherResponseStatus.httpSuccess,
+            air: air,
+            weather: weather,
+            sunAndMoonAndIndex: sunAndMoonAndIndex,
+          ));
+        }
       }
     } catch (e, stack) {
       debugPrint("error:");
       debugPrint(e.toString());
       debugPrint(stack.toString());
-      emit(state.copyWith(status: WeatherResponseStatus.httpFailure));
+      emit(state.copyWith(status: WeatherResponseStatus.httpError));
     }
   }
 }

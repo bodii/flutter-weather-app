@@ -5,6 +5,7 @@ enum WeatherResponseStatus {
   httpLoading,
   httpSuccess,
   httpFailure,
+  httpError,
 }
 
 class WeatherResponseState extends Equatable {
@@ -14,6 +15,7 @@ class WeatherResponseState extends Equatable {
     this.city = '',
     this.air,
     this.weather,
+    this.sunAndMoonAndIndex,
   });
 
   final WeatherResponseStatus? status;
@@ -21,6 +23,7 @@ class WeatherResponseState extends Equatable {
   final String? city;
   final AirCurrent? air;
   final Weather? weather;
+  final SunAndMoonAndIndex? sunAndMoonAndIndex;
 
   WeatherResponseState copyWith({
     WeatherResponseStatus? status,
@@ -28,6 +31,7 @@ class WeatherResponseState extends Equatable {
     String? city,
     AirCurrent? air,
     Weather? weather,
+    SunAndMoonAndIndex? sunAndMoonAndIndex,
   }) =>
       WeatherResponseState(
         status: status ?? this.status,
@@ -35,6 +39,7 @@ class WeatherResponseState extends Equatable {
         city: city ?? this.city,
         air: air ?? this.air,
         weather: weather ?? this.weather,
+        sunAndMoonAndIndex: sunAndMoonAndIndex ?? this.sunAndMoonAndIndex,
       );
 
   @override
@@ -44,5 +49,6 @@ class WeatherResponseState extends Equatable {
         city,
         air,
         weather,
+        sunAndMoonAndIndex,
       ];
 }

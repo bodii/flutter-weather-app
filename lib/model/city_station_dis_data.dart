@@ -61,12 +61,12 @@ class CityStationDis {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["districtcn"] = districtcn;
-    _data["namecn"] = namecn;
-    _data["provcn"] = provcn;
-    _data["stationid"] = stationid;
-    return _data;
+    final Map<String, dynamic> jsonData = <String, dynamic>{};
+    jsonData["districtcn"] = districtcn;
+    jsonData["namecn"] = namecn;
+    jsonData["provcn"] = provcn;
+    jsonData["stationid"] = stationid;
+    return jsonData;
   }
 
   CityStationDis copyWith({

@@ -60,18 +60,18 @@ class AirCurrent {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["NO2"] = no2;
-    _data["levelIndex"] = levelIndex;
-    _data["tips_long"] = tipsLong;
-    _data["o3"] = o3;
-    _data["PM25"] = pm25;
-    _data["dataTime"] = dataTime;
-    _data["SO2"] = so2;
-    _data["AQI"] = aqi;
-    _data["PM10"] = pm10;
-    _data["CO"] = co;
-    return _data;
+    final Map<String, dynamic> jsonData = <String, dynamic>{};
+    jsonData["NO2"] = no2;
+    jsonData["levelIndex"] = levelIndex;
+    jsonData["tips_long"] = tipsLong;
+    jsonData["o3"] = o3;
+    jsonData["PM25"] = pm25;
+    jsonData["dataTime"] = dataTime;
+    jsonData["SO2"] = so2;
+    jsonData["AQI"] = aqi;
+    jsonData["PM10"] = pm10;
+    jsonData["CO"] = co;
+    return jsonData;
   }
 
   AirCurrent copyWith({

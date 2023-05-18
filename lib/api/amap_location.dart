@@ -10,13 +10,15 @@ import 'package:weather_app/config/weather_api.dart';
 import 'package:weather_app/model/amap_location_result.dart';
 
 class GetLocation {
-  AmapLocationResult? locationResult;
-  late StreamSubscription<Map<String, Object>> locationListener;
-  final AMapFlutterLocation location = AMapFlutterLocation();
+  late AmapLocationResult? locationResult;
+  late StreamSubscription<Map<String, Object>>? locationListener;
+  late AMapFlutterLocation? location;
 
   /// 初始化
   void init() async {
     try {
+      location = AMapFlutterLocation();
+
       /// [hasContains] 隐私声明中是否包含高德隐私政策说明
       ///
       /// [hasShow] 隐私权政策是否弹窗展示告知用户
@@ -37,7 +39,7 @@ class GetLocation {
       }
 
       /// 注册定位结果监听
-      await for (final value in location.onLocationChanged()) {
+      await for (final value in location!.onLocationChanged()) {
         locationResult = AmapLocationResult.fromJson(value);
         debugPrint(jsonEncode(value));
       }
@@ -49,14 +51,22 @@ class GetLocation {
   /// 销毁
   void dispose() {
     /// 移除定位监听
-    locationListener.cancel();
+    if (null != locationListener) {
+      locationListener!.cancel();
+    }
 
     /// 销毁定位
-    location.destroy();
+    if (null != location) {
+      location!.destroy();
+    }
   }
 
   /// 设置定位参数
   void setOption() {
+    if (location == null) {
+      return;
+    }
+
     AMapLocationOption option = AMapLocationOption();
 
     /// 是否单次定位
@@ -92,7 +102,7 @@ class GetLocation {
     option.pausesLocationUpdatesAutomatically = false;
 
     /// 将定位参数设置给定位插件
-    location.setLocationOption(option);
+    location!.setLocationOption(option);
   }
 
   /// 动态申请定位权限
@@ -120,7 +130,7 @@ class GetLocation {
   /// 获取IOS native的accuracyAuthorization类型
   void iosRequestAccuracyAuth() async {
     AMapAccuracyAuthorization currentAccuracyAuth =
-        await location.getSystemAccuracyAuthorization();
+        await location!.getSystemAccuracyAuthorization();
     if (currentAccuracyAuth ==
         AMapAccuracyAuthorization.AMapAccuracyAuthorizationFullAccuracy) {
       debugPrint("精确定位类型");
@@ -136,14 +146,14 @@ class GetLocation {
   void start() {
     if (null != location) {
       setOption();
-      location.startLocation();
+      location!.startLocation();
     }
   }
 
   // 停止定位
   void stop() {
     if (null != location) {
-      location.stopLocation();
+      location!.stopLocation();
     }
   }
 }

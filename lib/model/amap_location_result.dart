@@ -105,27 +105,27 @@ class AmapLocationResult {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["callbackTime"] = callbackTime;
-    _data["locationTime"] = locationTime;
-    _data["locationType"] = locationType;
-    _data["latitude"] = latitude;
-    _data["longitude"] = longitude;
-    _data["accuracy"] = accuracy;
-    _data["altitude"] = altitude;
-    _data["bearing"] = bearing;
-    _data["speed"] = speed;
-    _data["country"] = country;
-    _data["province"] = province;
-    _data["city"] = city;
-    _data["district"] = district;
-    _data["street"] = street;
-    _data["streetNumber"] = streetNumber;
-    _data["cityCode"] = cityCode;
-    _data["adCode"] = adCode;
-    _data["address"] = address;
-    _data["description"] = description;
-    return _data;
+    final Map<String, dynamic> jsonData = <String, dynamic>{};
+    jsonData["callbackTime"] = callbackTime;
+    jsonData["locationTime"] = locationTime;
+    jsonData["locationType"] = locationType;
+    jsonData["latitude"] = latitude;
+    jsonData["longitude"] = longitude;
+    jsonData["accuracy"] = accuracy;
+    jsonData["altitude"] = altitude;
+    jsonData["bearing"] = bearing;
+    jsonData["speed"] = speed;
+    jsonData["country"] = country;
+    jsonData["province"] = province;
+    jsonData["city"] = city;
+    jsonData["district"] = district;
+    jsonData["street"] = street;
+    jsonData["streetNumber"] = streetNumber;
+    jsonData["cityCode"] = cityCode;
+    jsonData["adCode"] = adCode;
+    jsonData["address"] = address;
+    jsonData["description"] = description;
+    return jsonData;
   }
 
   AmapLocationResult copyWith({

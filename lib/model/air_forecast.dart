@@ -22,11 +22,11 @@ class AirForecast {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["min"] = min;
-    _data["data"] = data;
-    _data["max"] = max;
-    return _data;
+    final Map<String, dynamic> jsonData = <String, dynamic>{};
+    jsonData["min"] = min;
+    jsonData["data"] = data;
+    jsonData["max"] = max;
+    return jsonData;
   }
 
   AirForecast copyWith({

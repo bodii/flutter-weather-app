@@ -115,29 +115,29 @@ class AirPoint {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["area"] = area;
-    _data["aqi_level"] = aqiLevel;
-    _data["pm25_level"] = pm25Level;
-    _data["so2_level_color"] = so2LevelColor;
-    _data["pm10_level"] = pm10Level;
-    _data["pm10"] = pm10;
-    _data["co_level_color"] = coLevelColor;
-    _data["no2_level"] = no2Level;
-    _data["lon"] = lon;
-    _data["no2_level_color"] = no2LevelColor;
-    _data["aqi_level_color"] = aqiLevelColor;
-    _data["pm10_level_color"] = pm10LevelColor;
-    _data["so2_level"] = so2Level;
-    _data["no2"] = no2;
-    _data["pm25"] = pm25;
-    _data["co_level"] = coLevel;
-    _data["so2"] = so2;
-    _data["aqi"] = aqi;
-    _data["lat"] = lat;
-    _data["pm25_level_color"] = pm25LevelColor;
-    _data["co"] = co;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["area"] = area;
+    data["aqi_level"] = aqiLevel;
+    data["pm25_level"] = pm25Level;
+    data["so2_level_color"] = so2LevelColor;
+    data["pm10_level"] = pm10Level;
+    data["pm10"] = pm10;
+    data["co_level_color"] = coLevelColor;
+    data["no2_level"] = no2Level;
+    data["lon"] = lon;
+    data["no2_level_color"] = no2LevelColor;
+    data["aqi_level_color"] = aqiLevelColor;
+    data["pm10_level_color"] = pm10LevelColor;
+    data["so2_level"] = so2Level;
+    data["no2"] = no2;
+    data["pm25"] = pm25;
+    data["co_level"] = coLevel;
+    data["so2"] = so2;
+    data["aqi"] = aqi;
+    data["lat"] = lat;
+    data["pm25_level_color"] = pm25LevelColor;
+    data["co"] = co;
+    return data;
   }
 
   AirPoint copyWith({
