@@ -63,7 +63,6 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     emit(state.copyWith(status: ContinentsStatus.storeSaveInitial));
 
     final SharedPreferences store = await SharedPreferences.getInstance();
-    store.remove("continents");
     emit(state.copyWith(status: ContinentsStatus.storeSaving));
     final isSaved = await store.setString(
         "wni_hot_city_name_ids", jsonEncode(state.continents));

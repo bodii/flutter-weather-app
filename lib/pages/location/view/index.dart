@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/pages/location/cubit/location_cubit.dart';
 
 class Location extends StatelessWidget {
   const Location({super.key});
@@ -11,7 +13,25 @@ class Location extends StatelessWidget {
         appBar: AppBar(
           title: const Text('位置'),
         ),
-        body: Center(
+        body: BlocProvider(
+          create: (context) => LocationCubit()..getCityInfo(),
+          child: const LocationCubitView(),
+        ),
+      ),
+    );
+  }
+}
+
+class LocationCubitView extends StatelessWidget {
+  const LocationCubitView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LocationCubit, LocationState>(
+      builder: (context, state) {
+        return Center(
           child: Container(
             alignment: Alignment.center,
             width: 400,
@@ -57,58 +77,15 @@ class Location extends StatelessWidget {
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      // GetLocation amapLocation = GetLocation();
-                      // amapLocation.init();
-                      // amapLocation.start();
-                      // if (null != amapLocation.locationResult) {
-                      //   debugPrint(amapLocation.locationResult.toString());
-                      // }
-                      /*
-                      var location = await getLocation();
-                      // var address = await getAddress(
-                      var address = await getAmapGeoToAddress(
-                          location!.latitude ?? 0.0, location.longitude ?? 0.0);
-                      List<City> cityList = await getChinaAllCityList();
-                      print(address.addressData!.city);
-                      String addressProvince = address.addressData!.province!;
-                      if (addressProvince.length > 1) {
-                        addressProvince = addressProvince.substring(
-                            0, addressProvince.length - 1);
+                    onPressed: () {
+                      debugPrint(state.status.toString());
+                      if (state.status.isSuccess) {
+                        context.pushNamed('/weather/list', pathParameters: {
+                          'city': state.cityInfo!.namecn!,
+                          'cityId': state.cityInfo!.stationid!,
+                        });
+                        debugPrint("ok");
                       }
-                      String addressCity = address.addressData!.city!;
-                      if (addressCity.length > 1) {
-                        addressCity =
-                            addressCity.substring(0, addressCity.length - 1);
-                      }
-
-                      print(addressProvince);
-                      print(addressCity);
-
-                      if (cityList.isNotEmpty) {
-                        City? currentCity;
-
-                        for (City city in cityList) {
-                          if (city.provcn == addressProvince &&
-                              city.districtcn == addressCity &&
-                              city.namecn == addressCity) {
-                            currentCity = city;
-                          }
-                        }
-
-                        print(currentCity!.namecn);
-                        print(currentCity.stationid);
-
-                        Weather weather =
-                            await getCurrAnd15dAnd24h(currentCity.stationid!);
-                        print(jsonEncode(weather.toJson()));
-                      }
-                      */
-
-                      context.pushNamed('/weather/list', pathParameters: {
-                        'city': '',
-                        'cityId': '',
-                      });
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -128,8 +105,8 @@ class Location extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
