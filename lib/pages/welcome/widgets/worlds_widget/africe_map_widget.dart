@@ -67,7 +67,7 @@ class AfriceMapWidget extends StatelessWidget {
                 left: 248 * ratio,
                 top: 133 * ratio,
                 child: Text(
-                  '内罗华',
+                  '内罗毕',
                   style: TextStyle(fontSize: (14 * ratio)),
                 ).inkWellToWeatherInternational(context),
               ),

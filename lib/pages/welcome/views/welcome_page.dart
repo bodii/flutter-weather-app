@@ -34,13 +34,15 @@ class WelcomeBlocView extends StatelessWidget {
         } else if (state.status == ContinentsStatus.httpSuccess) {
           context.read<ContinentsBloc>().add(const ContinentsSaved());
           debugPrint("saved...");
-        } else if (state.status == ContinentsStatus.storeSaveSuccess) {
-          context.read<ContinentsBloc>().add(const ContinentsGeted());
-          debugPrint("geted...");
-        } else if (state.status == ContinentsStatus.storeGetSuccess) {
-          debugPrint("geted success...");
-          debugPrint(state.continents?.toJson().toString());
         }
+        //  else if (state.status == ContinentsStatus.storeSaveSuccess) {
+        // context.read<ContinentsBloc>().add(const ContinentsGeted());
+        // debugPrint("geted...");
+        // }
+        // else if (state.status == ContinentsStatus.storeGetSuccess) {
+        //   debugPrint("geted success...");
+        //   debugPrint(state.continents?.toString());
+        // }
         debugPrint(state.status.toString());
         return const WelcomeBlocListenerView();
       },

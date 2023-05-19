@@ -65,3 +65,29 @@ class WniHotCityList {
         wniHotCityList: wniHotCityList ?? this.wniHotCityList,
       );
 }
+
+class WniHotCityNameId {
+  late final Map<String, String>? nameIds;
+
+  WniHotCityNameId({this.nameIds});
+
+  Map<String, String>? toJson() {
+    return nameIds;
+  }
+
+  WniHotCityNameId.fromJson(WniHotCityList list) {
+    Map<String, String> data = {};
+    for (WniHotCity wni in list.wniHotCityList!) {
+      data[wni.name!] = wni.id!;
+    }
+
+    nameIds = data;
+  }
+
+  WniHotCityNameId copyWith({
+    Map<String, String>? nameIds,
+  }) =>
+      WniHotCityNameId(
+        nameIds: nameIds ?? this.nameIds,
+      );
+}

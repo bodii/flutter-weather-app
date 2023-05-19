@@ -22,11 +22,11 @@ class ContinentsState extends Equatable {
   });
 
   final ContinentsStatus status;
-  final WniHotCityList? continents;
+  final Map<String, String>? continents;
 
   ContinentsState copyWith({
     ContinentsStatus? status,
-    WniHotCityList? continents,
+    Map<String, String>? continents,
   }) {
     return ContinentsState(
       status: status ?? this.status,

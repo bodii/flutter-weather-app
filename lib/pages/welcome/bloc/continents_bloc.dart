@@ -33,7 +33,11 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
 
     debugPrint(state.status.toString());
     try {
-      final WniHotCityList continents = await getWniHotCity();
+      final WniHotCityList wniHotCityList = await getWniHotCity();
+      final WniHotCityNameId wniHotCityNameId =
+          WniHotCityNameId.fromJson(wniHotCityList);
+      final Map<String, String> continents = wniHotCityNameId.nameIds!;
+
       emit(
         state.copyWith(
           status: ContinentsStatus.httpSuccess,
@@ -59,9 +63,10 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     emit(state.copyWith(status: ContinentsStatus.storeSaveInitial));
 
     final SharedPreferences store = await SharedPreferences.getInstance();
+    store.remove("continents");
     emit(state.copyWith(status: ContinentsStatus.storeSaving));
-    final isSaved =
-        await store.setString("continents", jsonEncode(state.continents));
+    final isSaved = await store.setString(
+        "wni_hot_city_name_ids", jsonEncode(state.continents));
 
     if (isSaved) {
       emit(state.copyWith(status: ContinentsStatus.storeSaveSuccess));
@@ -80,13 +85,13 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
 
     emit(state.copyWith(status: ContinentsStatus.storeGetInitial));
 
-    WniHotCityList? continents;
+    Map<String, String>? continents;
 
     emit(state.copyWith(status: ContinentsStatus.storeGetting));
     SharedPreferences.getInstance().then((store) {
-      final String? continentsStr = store.getString("continents");
+      final String? continentsStr = store.getString("wni_hot_city_name_ids");
       if (continentsStr != null) {
-        continents = WniHotCityList.fromJson(jsonDecode(continentsStr));
+        continents = jsonDecode(continentsStr);
       }
     });
 
