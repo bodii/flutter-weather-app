@@ -80,10 +80,7 @@ class LocationCubitView extends StatelessWidget {
                     onPressed: () {
                       debugPrint(state.status.toString());
                       if (state.status.isSuccess) {
-                        context.pushNamed('/weather/list', pathParameters: {
-                          'city': state.cityInfo!.namecn!,
-                          'cityId': state.cityInfo!.stationid!,
-                        });
+                        context.pushNamed('/weather/list');
                         debugPrint("ok");
                       }
                     },

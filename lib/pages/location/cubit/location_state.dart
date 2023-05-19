@@ -13,22 +13,18 @@ extension LocationGetStatusX on LocationGetStatus {
 
 final class LocationState extends Equatable {
   const LocationState({
-    this.cityInfo,
     this.status = LocationGetStatus.init,
   });
 
-  final City? cityInfo;
   final LocationGetStatus status;
 
   LocationState copyWith({
-    City? cityInfo,
     LocationGetStatus? status,
   }) =>
       LocationState(
-        cityInfo: cityInfo ?? this.cityInfo,
         status: status ?? this.status,
       );
 
   @override
-  List<Object?> get props => [cityInfo, status];
+  List<Object> get props => [status];
 }

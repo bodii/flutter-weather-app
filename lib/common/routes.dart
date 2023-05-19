@@ -29,11 +29,8 @@ class AppRoutes {
       ),
       GoRoute(
         name: '/weather/list',
-        path: '/weather/list/:city/:cityId',
-        builder: (context, state) => WeatherListPage(
-          city: state.pathParameters['city'] ?? '北京',
-          cityId: state.pathParameters['cityId'] ?? '101010100',
-        ),
+        path: '/weather/list',
+        builder: (context, state) => const WeatherListPage(),
       ),
       GoRoute(
         name: '/weather/detail/china',

@@ -1,48 +1,79 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/api/response.dart';
+import 'package:weather_app/model/amap_geo_to_address.dart';
+import 'package:weather_app/model/city.dart';
 import 'package:weather_app/pages/weather_list/widgets/weather_card.dart';
 
 class WeatherListPage extends StatefulWidget {
-  const WeatherListPage({
-    super.key,
-    required this.city,
-    required this.cityId,
-  });
-
-  final String city;
-  final String cityId;
+  const WeatherListPage({super.key});
 
   @override
   State<WeatherListPage> createState() => WeatherListPageState();
 }
 
 class WeatherListPageState extends State<WeatherListPage> {
-  // LocationData? currentLocation;
-  // Address? address;
+  final List<City> currentProvinceCitys = [];
+  City? currentCity;
 
   @override
   void initState() {
     super.initState();
-    /*
-    try {
-      getLocation().then((value) {
-        LocationData? location = value;
-        log('latitude: ${location?.latitude}, '
-            'longitude: ${location?.longitude}');
-        if (location != null) {
-          log('bbb');
-          double latitude = location.latitude ?? 0.0;
-          double longitude = location.longitude ?? 0.0;
-          getGeoToAddress(latitude, longitude).then((v) {
-            BGeoToAddress bGeoToAddress = v;
-            log(bGeoToAddress.toJson().toString());
-          });
-        }
-      });
-    } catch (e) {
-      log('get location failure');
+    getAddressInfo();
+  }
+
+  void getAddressInfo() async {
+    final SharedPreferences store = await SharedPreferences.getInstance();
+    String? addressStr = store.getString('local_location');
+    if (addressStr == null) {
+      throw Exception("store get address info failure");
     }
-    */
+    // List<String> keys = store.getKeys().toList();
+    print(jsonDecode(addressStr));
+
+    AmapAddressData address = AmapAddressData.fromJson(jsonDecode(addressStr));
+
+    String addressProvince = address.province!;
+    if (addressProvince.length > 1) {
+      addressProvince =
+          addressProvince.substring(0, addressProvince.length - 1);
+    }
+    String addressCity = address.city!;
+    if (addressCity.length > 1) {
+      addressCity = addressCity.substring(0, addressCity.length - 1);
+    }
+
+    print(addressProvince);
+    print(addressCity);
+
+    List<City> cityList = await getChinaAllCityList();
+    if (cityList.isEmpty) {
+      throw Exception("getChinaAllCityList request failure");
+    }
+    // print(jsonEncode(cityList));
+
+    final List<City> currentProvinceCitys = [];
+    City? currentCity;
+
+    for (City city in cityList) {
+      if (city.provcn == addressProvince && city.districtcn == addressCity) {
+        currentProvinceCitys.add(city);
+
+        if (city.namecn == addressCity) {
+          currentCity = city;
+        }
+      }
+    }
+
+    if (currentCity == null) {
+      throw Exception("city info get failure");
+    }
+    print(jsonEncode(currentProvinceCitys));
+    print(currentCity.namecn);
+    print(currentCity.stationid);
   }
 
   @override
@@ -95,8 +126,11 @@ class WeatherListPageState extends State<WeatherListPage> {
                   ),
                 ],
               ),
-              const Expanded(
-                child: Index(),
+              Expanded(
+                child: Index(
+                  currentCity: currentCity!,
+                  currentProvinceCitys: currentProvinceCitys,
+                ),
               ),
             ],
           ),
@@ -107,7 +141,14 @@ class WeatherListPageState extends State<WeatherListPage> {
 }
 
 class Index extends StatefulWidget {
-  const Index({Key? key}) : super(key: key);
+  Index({
+    super.key,
+    required this.currentCity,
+    required this.currentProvinceCitys,
+  });
+
+  final List<City> currentProvinceCitys;
+  City currentCity;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -218,9 +259,9 @@ class _IndexState extends State<Index> {
                   provcn: weathers[index]['provcn'] ?? '',
                   city: weathers[index]['city'] ?? '',
                   cityId: weathers[index]['cityId'] ?? '',
-                  weather: weathers[index]['weather'] ?? '',
-                  pic: weathers[index]['pic'] ?? '',
-                  temperature: weathers[index]['temperature'] ?? '',
+                  weather: weathers[0]['weather'] ?? '',
+                  pic: weathers[0]['pic'] ?? '',
+                  temperature: weathers[0]['temperature'] ?? '',
                 ),
               );
             },

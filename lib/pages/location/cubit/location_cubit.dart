@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/amap_location.dart';
 import 'package:weather_app/api/location.dart';
 import 'package:weather_app/api/response.dart';
@@ -26,6 +29,7 @@ class LocationCubit extends Cubit<LocationState> {
 
     AmapGeoToAddress? address =
         await getAmapGeoToAddress(location.latitude!, location.longitude!);
+    print(address.toJson());
 
     if (address.addressData == null ||
         address.addressData!.province == null ||
@@ -34,45 +38,14 @@ class LocationCubit extends Cubit<LocationState> {
       throw Exception("getAmapGeoToAddress request failure");
     }
 
-    List<City> cityList = await getChinaAllCityList();
-    if (cityList.isEmpty) {
+    final SharedPreferences store = await SharedPreferences.getInstance();
+    bool storeState = await store.setString(
+        'local_location', jsonEncode(address.addressData));
+
+    if (!storeState) {
       emit(state.copyWith(status: LocationGetStatus.failure));
-      throw Exception("getChinaAllCityList request failure");
     }
-
-    String addressProvince = address.addressData!.province!;
-    if (addressProvince.length > 1) {
-      addressProvince =
-          addressProvince.substring(0, addressProvince.length - 1);
-    }
-    String addressCity = address.addressData!.city!;
-    if (addressCity.length > 1) {
-      addressCity = addressCity.substring(0, addressCity.length - 1);
-    }
-
-    print(addressProvince);
-    print(addressCity);
-
-    City? currentCity;
-
-    for (City city in cityList) {
-      if (city.provcn == addressProvince &&
-          city.districtcn == addressCity &&
-          city.namecn == addressCity) {
-        currentCity = city;
-      }
-    }
-    if (currentCity == null) {
-      emit(state.copyWith(status: LocationGetStatus.failure));
-      throw Exception("city info get failure");
-    }
-
-    print(currentCity.namecn);
-    print(currentCity.stationid);
-    emit(state.copyWith(
-      status: LocationGetStatus.success,
-      cityInfo: currentCity,
-    ));
+    emit(state.copyWith(status: LocationGetStatus.success));
   }
 
   void getAmapSdkGeo() async {
