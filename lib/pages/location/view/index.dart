@@ -14,7 +14,7 @@ class Location extends StatelessWidget {
           title: const Text('位置'),
         ),
         body: BlocProvider(
-          create: (context) => LocationCubit()..getCityInfo(),
+          create: (context) => LocationCubit()..getPermisssion(),
           child: const LocationCubitView(),
         ),
       ),
@@ -23,9 +23,30 @@ class Location extends StatelessWidget {
 }
 
 class LocationCubitView extends StatelessWidget {
-  const LocationCubitView({
-    super.key,
-  });
+  const LocationCubitView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    LocationState stateV = context.watch<LocationCubit>().state;
+    return BlocListener<LocationCubit, LocationState>(
+      listener: (context, state) {
+        if (state.status.hasPermission) {
+          context.read<LocationCubit>().getCityInfo();
+        } else if (state.status.isSuccess) {
+          context.replaceNamed('/weather/list');
+        }
+      },
+      child: stateV.status.notPermission
+          ? const LocationPermissionView()
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
+    );
+  }
+}
+
+class LocationPermissionView extends StatelessWidget {
+  const LocationPermissionView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +99,10 @@ class LocationCubitView extends StatelessWidget {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      debugPrint(state.status.toString());
-                      if (state.status.isSuccess) {
-                        context.pushNamed('/weather/list');
-                        debugPrint("ok");
-                      }
+                      context.read<LocationCubit>().changePermission();
+                      // context.read<LocationCubit>().getCityInfo();
+
+                      // context.replaceNamed('/weather/list');
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

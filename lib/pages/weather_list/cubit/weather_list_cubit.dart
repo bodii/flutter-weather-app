@@ -19,8 +19,8 @@ final class WeatherListCubit extends Cubit<WeatherListState> {
       emit(state.copyWith(status: WeatherListStatus.failure));
       throw Exception("store get address info failure");
     }
-    List<String> keys = store.getKeys().toList();
-    print(keys);
+    // List<String> keys = store.getKeys().toList();
+    // print(keys);
 
     AmapGeoToAddress address =
         AmapGeoToAddress.fromJson(jsonDecode(addressStr));
@@ -35,15 +35,15 @@ final class WeatherListCubit extends Cubit<WeatherListState> {
       addressCity = addressCity.substring(0, addressCity.length - 1);
     }
 
-    print(addressProvince);
-    print(addressCity);
+    // print(addressProvince);
+    // print(addressCity);
 
     List<City> cityList = await getChinaAllCityList();
     if (cityList.isEmpty) {
       emit(state.copyWith(status: WeatherListStatus.failure));
       throw Exception("getChinaAllCityList request failure");
     }
-    print(jsonEncode(cityList));
+    // print(jsonEncode(cityList));
 
     // City? currentCity;
 

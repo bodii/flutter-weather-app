@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
+import 'package:weather_app/pages/location/cubit/location_cubit.dart';
 import 'package:weather_app/pages/location/view/index.dart';
 import 'package:weather_app/pages/weather_details/views/weather_details.dart';
 import 'package:weather_app/pages/weather_list/view/weather_list.dart';
@@ -18,7 +21,9 @@ class AppRoutes {
       GoRoute(
         name: '/location',
         path: '/location',
-        builder: (context, state) => const Location(),
+        builder: (context, state) {
+          return const Location();
+        },
         routes: [
           GoRoute(
             name: '/location/search',

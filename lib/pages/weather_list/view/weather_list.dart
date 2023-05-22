@@ -16,12 +16,14 @@ class WeatherListPage extends StatefulWidget {
 }
 
 class WeatherListPageState extends State<WeatherListPage> {
-  final List<City> currentProvinceCitys = [];
-  City? currentCity;
+  late List<City> currentProvinceCitys;
+  late City currentCity;
 
   @override
   void initState() {
     super.initState();
+    currentCity = City();
+    currentProvinceCitys = [];
     getAddressInfo();
   }
 
@@ -32,7 +34,7 @@ class WeatherListPageState extends State<WeatherListPage> {
       throw Exception("store get address info failure");
     }
     // List<String> keys = store.getKeys().toList();
-    print(jsonDecode(addressStr));
+    // print(jsonDecode(addressStr));
 
     AmapAddressData address = AmapAddressData.fromJson(jsonDecode(addressStr));
 
@@ -46,17 +48,11 @@ class WeatherListPageState extends State<WeatherListPage> {
       addressCity = addressCity.substring(0, addressCity.length - 1);
     }
 
-    print(addressProvince);
-    print(addressCity);
-
     List<City> cityList = await getChinaAllCityList();
     if (cityList.isEmpty) {
       throw Exception("getChinaAllCityList request failure");
     }
     // print(jsonEncode(cityList));
-
-    final List<City> currentProvinceCitys = [];
-    City? currentCity;
 
     for (City city in cityList) {
       if (city.provcn == addressProvince && city.districtcn == addressCity) {
@@ -67,13 +63,6 @@ class WeatherListPageState extends State<WeatherListPage> {
         }
       }
     }
-
-    if (currentCity == null) {
-      throw Exception("city info get failure");
-    }
-    print(jsonEncode(currentProvinceCitys));
-    print(currentCity.namecn);
-    print(currentCity.stationid);
   }
 
   @override
@@ -127,8 +116,8 @@ class WeatherListPageState extends State<WeatherListPage> {
                 ],
               ),
               Expanded(
-                child: Index(
-                  currentCity: currentCity!,
+                child: WeatherListViw(
+                  currentCity: currentCity,
                   currentProvinceCitys: currentProvinceCitys,
                 ),
               ),
@@ -140,22 +129,23 @@ class WeatherListPageState extends State<WeatherListPage> {
   }
 }
 
-class Index extends StatefulWidget {
-  Index({
+// ignore: must_be_immutable
+class WeatherListViw extends StatefulWidget {
+  const WeatherListViw({
     super.key,
     required this.currentCity,
     required this.currentProvinceCitys,
   });
 
   final List<City> currentProvinceCitys;
-  City currentCity;
+  final City currentCity;
 
   @override
   // ignore: library_private_types_in_public_api
-  _IndexState createState() => _IndexState();
+  _WeatherListViwState createState() => _WeatherListViwState();
 }
 
-class _IndexState extends State<Index> {
+class _WeatherListViwState extends State<WeatherListViw> {
   late PageController pageController;
   late TabController tabController;
   int currentPage = 0;
@@ -177,27 +167,6 @@ class _IndexState extends State<Index> {
         'weather': '晴',
         'pic': 'assets/weather_icon/d00.png',
         'temperature': '5',
-      },
-      {
-        'provcn': '当前城市',
-        'city': '上海',
-        'weather': '多云',
-        'pic': 'assets/weather_icon/d01.png',
-        'temperature': '3',
-      },
-      {
-        'provcn': '当前城市',
-        'city': '天津',
-        'weather': '多云',
-        'pic': 'assets/weather_icon/d01.png',
-        'temperature': '3',
-      },
-      {
-        'provcn': '当前城市',
-        'city': '大连',
-        'weather': '多云',
-        'pic': 'assets/weather_icon/d01.png',
-        'temperature': '3',
       }
     ];
   }
@@ -227,20 +196,19 @@ class _IndexState extends State<Index> {
             scrollDirection: Axis.horizontal,
             controller: pageController,
             itemBuilder: (BuildContext context, int index) {
-              Map<String, String> data = weathers[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: WeatherCardWidget(
-                  provcn: data['provcn'] ?? '',
-                  city: data['city'] ?? '',
-                  cityId: data['cityid'] ?? '',
-                  weather: data['weather'] ?? '',
-                  pic: data['pic'] ?? '',
-                  temperature: data['temperature'] ?? '',
+                  provcn: widget.currentCity.provcn ?? '',
+                  city: widget.currentCity.namecn ?? '',
+                  cityId: widget.currentCity.stationid ?? '',
+                  weather: weathers[0]['weather'] ?? '',
+                  pic: weathers[0]['pic'] ?? '',
+                  temperature: weathers[0]['temperature'] ?? '',
                 ),
               );
             },
-            itemCount: weathers.length,
+            itemCount: 2,
           ),
         ),
         Padding(
@@ -256,16 +224,16 @@ class _IndexState extends State<Index> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: WeatherCardWidget(
-                  provcn: weathers[index]['provcn'] ?? '',
-                  city: weathers[index]['city'] ?? '',
-                  cityId: weathers[index]['cityId'] ?? '',
+                  provcn: widget.currentProvinceCitys[index].provcn ?? '',
+                  city: widget.currentProvinceCitys[index].namecn ?? '',
+                  cityId: widget.currentProvinceCitys[index].stationid ?? '',
                   weather: weathers[0]['weather'] ?? '',
                   pic: weathers[0]['pic'] ?? '',
                   temperature: weathers[0]['temperature'] ?? '',
                 ),
               );
             },
-            itemCount: weathers.length,
+            itemCount: widget.currentProvinceCitys.length,
           ),
         ),
       ],

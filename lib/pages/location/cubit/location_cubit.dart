@@ -9,7 +9,6 @@ import 'package:weather_app/api/amap_location.dart';
 import 'package:weather_app/api/location.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/amap_geo_to_address.dart';
-import 'package:weather_app/model/city.dart';
 
 part 'location_state.dart';
 
@@ -29,7 +28,6 @@ class LocationCubit extends Cubit<LocationState> {
 
     AmapGeoToAddress? address =
         await getAmapGeoToAddress(location.latitude!, location.longitude!);
-    print(address.toJson());
 
     if (address.addressData == null ||
         address.addressData!.province == null ||
@@ -44,8 +42,9 @@ class LocationCubit extends Cubit<LocationState> {
 
     if (!storeState) {
       emit(state.copyWith(status: LocationGetStatus.failure));
+    } else {
+      emit(state.copyWith(status: LocationGetStatus.success));
     }
-    emit(state.copyWith(status: LocationGetStatus.success));
   }
 
   void getAmapSdkGeo() async {
@@ -54,6 +53,50 @@ class LocationCubit extends Cubit<LocationState> {
     amapLocation.start();
     if (null != amapLocation.locationResult) {
       debugPrint(amapLocation.locationResult.toString());
+    }
+  }
+
+  void getPermisssion() async {
+    Location location = Location();
+
+    bool serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      emit(state.copyWith(status: LocationGetStatus.serviceDisabled));
+    } else {
+      emit(state.copyWith(status: LocationGetStatus.serviceEnabled));
+    }
+
+    PermissionStatus permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      emit(state.copyWith(status: LocationGetStatus.permissionDenied));
+    } else {
+      emit(state.copyWith(status: LocationGetStatus.permissionGranted));
+    }
+  }
+
+  void changePermission() async {
+    Location location = Location();
+
+    bool serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      emit(state.copyWith(status: LocationGetStatus.serviceDisabled));
+
+      serviceEnabled = await location.requestService();
+      if (serviceEnabled) {
+        emit(state.copyWith(status: LocationGetStatus.serviceEnabled));
+      } else {
+        return;
+      }
+    }
+
+    PermissionStatus permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      emit(state.copyWith(status: LocationGetStatus.permissionDenied));
+
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted == PermissionStatus.granted) {
+        emit(state.copyWith(status: LocationGetStatus.permissionGranted));
+      }
     }
   }
 }

@@ -2,6 +2,10 @@ part of 'location_cubit.dart';
 
 enum LocationGetStatus {
   init,
+  serviceEnabled,
+  serviceDisabled,
+  permissionDenied,
+  permissionGranted,
   inProgress,
   success,
   failure,
@@ -9,6 +13,10 @@ enum LocationGetStatus {
 
 extension LocationGetStatusX on LocationGetStatus {
   bool get isSuccess => LocationGetStatus.success == this;
+
+  bool get hasPermission => LocationGetStatus.permissionGranted == this;
+
+  bool get notPermission => LocationGetStatus.permissionDenied == this;
 }
 
 final class LocationState extends Equatable {
