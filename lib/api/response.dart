@@ -65,7 +65,7 @@ Future<List<City>> getChinaAllCityList() async {
     'js/arealist.js',
   );
   List<City> citys = list.map((city) => City.fromJson(city)).toList();
-  log(citys[0].namecn!);
+  // log(citys[0].namecn!);
 
   return citys;
 }

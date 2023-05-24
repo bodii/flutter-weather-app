@@ -11,7 +11,7 @@ class Location extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('位置'),
+          title: const Text('获取当前位置'),
         ),
         body: BlocProvider(
           create: (context) => LocationCubit()..getPermisssion(),

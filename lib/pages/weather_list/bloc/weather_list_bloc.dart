@@ -7,12 +7,18 @@ import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/amap_geo_to_address.dart';
 import 'package:weather_app/model/city.dart';
 
+part 'weather_list_event.dart';
 part 'weather_list_state.dart';
 
-final class WeatherListCubit extends Cubit<WeatherListState> {
-  WeatherListCubit() : super(const WeatherListState());
+class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
+  WeatherListBloc() : super(const WeatherListState()) {
+    on<WeatherListGetAddressEvent>(_getAddressInfo);
+  }
 
-  void getAddressInfo() async {
+  Future<void> _getAddressInfo(
+    WeatherListGetAddressEvent event,
+    Emitter<WeatherListState> emit,
+  ) async {
     final SharedPreferences store = await SharedPreferences.getInstance();
     String? addressStr = store.getString('local_location');
     if (addressStr == null) {
@@ -22,21 +28,25 @@ final class WeatherListCubit extends Cubit<WeatherListState> {
     // List<String> keys = store.getKeys().toList();
     // print(keys);
 
-    AmapGeoToAddress address =
-        AmapGeoToAddress.fromJson(jsonDecode(addressStr));
+    // print(addressStr);
 
-    String addressProvince = address.addressData!.province!;
+    AmapAddressData address = AmapAddressData.fromJson(jsonDecode(addressStr));
+
+    String addressProvince = address.province!;
     if (addressProvince.length > 1) {
       addressProvince =
           addressProvince.substring(0, addressProvince.length - 1);
     }
-    String addressCity = address.addressData!.city!;
+
+    emit(state.copyWith(province: addressProvince));
+    String addressCity = address.city!;
     if (addressCity.length > 1) {
       addressCity = addressCity.substring(0, addressCity.length - 1);
     }
+    emit(state.copyWith(localCity: addressCity));
 
-    // print(addressProvince);
-    // print(addressCity);
+    print(addressProvince);
+    print(addressCity);
 
     List<City> cityList = await getChinaAllCityList();
     if (cityList.isEmpty) {
@@ -45,22 +55,23 @@ final class WeatherListCubit extends Cubit<WeatherListState> {
     }
     // print(jsonEncode(cityList));
 
-    // City? currentCity;
+    City? currentCity;
+    final List<City> currentProvinceCitys = [];
 
-    // for (City city in cityList) {
-    //   if (city.provcn == addressProvince &&
-    //       city.districtcn == addressCity &&
-    //       city.namecn == addressCity) {
-    //     currentCity = city;
-    //   }
-    // }
-    // if (currentCity == null) {
-    //   emit(state.copyWith(status: WeatherListStatus.failure));
-    //   throw Exception("city info get failure");
-    // }
+    for (City city in cityList) {
+      if (city.provcn == addressProvince && city.districtcn == addressCity) {
+        currentProvinceCitys.add(city);
 
-    // print(currentCity.namecn);
-    // print(currentCity.stationid);
-    emit(state.copyWith(status: WeatherListStatus.success));
+        if (city.namecn == addressCity) {
+          currentCity = city;
+        }
+      }
+    }
+
+    emit(state.copyWith(
+      status: WeatherListStatus.success,
+      currentCity: currentCity!,
+      currentProvinceCitys: currentProvinceCitys,
+    ));
   }
 }
