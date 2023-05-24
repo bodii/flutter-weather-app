@@ -5,7 +5,7 @@ import 'package:weather_app/model/air_current.dart';
 import 'package:weather_app/model/sun_and_moon.dart';
 import 'package:weather_app/model/weather.dart';
 import 'package:weather_app/pages/weather_details/bloc/weather_response_bloc.dart';
-import 'package:weather_app/pages/weather_details/widgets/chart.dart';
+import 'package:weather_app/pages/weather_details/widgets/index.dart';
 
 class WeatherDetailsCNPage extends StatelessWidget {
   const WeatherDetailsCNPage({
@@ -214,109 +214,15 @@ class WeatherDetailsWidget extends StatelessWidget {
                 "${weather.current?.current?.weather} ${weather.current?.current?.feelstemperature} - ${weather.current?.current?.temperature}℃",
                 style: const TextStyle(fontSize: 20),
               ),
-              Container(
-                width: 380,
-                height: 260,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                margin: const EdgeInsets.only(top: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  // backgroundBlendMode: BlendMode.colorBurn,
-                  color: Colors.grey[100],
-                ),
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1.1,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(vertical: 0),
-                  children: [
-                    WeatherIconItem(
-                      icon: 'thermometer_icon.svg',
-                      title: '温度',
-                      value: '${weather.current?.current?.temperature}℃',
-                    ),
-                    WeatherIconItem(
-                      icon: 'wind_icon.svg',
-                      title: '风量',
-                      value:
-                          '${weather.current?.current?.winddir}${weather.current?.current?.windpower}',
-                    ),
-                    WeatherIconItem(
-                      icon: 'precipitation_icon.svg',
-                      title: '湿度',
-                      value: '${weather.current?.current?.humidity}%',
-                    ),
-                    WeatherIconItem(
-                      icon: 'uv_icon.svg',
-                      title: '紫外线',
-                      value: '${smi.index![6].indexLevel}',
-                    ),
-                    WeatherIconItem(
-                      icon: 'eye_icon.svg',
-                      title: '可视度',
-                      value: '${weather.current?.current?.visibility}Km',
-                    ),
-                    WeatherIconItem(
-                      icon: 'pressure_icon.svg',
-                      title: '气压',
-                      value: '${weather.current?.current?.airpressure}hPa',
-                    ),
-                  ],
-                ),
-              ),
+              WeatherItemsWidget(weather: weather, smi: smi),
+              const AirQualityWidget(),
+              const SunAndMoonWidget(),
               const SizedBox(
-                height: 200,
-                child: Chart(),
-              )
+                height: 100,
+                width: double.infinity,
+              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class WeatherIconItem extends StatelessWidget {
-  const WeatherIconItem({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.value,
-  });
-
-  final String icon;
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              'assets/weather_icon/icons/$icon',
-              width: 45,
-              height: 45,
-              color: Colors.blue,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.green,
-                height: 1,
-              ),
-            ),
-          ],
         ),
       ),
     );

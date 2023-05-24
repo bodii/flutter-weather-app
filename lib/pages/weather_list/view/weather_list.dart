@@ -8,44 +8,6 @@ import 'package:weather_app/pages/weather_list/widgets/weather_card.dart';
 class WeatherListPage extends StatelessWidget {
   const WeatherListPage({super.key});
 
-  // void getAddressInfo() async {
-  //   final SharedPreferences store = await SharedPreferences.getInstance();
-  //   String? addressStr = store.getString('local_location');
-  //   if (addressStr == null) {
-  //     throw Exception("store get address info failure");
-  //   }
-  //   // List<String> keys = store.getKeys().toList();
-  //   // print(jsonDecode(addressStr));
-
-  //   AmapAddressData address = AmapAddressData.fromJson(jsonDecode(addressStr));
-
-  //   String addressProvince = address.province!;
-  //   if (addressProvince.length > 1) {
-  //     addressProvince =
-  //         addressProvince.substring(0, addressProvince.length - 1);
-  //   }
-  //   String addressCity = address.city!;
-  //   if (addressCity.length > 1) {
-  //     addressCity = addressCity.substring(0, addressCity.length - 1);
-  //   }
-
-  //   List<City> cityList = await getChinaAllCityList();
-  //   if (cityList.isEmpty) {
-  //     throw Exception("getChinaAllCityList request failure");
-  //   }
-  //   // print(jsonEncode(cityList));
-
-  //   for (City city in cityList) {
-  //     if (city.provcn == addressProvince && city.districtcn == addressCity) {
-  //       currentProvinceCitys.add(city);
-
-  //       if (city.namecn == addressCity) {
-  //         currentCity = city;
-  //       }
-  //     }
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

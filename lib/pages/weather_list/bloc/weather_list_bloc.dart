@@ -48,21 +48,40 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     }
     emit(state.copyWith(cityName: addressCity));
 
-    print(addressProvince);
-    print(addressCity);
+    // print(addressProvince);
+    // print(addressCity);
 
     CityStationDisDataList cityList =
         await getCityStationDisData(addressProvince);
 
-    late final String? localCityId;
+    String localCityId = '';
     for (CityStationDis cityInfo in cityList.cityStationDisList!) {
       if (cityInfo.namecn == addressCity) {
         localCityId = cityInfo.stationid!;
       }
     }
+    if (localCityId.isEmpty) {
+      emit(state.copyWith(status: WeatherListStatus.failure));
+      throw Exception('get city id failure');
+    }
     emit(state.copyWith(cityId: localCityId));
 
-    RelatedWeather relatedWeatherList = await getRelatedWeather(localCityId!);
+    // store
+    Map<String, String> localCityInfo = {
+      'cityId': localCityId,
+      'cityName': addressCity,
+      'province': addressProvince
+    };
+    bool storeState = await store.setString(
+      'local_city_info',
+      jsonEncode(localCityInfo),
+    );
+    if (!storeState) {
+      emit(state.copyWith(status: WeatherListStatus.failure));
+      throw Exception('store city info failure');
+    }
+
+    RelatedWeather relatedWeatherList = await getRelatedWeather(localCityId);
     emit(state.copyWith(
       provinceCitysWeather: relatedWeatherList.relatedArea!,
     ));

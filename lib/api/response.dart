@@ -157,7 +157,6 @@ Future<RelatedWeather> getRelatedWeather(String cityid) async {
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   RelatedWeather relatedWeather = RelatedWeather.fromJson(resps['data']);
-  log(relatedWeather.relateJc!.toString());
 
   return relatedWeather;
 }
