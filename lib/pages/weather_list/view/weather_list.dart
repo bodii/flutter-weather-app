@@ -138,9 +138,6 @@ class WeatherListView extends StatefulWidget {
 
 class _WeatherListViewState extends State<WeatherListView> {
   late final PageController pageController;
-
-  // late TabController tabController;
-
   int currentPage = 0;
 
   @override
@@ -151,8 +148,6 @@ class _WeatherListViewState extends State<WeatherListView> {
       keepPage: true,
     );
     pageController.addListener(() {});
-
-    // tabController = TabController(length: length, vsync: vsync)
   }
 
   @override
@@ -188,7 +183,11 @@ class _WeatherListViewState extends State<WeatherListView> {
           height: 150,
           child: PageView.builder(
             // 左右滑动
-            onPageChanged: (int index) {},
+            onPageChanged: (int index) {
+              setState(() {
+                currentPage = index;
+              });
+            },
             reverse: false,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -197,14 +196,12 @@ class _WeatherListViewState extends State<WeatherListView> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: WeatherCardWidget(
-                  provcn: state.localCity == state.currentCity!.namecn
-                      ? '当前城市'
-                      : state.currentCity!.provcn!,
-                  city: state.currentCity!.namecn!,
-                  cityId: state.currentCity!.stationid!,
-                  weather: WeatherListView.weathers[0]['weather'] ?? '',
+                  provcn: '当前城市',
+                  city: state.cityWeather!.namecn!,
+                  cityId: state.cityWeather!.id!,
+                  weather: state.cityWeather!.winddirAm!,
                   pic: WeatherListView.weathers[0]['pic'] ?? '',
-                  temperature: WeatherListView.weathers[0]['temperature'] ?? '',
+                  temperature: state.cityWeather!.temperatureAm!,
                 ),
               );
             },
@@ -224,16 +221,17 @@ class _WeatherListViewState extends State<WeatherListView> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: WeatherCardWidget(
-                  provcn: state.currentProvinceCitys![index].provcn ?? '',
-                  city: state.currentProvinceCitys![index].namecn ?? '',
-                  cityId: state.currentProvinceCitys![index].stationid ?? '',
-                  weather: WeatherListView.weathers[0]['weather'] ?? '',
+                  provcn: state.province!,
+                  city: state.provinceCitysWeather![index].namecn ?? '',
+                  cityId: state.provinceCitysWeather![index].id ?? '',
+                  weather: state.provinceCitysWeather![index].winddirAm ?? '',
                   pic: WeatherListView.weathers[0]['pic'] ?? '',
-                  temperature: WeatherListView.weathers[0]['temperature'] ?? '',
+                  temperature:
+                      state.provinceCitysWeather![index].temperatureAm ?? '',
                 ),
               );
             },
-            itemCount: state.currentProvinceCitys!.length,
+            itemCount: state.provinceCitysWeather!.length,
           ),
         ),
       ],

@@ -151,7 +151,7 @@ Future<RelatedWeather> getRelatedWeather(String cityid) async {
   var url = Uri.https(
     weatherApiHost,
     'api/home/getRelatedWeather',
-    {'id': cityid},
+    {'cityid': cityid},
   );
   var response = await http.get(url);
   var body = response.body;

@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/amap_geo_to_address.dart';
 import 'package:weather_app/model/city.dart';
+import 'package:weather_app/model/city_station_dis_data.dart';
+import 'package:weather_app/model/related_weather.dart';
 
 part 'weather_list_event.dart';
 part 'weather_list_state.dart';
@@ -39,39 +41,42 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
     }
 
     emit(state.copyWith(province: addressProvince));
+
     String addressCity = address.city!;
     if (addressCity.length > 1) {
       addressCity = addressCity.substring(0, addressCity.length - 1);
     }
-    emit(state.copyWith(localCity: addressCity));
+    emit(state.copyWith(cityName: addressCity));
 
     print(addressProvince);
     print(addressCity);
 
-    List<City> cityList = await getChinaAllCityList();
-    if (cityList.isEmpty) {
-      emit(state.copyWith(status: WeatherListStatus.failure));
-      throw Exception("getChinaAllCityList request failure");
+    CityStationDisDataList cityList =
+        await getCityStationDisData(addressProvince);
+
+    late final String? localCityId;
+    for (CityStationDis cityInfo in cityList.cityStationDisList!) {
+      if (cityInfo.namecn == addressCity) {
+        localCityId = cityInfo.stationid!;
+      }
     }
-    // print(jsonEncode(cityList));
+    emit(state.copyWith(cityId: localCityId));
 
-    City? currentCity;
-    final List<City> currentProvinceCitys = [];
+    RelatedWeather relatedWeatherList = await getRelatedWeather(localCityId!);
+    emit(state.copyWith(
+      provinceCitysWeather: relatedWeatherList.relatedArea!,
+    ));
 
-    for (City city in cityList) {
-      if (city.provcn == addressProvince && city.districtcn == addressCity) {
-        currentProvinceCitys.add(city);
-
-        if (city.namecn == addressCity) {
-          currentCity = city;
-        }
+    late final RelatedArea cityWeather;
+    for (RelatedArea realated in relatedWeatherList.relatedArea!) {
+      if (realated.namecn == addressCity) {
+        cityWeather = realated;
       }
     }
 
     emit(state.copyWith(
       status: WeatherListStatus.success,
-      currentCity: currentCity!,
-      currentProvinceCitys: currentProvinceCitys,
+      cityWeather: cityWeather,
     ));
   }
 }

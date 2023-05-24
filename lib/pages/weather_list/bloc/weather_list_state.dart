@@ -13,43 +13,43 @@ final class WeatherListState extends Equatable {
   const WeatherListState({
     this.status = WeatherListStatus.init,
     this.province,
-    this.localCity,
-    this.currentPage = 0,
-    this.currentCity,
-    this.currentProvinceCitys,
+    this.cityName,
+    this.cityId,
+    this.cityWeather,
+    this.provinceCitysWeather,
   });
 
   final WeatherListStatus status;
-  final String? localCity;
+  final String? cityName;
+  final String? cityId;
   final String? province;
-  final List<City>? currentProvinceCitys;
-  final City? currentCity;
-  final int currentPage;
+  final List<RelatedArea>? provinceCitysWeather;
+  final RelatedArea? cityWeather;
 
   WeatherListState copyWith({
     WeatherListStatus? status,
-    String? localCity,
+    String? cityName,
+    String? cityId,
     String? province,
-    List<City>? currentProvinceCitys,
-    City? currentCity,
-    int? currentPage,
+    List<RelatedArea>? provinceCitysWeather,
+    RelatedArea? cityWeather,
   }) =>
       WeatherListState(
         status: status ?? this.status,
-        localCity: localCity ?? this.localCity,
+        cityName: cityName ?? this.cityName,
+        cityId: cityId ?? this.cityId,
         province: province ?? this.province,
-        currentCity: currentCity ?? this.currentCity,
-        currentProvinceCitys: currentProvinceCitys ?? this.currentProvinceCitys,
-        currentPage: currentPage ?? this.currentPage,
+        cityWeather: cityWeather ?? this.cityWeather,
+        provinceCitysWeather: provinceCitysWeather ?? this.provinceCitysWeather,
       );
 
   @override
   List<Object?> get props => [
         status,
-        localCity,
+        cityName,
+        cityId,
         province,
-        currentCity,
-        currentProvinceCitys,
-        currentPage,
+        cityWeather,
+        provinceCitysWeather,
       ];
 }
