@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/pages/weather_details/paints/arc.dart';
 
 class SunAndMoonWidget extends StatelessWidget {
   const SunAndMoonWidget({
@@ -40,9 +41,10 @@ class SunAndMoonWidget extends StatelessWidget {
                   alignment: const FractionalOffset(0.401, 0.0),
                   child: SvgPicture.asset(
                     'assets/weather_icon/icons/sun.svg',
-                    color: Colors.orange,
                     width: 32,
                     height: 32,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.orange, BlendMode.srcIn),
                   ),
                 ),
               ],
@@ -57,21 +59,50 @@ class SunAndMoonWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/weather_icon/icons/sunrise.svg'),
-                    const Text('00'),
+                    SvgPicture.asset(
+                      'assets/weather_icon/icons/sunrise.svg',
+                      colorFilter: ColorFilter.mode(
+                          Colors.orange.shade200, BlendMode.srcIn),
+                    ),
+                    Text(
+                      '00',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text('23'),
-                    SvgPicture.asset('assets/weather_icon/icons/sunset.svg'),
+                    Text(
+                      '23',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                    SvgPicture.asset(
+                      'assets/weather_icon/icons/sunset.svg',
+                      colorFilter: ColorFilter.mode(
+                          Colors.orange.shade200, BlendMode.srcIn),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
+          const ArcSunWidget(),
         ],
       ),
     );
+  }
+}
+
+class ArcSunWidget extends StatefulWidget {
+  const ArcSunWidget({Key? key}) : super(key: key);
+
+  @override
+  _ArcSunWidgetState createState() => _ArcSunWidgetState();
+}
+
+class _ArcSunWidgetState extends State<ArcSunWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return ArcPainter();
   }
 }

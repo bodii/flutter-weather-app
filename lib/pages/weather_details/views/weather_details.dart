@@ -135,9 +135,10 @@ class WeatherDetailsWidget extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/weather_icon/icons/pm25_icon.svg',
-                            color: Colors.purple,
                             width: 45,
                             height: 45,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.purple, BlendMode.srcIn),
                           ),
                           Text(air.pm25!),
                         ],
@@ -158,7 +159,8 @@ class WeatherDetailsWidget extends StatelessWidget {
                         children: [
                           SvgPicture.asset(
                             'assets/weather_icon/icons/uv_icon02.svg',
-                            color: Colors.purple,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.purple, BlendMode.srcIn),
                             width: 60,
                             height: 38,
                           ),

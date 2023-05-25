@@ -91,7 +91,7 @@ class WeatherItem extends StatelessWidget {
               'assets/weather_icon/icons/$icon',
               width: 45,
               height: 45,
-              color: Colors.blue,
+              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
             ),
             Text(
               title,
