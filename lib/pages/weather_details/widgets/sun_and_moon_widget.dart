@@ -11,7 +11,7 @@ class SunAndMoonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 380,
-      height: 180,
+      height: 200,
       padding: const EdgeInsets.symmetric(vertical: 20),
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
@@ -23,22 +23,14 @@ class SunAndMoonWidget extends StatelessWidget {
         children: [
           SizedBox(
             width: 300,
-            height: 32,
+            height: 100,
             child: Stack(
               alignment: Alignment.centerLeft,
               children: [
-                Container(
-                  width: 300,
-                  height: 6,
-                  color: Colors.grey[300],
-                ),
-                Container(
-                  width: 200,
-                  height: 6,
-                  color: Colors.orange[300],
-                ),
+                const ArcSunWidget(color: Colors.grey, length: 1.0),
+                const ArcSunWidget(color: Colors.orange, length: 0.6),
                 Align(
-                  alignment: const FractionalOffset(0.401, 0.0),
+                  alignment: const FractionalOffset(0.62, 0.28),
                   child: SvgPicture.asset(
                     'assets/weather_icon/icons/sun.svg',
                     width: 32,
@@ -50,10 +42,9 @@ class SunAndMoonWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: 320,
             height: 60,
-            margin: const EdgeInsets.only(top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -86,23 +77,30 @@ class SunAndMoonWidget extends StatelessWidget {
               ],
             ),
           ),
-          const ArcSunWidget(),
         ],
       ),
     );
   }
 }
 
-class ArcSunWidget extends StatefulWidget {
-  const ArcSunWidget({Key? key}) : super(key: key);
+class ArcSunWidget extends StatelessWidget {
+  const ArcSunWidget({
+    super.key,
+    required this.color,
+    required this.length,
+  });
 
-  @override
-  _ArcSunWidgetState createState() => _ArcSunWidgetState();
-}
+  final Color color;
+  final double length;
 
-class _ArcSunWidgetState extends State<ArcSunWidget> {
   @override
   Widget build(BuildContext context) {
-    return ArcPainter();
+    return Positioned(
+      left: 150,
+      top: 130,
+      child: CustomPaint(
+        painter: ArcPainter(color: color, length: length),
+      ),
+    );
   }
 }
