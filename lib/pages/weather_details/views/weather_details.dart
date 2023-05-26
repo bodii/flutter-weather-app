@@ -218,7 +218,8 @@ class WeatherDetailsWidget extends StatelessWidget {
               ),
               WeatherItemsWidget(weather: weather, smi: smi),
               const AirQualityWidget(),
-              const SunAndMoonWidget(),
+              SunAndMoonWidget(smi: smi),
+              LivingIndexWidget(smi: smi),
               const SizedBox(
                 height: 100,
                 width: double.infinity,
