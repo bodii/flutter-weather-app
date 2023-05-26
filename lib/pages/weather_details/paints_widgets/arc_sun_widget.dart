@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'arc.dart';
+import 'arc_painter.dart';
 
 class ArcSunWidget extends StatelessWidget {
   const ArcSunWidget({

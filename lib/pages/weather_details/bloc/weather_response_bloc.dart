@@ -57,14 +57,14 @@ class WeatherResponseBloc
               status: WeatherResponseStatus.httpFailure,
             ));
           } else {
-            debugPrint("air");
-            debugPrint(jsonEncode(air.toJson()));
+            // debugPrint("air");
+            // debugPrint(jsonEncode(air.toJson()));
 
-            debugPrint("weather");
-            debugPrint(jsonEncode(weather.toJson()));
+            // debugPrint("weather");
+            // debugPrint(jsonEncode(weather.toJson()));
 
-            debugPrint("sunAndMoonAndIndex");
-            debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
+            // debugPrint("sunAndMoonAndIndex");
+            // debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
 
             emit(state.copyWith(
               status: WeatherResponseStatus.httpSuccess,
@@ -75,38 +75,6 @@ class WeatherResponseBloc
           }
         } else {
           throw Exception("暂不可访问");
-          /*
-          final AirCurrent air = await getWniHotCountryData(stationid);
-          final WniHotCountryData weather =
-              await getWniHotCountryData(stationid);
-          final SunAndMoonAndIndex sunAndMoonAndIndex =
-              await getSunMoonAndIndex(stationid);
-
-          if (air.dataTime == null ||
-              weather.current == null ||
-              sunAndMoonAndIndex.sunAndMoon == null) {
-            debugPrint("air or weather or sunAndMoonAndIndex is null");
-            emit(state.copyWith(
-              status: WeatherResponseStatus.httpFailure,
-            ));
-          } else {
-            debugPrint("air");
-            debugPrint(jsonEncode(air.toJson()));
-
-            debugPrint("weather");
-            debugPrint(jsonEncode(weather.toJson()));
-
-            debugPrint("sunAndMoonAndIndex");
-            debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
-
-            emit(state.copyWith(
-              status: WeatherResponseStatus.httpSuccess,
-              air: air,
-              weather: weather,
-              sunAndMoonAndIndex: sunAndMoonAndIndex,
-            ));
-          }
-          */
         }
       }
     } catch (e, stack) {

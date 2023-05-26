@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/model/sun_and_moon.dart';
@@ -13,11 +15,15 @@ class SunAndMoonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double percent = currentTimeInDayPercentage(smi.sunAndMoon!.sun!);
+    final double y = percent > 0.5 ? percent - 0.5 : 1 - percent;
+    final double y2 = y;
+
     return Container(
       width: 380,
-      height: 200,
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      margin: const EdgeInsets.only(top: 20),
+      height: 210,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
@@ -27,18 +33,17 @@ class SunAndMoonWidget extends StatelessWidget {
         children: [
           SizedBox(
             width: 300,
-            height: 100,
+            height: 120,
             child: Stack(
               alignment: Alignment.centerLeft,
               children: [
                 const ArcSunWidget(color: Colors.grey, length: 1.0),
                 ArcSunWidget(
                   color: Colors.orange.shade200,
-                  length: currentTimeInDayPercentage(),
+                  length: percent,
                 ),
                 Align(
-                  alignment:
-                      FractionalOffset(currentTimeInDayPercentage(), 0.58),
+                  alignment: FractionalOffset(percent, y2),
                   child: SvgPicture.asset(
                     'assets/weather_icon/icons/sun.svg',
                     width: 32,
@@ -94,16 +99,28 @@ class SunAndMoonWidget extends StatelessWidget {
     );
   }
 
-  double currentTimeInDayPercentage() {
+  double currentTimeInDayPercentage(Sun sun) {
     final DateTime dateTime = DateTime.now();
     final int hour = dateTime.hour;
+    String currnet = '${dateTime.hour}${dateTime.minute}';
+    int currentInt = int.parse(currnet);
+    currentInt = 1316;
 
-    const int sunrise = 5;
-    const int sunset = 17;
-    if (hour < sunrise || hour > sunset) {
+    String sunrise = sun.sunrise!;
+    String sunset = sun.sunset!;
+
+    final sunriseSplit = sunrise.split(':');
+    sunrise = '${sunriseSplit[0]}${sunriseSplit[1]}';
+    int sunriseInt = int.parse(sunrise);
+
+    final sunsetSplit = sunset.split(':');
+    sunset = '${sunsetSplit[0]}${sunsetSplit[1]}';
+    int sunsetInt = int.parse(sunset);
+
+    if (currentInt < sunriseInt || hour > sunsetInt) {
       return 0.0;
     }
 
-    return (hour - sunrise) / (sunset - sunrise);
+    return (currentInt - sunriseInt) / (sunsetInt - sunriseInt);
   }
 }

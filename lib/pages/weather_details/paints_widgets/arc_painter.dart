@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const double pi = 3.14;
+import 'dart:math';
 
 class ArcPainter extends CustomPainter {
   const ArcPainter({
@@ -24,7 +24,7 @@ class ArcPainter extends CustomPainter {
       radius: 100.0,
     );
 
-    canvas.drawArc(rect, 3.14, pi * 2 / 2 * length, false, paint);
+    canvas.drawArc(rect, pi, pi * length, false, paint);
   }
 
   @override
