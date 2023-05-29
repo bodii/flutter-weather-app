@@ -213,7 +213,9 @@ class WeatherDetailsWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "${weather.current?.current?.weather} ${weather.current?.current?.feelstemperature} - ${weather.current?.current?.temperature}℃",
+                "${weather.current?.current?.weather} "
+                "${weather.forecast15d?[1].temperaturePm} - "
+                "${weather.forecast15d?[1].temperatureAm}℃",
                 style: const TextStyle(fontSize: 20),
               ),
               WeatherItemsWidget(weather: weather, smi: smi),

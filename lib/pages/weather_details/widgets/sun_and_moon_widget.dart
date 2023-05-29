@@ -18,7 +18,7 @@ class SunAndMoonWidget extends StatelessWidget {
     double percent = getCurrentTimeInDayPercentage(smi.sunAndMoon!.sun!);
     // final double y = percent > 0.5 ? percent - 0.5 : 1 - percent;
     // final double y2 = y;
-    percent = .5;
+    // percent = .5;
 
     final num angle = 180 * percent;
     final num radians = degToRad(angle);
@@ -123,7 +123,6 @@ class SunAndMoonWidget extends StatelessWidget {
 
   double getCurrentTimeInDayPercentage(Sun sun) {
     final DateTime dateTime = DateTime.now();
-    final int hour = dateTime.hour;
     String currnet = '${dateTime.hour}${dateTime.minute}';
     int currentInt = int.parse(currnet);
 
@@ -138,8 +137,10 @@ class SunAndMoonWidget extends StatelessWidget {
     sunset = '${sunsetSplit[0]}${sunsetSplit[1]}';
     int sunsetInt = int.parse(sunset);
 
-    if (currentInt < sunriseInt || hour > sunsetInt) {
+    if (currentInt < sunriseInt) {
       return 0.0;
+    } else if (currentInt > sunsetInt) {
+      return 1.0;
     }
 
     return (currentInt - sunriseInt) / (sunsetInt - sunriseInt);
