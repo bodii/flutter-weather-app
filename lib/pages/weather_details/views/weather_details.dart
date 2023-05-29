@@ -217,7 +217,7 @@ class WeatherDetailsWidget extends StatelessWidget {
                 style: const TextStyle(fontSize: 20),
               ),
               WeatherItemsWidget(weather: weather, smi: smi),
-              const AirQualityWidget(),
+              AirQualityWidget(air: air),
               SunAndMoonWidget(smi: smi),
               LivingIndexWidget(smi: smi),
               const SizedBox(

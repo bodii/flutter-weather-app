@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/model/air_current.dart';
 
 class AirQualityWidget extends StatelessWidget {
-  const AirQualityWidget({Key? key}) : super(key: key);
+  const AirQualityWidget({
+    super.key,
+    required this.air,
+  });
+
+  final AirCurrent air;
 
   @override
   Widget build(BuildContext context) {
+    final int no2Int = int.parse(air.no2!);
+
     return Container(
       width: 380,
       height: 230,
@@ -23,10 +31,13 @@ class AirQualityWidget extends StatelessWidget {
             height: 80,
             child: Column(
               children: [
-                const Row(
+                Row(
                   children: [
-                    Text('50', style: TextStyle(fontSize: 32)),
-                    Text('良好'),
+                    Text(
+                      air.aqi!,
+                      style: const TextStyle(fontSize: 32),
+                    ),
+                    Text(air.levelIndex!),
                   ],
                 ),
                 Stack(
@@ -34,12 +45,24 @@ class AirQualityWidget extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 6,
-                      decoration: const BoxDecoration(color: Colors.lightGreen),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.green,
+                            Colors.orange.shade900,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                      ),
                     ),
-                    Container(
-                      width: 20,
-                      height: 6,
-                      decoration: const BoxDecoration(color: Colors.grey),
+                    Positioned(
+                      right: 0.0,
+                      child: Container(
+                        width: 320 - 320 * (no2Int / 300),
+                        height: 6,
+                        color: Colors.grey.shade300,
+                      ),
                     ),
                   ],
                 ),
@@ -53,13 +76,13 @@ class AirQualityWidget extends StatelessWidget {
               ],
             ),
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              AirItem(title: 'PM2.5', value: '21'),
-              AirItem(title: 'PM10', value: '39'),
-              AirItem(title: 'CO', value: '0'),
-              AirItem(title: 'SO2', value: '5'),
+              AirItem(title: 'PM2.5', value: air.pm25!, maxValue: 300),
+              AirItem(title: 'PM10', value: air.pm10!, maxValue: 300),
+              AirItem(title: 'CO', value: air.co!, maxValue: 30),
+              AirItem(title: 'SO2', value: air.so2!, maxValue: 150),
             ],
           ),
         ],
@@ -73,14 +96,18 @@ class AirItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.value,
+    required this.maxValue,
   });
 
   final String title;
   final String value;
+  final double maxValue;
 
   @override
   Widget build(BuildContext context) {
-    const double maxWidth = 55;
+    const double maxWidth = 50;
+    final double valWidth = maxWidth * (double.parse(value) / maxValue);
+    final double emptyWidth = maxWidth - valWidth;
     return SizedBox(
       height: 60,
       width: maxWidth,
@@ -95,12 +122,24 @@ class AirItem extends StatelessWidget {
               Container(
                 width: maxWidth,
                 height: 6,
-                color: Colors.grey[300],
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.green,
+                      Colors.orange.shade900,
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
               ),
-              Container(
-                width: maxWidth * (double.parse(value) / 100),
-                height: 6,
-                color: Colors.green,
+              Positioned(
+                right: 0.0,
+                child: Container(
+                  width: emptyWidth,
+                  height: 6,
+                  color: Colors.grey.shade300,
+                ),
               ),
             ],
           )
