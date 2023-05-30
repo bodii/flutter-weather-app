@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/model/wni_hot_country_index.dart';
+import 'package:weather_app/model/sun_and_moon.dart';
 
-class LivingIndexWidget extends StatelessWidget {
-  const LivingIndexWidget({
+class LivingIndexCnWidget extends StatelessWidget {
+  const LivingIndexCnWidget({
     super.key,
-    required this.wniIndexs,
+    required this.smi,
   });
 
-  final List<WniHotCountryIndex> wniIndexs;
+  final SunAndMoonAndIndex smi;
 
   @override
   Widget build(BuildContext context) {
     const Map<String, String> indexToIcon = {
+      '限行': 'car.svg',
       '晨练指数': 'morning_exercise.svg',
+      '穿衣指数': 'clothes.svg',
       '钓鱼指数': 'fishing.svg',
       '感冒指数': 'coughing_ill_patient.svg',
-      '跑步指数': 'run.svg',
-      '骑车指数': 'cycling.svg',
+      '化妆指数': 'mirror_salon.svg',
+      '紫外线强度指数': 'uv_spf50.svg',
       '洗车指数': 'car_wash.svg',
-      '雨伞指数': 'umbrella.svg',
+      '运动指数': 'exercise_game_sport.svg',
     };
 
     return Container(
@@ -37,23 +39,23 @@ class LivingIndexWidget extends StatelessWidget {
         childAspectRatio: 1.1,
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(vertical: 0),
-        children: wniIndexs
-            .map((e) => LivingIndexItem(
-                icon: indexToIcon[e.indexTypeCh] ?? 'car.svg', item: e))
+        children: smi.index!
+            .map((e) => LivingIndexCnItem(
+                icon: indexToIcon[e.indexTypeCh!] ?? 'car.svg', item: e))
             .toList(),
       ),
     );
   }
 }
 
-class LivingIndexItem extends StatelessWidget {
-  const LivingIndexItem({
+class LivingIndexCnItem extends StatelessWidget {
+  const LivingIndexCnItem({
     super.key,
     required this.icon,
     required this.item,
   });
 
-  final WniHotCountryIndex item;
+  final Index item;
   final String icon;
 
   @override
@@ -70,14 +72,14 @@ class LivingIndexItem extends StatelessWidget {
           ),
         ),
         Text(
-          item.indexTypeCh,
+          item.indexTypeCh!,
           style: const TextStyle(
             fontSize: 13,
             color: Colors.black45,
           ),
         ),
         Text(
-          item.indexLevel,
+          item.indexLevel!,
           style: const TextStyle(
             fontSize: 16,
             color: Colors.black87,

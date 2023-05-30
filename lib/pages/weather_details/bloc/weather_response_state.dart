@@ -13,33 +13,29 @@ class WeatherResponseState extends Equatable {
     this.status = WeatherResponseStatus.initial,
     this.cityId = '',
     this.city = '',
-    this.air,
     this.weather,
-    this.sunAndMoonAndIndex,
+    this.wniIndexs,
   });
 
   final WeatherResponseStatus? status;
   final String? cityId;
   final String? city;
-  final AirCurrent? air;
-  final Weather? weather;
-  final SunAndMoonAndIndex? sunAndMoonAndIndex;
+  final WniHotCountryData? weather;
+  final List<WniHotCountryIndex>? wniIndexs;
 
   WeatherResponseState copyWith({
     WeatherResponseStatus? status,
     String? cityId,
     String? city,
-    AirCurrent? air,
-    Weather? weather,
-    SunAndMoonAndIndex? sunAndMoonAndIndex,
+    WniHotCountryData? weather,
+    List<WniHotCountryIndex>? wniIndexs,
   }) =>
       WeatherResponseState(
         status: status ?? this.status,
         cityId: cityId ?? this.cityId,
         city: city ?? this.city,
-        air: air ?? this.air,
         weather: weather ?? this.weather,
-        sunAndMoonAndIndex: sunAndMoonAndIndex ?? this.sunAndMoonAndIndex,
+        wniIndexs: wniIndexs ?? this.wniIndexs,
       );
 
   @override
@@ -47,8 +43,7 @@ class WeatherResponseState extends Equatable {
         status,
         cityId,
         city,
-        air,
         weather,
-        sunAndMoonAndIndex,
+        wniIndexs,
       ];
 }

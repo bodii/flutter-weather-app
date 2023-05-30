@@ -26,6 +26,7 @@ import 'package:weather_app/model/win_hot_country_list.dart';
 import 'package:weather_app/model/win_hot_country_obs_capl.dart';
 import 'package:weather_app/config/weather_api.dart';
 import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/wni_hot_country_index.dart';
 
 // 将js返回的数据转返回成json，再将json转换成对象
 Future<List<dynamic>> getJsJsonResult(
@@ -348,6 +349,26 @@ Future<WniHotCountryData> getWniHotCountryData(String id) async {
   WniHotCountryData data = WniHotCountryData.fromJson(resps['data']);
 
   return data;
+}
+
+// 国际天气数据： 生活指数
+Future<List<WniHotCountryIndex>> getWniHotCountryIndex(String id) async {
+  var url = Uri.https(
+    weatherApiHost,
+    'api/getWniHotcountryIndex',
+    {'id': id},
+  );
+  var response = await http.get(url);
+  var body = response.body;
+  Map<String, dynamic> resps = jsonDecode(body);
+  List<dynamic> data = resps['data'] as List<dynamic>;
+
+  List<WniHotCountryIndex> result = [];
+  for (var index in data) {
+    result.add(WniHotCountryIndex.fromJson(index as Map<String, dynamic>));
+  }
+
+  return result;
 }
 
 // 高德地图:通过geo返回地址信息

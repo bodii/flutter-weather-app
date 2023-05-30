@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/rendering.dart';
 import 'package:weather_app/api/response.dart';
-import 'package:weather_app/model/air_current.dart';
-// import 'package:weather_app/model/city_station_dis_data.dart';
-import 'package:weather_app/model/sun_and_moon.dart';
-import 'package:weather_app/model/weather.dart';
+import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/wni_hot_country_index.dart';
 
 part 'weather_response_event.dart';
 part 'weather_response_state.dart';
@@ -17,14 +13,12 @@ class WeatherResponseBloc
   WeatherResponseBloc({
     required this.city,
     required this.cityId,
-    this.isChina = true,
   }) : super(const WeatherResponseState()) {
     on<WeatherResponseLoadedEvent>(_onRequested);
   }
 
   final String cityId;
   final String city;
-  final bool isChina;
 
   Future<void> _onRequested(
     WeatherResponseLoadedEvent event,
@@ -43,38 +37,30 @@ class WeatherResponseBloc
 
       if (stationid.isNotEmpty) {
         debugPrint("stationid: $stationid");
-        if (isChina) {
-          final AirCurrent air = await getAirCurrent(stationid);
-          final Weather weather = await getCurrAnd15dAnd24h(stationid);
-          final SunAndMoonAndIndex sunAndMoonAndIndex =
-              await getSunMoonAndIndex(stationid);
+        final WniHotCountryData weather = await getWniHotCountryData(stationid);
+        final List<WniHotCountryIndex> wniIndexs =
+            await getWniHotCountryIndex(stationid);
 
-          if (air.dataTime == null ||
-              weather.current == null ||
-              sunAndMoonAndIndex.sunAndMoon == null) {
-            debugPrint("air or weather or sunAndMoonAndIndex is null");
-            emit(state.copyWith(
-              status: WeatherResponseStatus.httpFailure,
-            ));
-          } else {
-            // debugPrint("air");
-            // debugPrint(jsonEncode(air.toJson()));
-
-            // debugPrint("weather");
-            // debugPrint(jsonEncode(weather.toJson()));
-
-            // debugPrint("sunAndMoonAndIndex");
-            // debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
-
-            emit(state.copyWith(
-              status: WeatherResponseStatus.httpSuccess,
-              air: air,
-              weather: weather,
-              sunAndMoonAndIndex: sunAndMoonAndIndex,
-            ));
-          }
+        if (weather.current == null) {
+          debugPrint("weather is null");
+          emit(state.copyWith(
+            status: WeatherResponseStatus.httpFailure,
+          ));
         } else {
-          throw Exception("暂不可访问");
+          // debugPrint("air");
+          // debugPrint(jsonEncode(air.toJson()));
+
+          // debugPrint("weather");
+          // debugPrint(jsonEncode(weather.toJson()));
+
+          // debugPrint("sunAndMoonAndIndex");
+          // debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
+
+          emit(state.copyWith(
+            status: WeatherResponseStatus.httpSuccess,
+            weather: weather,
+            wniIndexs: wniIndexs,
+          ));
         }
       }
     } catch (e, stack) {

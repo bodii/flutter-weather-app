@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/model/air_current.dart';
-import 'package:weather_app/model/sun_and_moon.dart';
-import 'package:weather_app/model/weather.dart';
+import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/wni_hot_country_index.dart';
 import 'package:weather_app/pages/weather_details/bloc/weather_response_bloc.dart';
 import 'package:weather_app/pages/weather_details/widgets/index.dart';
 
-class WeatherDetailsCNPage extends StatelessWidget {
-  const WeatherDetailsCNPage({
+class WeatherDetailsInterPage extends StatelessWidget {
+  const WeatherDetailsInterPage({
     super.key,
     required this.cityId,
     required this.city,
-    this.isChina = true,
   });
 
   final String cityId;
   final String city;
-  final bool isChina;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,6 @@ class WeatherDetailsCNPage extends StatelessWidget {
       create: (_) => WeatherResponseBloc(
         city: city,
         cityId: cityId,
-        isChina: isChina,
       )..add(const WeatherResponseLoadedEvent()),
       child: WeatherBlocWidget(cityId: cityId, city: city),
     );
@@ -93,9 +88,8 @@ class WeatherDetailsWidget extends StatelessWidget {
       );
     }
 
-    final AirCurrent air = weatherState.air!;
-    final Weather weather = weatherState.weather!;
-    final SunAndMoonAndIndex smi = weatherState.sunAndMoonAndIndex!;
+    final WniHotCountryData weather = weatherState.weather!;
+    final List<WniHotCountryIndex> wniIndexs = weatherState.wniIndexs!;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -113,64 +107,6 @@ class WeatherDetailsWidget extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                width: double.infinity,
-                height: 95,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 40,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                        color: Colors.grey[200],
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/weather_icon/icons/pm25_icon.svg',
-                            width: 45,
-                            height: 45,
-                            colorFilter: const ColorFilter.mode(
-                                Colors.purple, BlendMode.srcIn),
-                          ),
-                          Text(air.pm25!),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 100,
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(40),
-                        ),
-                        color: Colors.grey[200],
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/weather_icon/icons/uv_icon02.svg',
-                            colorFilter: const ColorFilter.mode(
-                                Colors.purple, BlendMode.srcIn),
-                            width: 60,
-                            height: 38,
-                          ),
-                          Text(smi.index![6].indexLevel!),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Image.asset(
                 'assets/weather_icon/d00.png',
                 width: 200,
@@ -183,7 +119,7 @@ class WeatherDetailsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${weather.current?.current?.temperature}',
+                      '${weather.current?.temp}',
                       style: const TextStyle(
                         fontSize: 120,
                         height: 0.85,
@@ -202,7 +138,7 @@ class WeatherDetailsWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "体感温度\n${weather.current?.current?.feelstemperature}℃",
+                          "体感温度\n${weather.current?.feelsLike}℃",
                           style: TextStyle(
                             color: Colors.grey.shade600,
                           ),
@@ -213,17 +149,17 @@ class WeatherDetailsWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                "${weather.current?.current?.weather} "
-                "${weather.forecast15d?[1].temperaturePm} - "
-                "${weather.forecast15d?[1].temperatureAm}℃",
+                "${weather.current?.iconDecoder} "
+                "${weather.current?.tempMin24} - "
+                "${weather.current?.tempMax24}℃",
                 style: const TextStyle(fontSize: 20),
               ),
-              Weather24HBriefWidget(forecast24h: weather.forecast24h!),
-              Weather15DBriefWidget(forecast15d: weather.forecast15d!),
-              WeatherItemsWidget(weather: weather, smi: smi),
-              AirQualityWidget(air: air),
-              SunAndMoonWidget(smi: smi),
-              LivingIndexWidget(smi: smi),
+              // Weather24HBriefWidget(forecast24h: weather.forecast72h!),
+              // Weather15DBriefWidget(forecast15d: weather.forecast15d!),
+              // WeatherItemsWidget(weather: weather, smi: smi),
+              // AirQualityWidget(air: air),
+              // SunAndMoonWidget(smi: smi),
+              LivingIndexWidget(wniIndexs: wniIndexs),
               const SizedBox(
                 height: 100,
                 width: double.infinity,

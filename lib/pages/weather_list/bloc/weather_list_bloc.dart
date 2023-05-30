@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/model/amap_geo_to_address.dart';
-import 'package:weather_app/model/city.dart';
 import 'package:weather_app/model/city_station_dis_data.dart';
 import 'package:weather_app/model/related_weather.dart';
 
