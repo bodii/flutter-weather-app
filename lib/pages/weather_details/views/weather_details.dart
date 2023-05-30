@@ -218,6 +218,8 @@ class WeatherDetailsWidget extends StatelessWidget {
                 "${weather.forecast15d?[1].temperatureAm}℃",
                 style: const TextStyle(fontSize: 20),
               ),
+              Weather24HBriefWidget(forecast24h: weather.forecast24h!),
+              Weather15DBriefWidget(forecast15d: weather.forecast15d!),
               WeatherItemsWidget(weather: weather, smi: smi),
               AirQualityWidget(air: air),
               SunAndMoonWidget(smi: smi),
