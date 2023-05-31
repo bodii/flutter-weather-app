@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/weather.dart';
 
-class Weather24HBriefWidget extends StatefulWidget {
-  const Weather24HBriefWidget({
+class WeatherCn24HBriefWidget extends StatefulWidget {
+  const WeatherCn24HBriefWidget({
     super.key,
     required this.forecast24h,
   });
 
-  final Forecast72H forecast24h;
+  final List<Forecast24h> forecast24h;
 
   @override
-  State<Weather24HBriefWidget> createState() => _Weather24HBriefWidgetState();
+  State<WeatherCn24HBriefWidget> createState() =>
+      _WeatherCn24HBriefWidgetState();
 }
 
-class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
+class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
   late final ScrollController listController;
   int currentIndex = 0;
 
@@ -32,7 +33,7 @@ class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Value> values = widget.forecast24h.value!;
+    final List<Forecast24h> forecast24h = widget.forecast24h;
 
     return Container(
       width: 380,
@@ -57,15 +58,15 @@ class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  Text(values[index].iconDecoder!),
+                  Text(forecast24h[index].weather!),
                   Text(
-                    values[index].temp!,
+                    forecast24h[index].forecasttime!,
                     style: const TextStyle(fontSize: 15),
                   ),
                 ],
               );
             },
-            itemCount: values.length,
+            itemCount: forecast24h.length,
           ),
         ),
       ),

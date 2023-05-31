@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/weather.dart';
 
-class Weather15DBriefWidget extends StatefulWidget {
-  const Weather15DBriefWidget({
+class WeatherCn15DBriefWidget extends StatefulWidget {
+  const WeatherCn15DBriefWidget({
     super.key,
     required this.forecast15d,
   });
 
-  final Forecast15D forecast15d;
+  final List<Forecast15d> forecast15d;
 
   @override
-  State<Weather15DBriefWidget> createState() => _Weather15DBriefWidgetState();
+  State<WeatherCn15DBriefWidget> createState() =>
+      _WeatherCn15DBriefWidgetState();
 }
 
-class _Weather15DBriefWidgetState extends State<Weather15DBriefWidget> {
+class _WeatherCn15DBriefWidgetState extends State<WeatherCn15DBriefWidget> {
   late final ScrollController listController;
   int currentIndex = 0;
   double srcWidgetHight = 235;
@@ -35,7 +36,7 @@ class _Weather15DBriefWidgetState extends State<Weather15DBriefWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Forecast> forecasts = widget.forecast15d.forecast!;
+    final List<Forecast15d> forecast15d = widget.forecast15d;
     return Container(
       width: 380,
       height: srcWidgetHight,
@@ -51,17 +52,17 @@ class _Weather15DBriefWidgetState extends State<Weather15DBriefWidget> {
             width: double.infinity,
             height: srcListHight,
             child: ListView.builder(
-              itemCount: forecasts.length,
+              itemCount: forecast15d.length,
               itemExtent: 35.0,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(forecasts[index].validDateCn!),
-                    Text(forecasts[index].dayIconText!),
-                    Text(forecasts[index].nightIconText!),
-                    Text(forecasts[index].minTemp!),
-                    Text(forecasts[index].maxTemp!),
+                    Text(forecast15d[index].forecasttime!),
+                    Text(forecast15d[index].weatherAm!),
+                    Text(forecast15d[index].weatherPm!),
+                    Text(forecast15d[index].temperaturePm!),
+                    Text(forecast15d[index].temperatureAm!),
                   ],
                 );
               },
