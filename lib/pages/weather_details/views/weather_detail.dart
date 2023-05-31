@@ -156,7 +156,7 @@ class WeatherDetailsWidget extends StatelessWidget {
               ),
               Weather24HBriefWidget(forecast24h: weather.forecast72H!),
               Weather15DBriefWidget(forecast15d: weather.forecast15D!),
-              // WeatherItemsWidget(weather: weather, smi: smi),
+              WeatherItemsWidget(weather: weather.current!),
               // AirQualityWidget(air: air),
               // SunAndMoonWidget(smi: smi),
               LivingIndexWidget(wniIndexs: wniIndexs),

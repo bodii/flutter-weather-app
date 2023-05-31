@@ -57,11 +57,19 @@ class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  Text(values[index].iconDecoder!),
-                  Text(
-                    values[index].temp!,
-                    style: const TextStyle(fontSize: 15),
+                  // Text(
+                  //   values[index].iconDecoder!,
+                  //   style: const TextStyle(fontSize: 15),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Image.asset(
+                      'assets/weather_icon/weathers/${values[index].iconPic}.png',
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
+                  Text('${values[index].dateTime!}:00'),
                 ],
               );
             },

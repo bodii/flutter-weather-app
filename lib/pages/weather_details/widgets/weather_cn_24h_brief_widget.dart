@@ -39,7 +39,7 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
       width: 380,
       height: 100,
       padding: const EdgeInsets.symmetric(vertical: 10),
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.grey[100],
@@ -58,7 +58,16 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  Text(forecast24h[index].weather!),
+                  // Text(forecast24h[index].weather!),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Image.asset(
+                      'assets/weather_icon/weathers/'
+                      '${forecast24h[index].weatherPic}.png',
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
                   Text(
                     forecast24h[index].forecasttime!,
                     style: const TextStyle(fontSize: 15),

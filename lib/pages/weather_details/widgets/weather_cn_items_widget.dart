@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/model/wni_hot_country_data.dart';
+import 'package:weather_app/model/sun_and_moon.dart';
+import 'package:weather_app/model/weather.dart';
 
-class WeatherItemsWidget extends StatelessWidget {
-  const WeatherItemsWidget({
+class WeatherCnItemsWidget extends StatelessWidget {
+  const WeatherCnItemsWidget({
     super.key,
     required this.weather,
+    required this.smi,
   });
 
-  final Current weather;
+  final Weather weather;
+  final SunAndMoonAndIndex smi;
 
   @override
   Widget build(BuildContext context) {
@@ -28,35 +31,36 @@ class WeatherItemsWidget extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(vertical: 0),
         children: [
-          WeatherItem(
-            icon: 'dew_point.svg',
-            title: '露点',
-            value: '${weather.dewPoint}℃',
+          WeatherCnItem(
+            icon: 'thermometer_icon.svg',
+            title: '温度',
+            value: '${weather.current?.current?.temperature}℃',
           ),
-          WeatherItem(
+          WeatherCnItem(
             icon: 'wind_icon.svg',
             title: '风量',
-            value: '${weather.wSpeed}',
+            value:
+                '${weather.current?.current?.winddir}${weather.current?.current?.windpower}',
           ),
-          WeatherItem(
+          WeatherCnItem(
             icon: 'precipitation_icon.svg',
             title: '湿度',
-            value: '${weather.humid}%',
+            value: '${weather.current?.current?.humidity}%',
           ),
-          WeatherItem(
+          WeatherCnItem(
             icon: 'uv_icon.svg',
             title: '紫外线',
-            value: '${weather.uvindex}',
+            value: '${smi.index![6].indexLevel}',
           ),
-          WeatherItem(
+          WeatherCnItem(
             icon: 'eye_icon.svg',
             title: '可视度',
-            value: '${weather.visibility}m',
+            value: '${weather.current?.current?.visibility}Km',
           ),
-          WeatherItem(
+          WeatherCnItem(
             icon: 'pressure_icon.svg',
             title: '气压',
-            value: '${weather.pressure}hPa',
+            value: '${weather.current?.current?.airpressure}hPa',
           ),
         ],
       ),
@@ -64,8 +68,8 @@ class WeatherItemsWidget extends StatelessWidget {
   }
 }
 
-class WeatherItem extends StatelessWidget {
-  const WeatherItem({
+class WeatherCnItem extends StatelessWidget {
+  const WeatherCnItem({
     super.key,
     required this.icon,
     required this.title,
