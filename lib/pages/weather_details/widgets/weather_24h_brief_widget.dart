@@ -57,10 +57,6 @@ class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  // Text(
-                  //   values[index].iconDecoder!,
-                  //   style: const TextStyle(fontSize: 15),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Image.asset(

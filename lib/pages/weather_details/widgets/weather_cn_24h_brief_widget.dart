@@ -58,7 +58,6 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 children: [
-                  // Text(forecast24h[index].weather!),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Image.asset(

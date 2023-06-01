@@ -72,22 +72,24 @@ class WelcomeBlocListenerView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Spacer(flex: 1),
-                  const SizedBox(
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 20.0),
                     width: 320,
-                    child: Text(
-                      '四季交迭，风雨变换\n'
-                      '天气冷暖，草木皆知\n'
-                      '享受生活中每一个美好的时刻\n'
-                      '也或者坏天气\n'
-                      '无论是，春夏秋冬',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
+                    child: const Center(
+                      child: Text(
+                        '四季交迭，草木皆知\n'
+                        '天气冷暖，风云变换\n'
+                        '享受生活中，每一个舒服的温度\n'
+                        '也或者，糟糕的坏天气\n'
+                        '无论何事\n'
+                        '尽在，春夏秋冬的季节里',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
-                  const Spacer(flex: 1),
                   SizedBox(
                     width: 300,
                     height: 60,
@@ -140,7 +142,7 @@ class WelcomeBlocListenerView extends StatelessWidget {
     );
   }
 
-  _dialogLogin(BuildContext context) async {
+  void _dialogLogin(BuildContext context) async {
     var result = await showDialog(
       context: context,
       builder: (context) {
