@@ -33,6 +33,7 @@ Future<List<dynamic>> getJsJsonResult(
   String authority, [
   String unencodedPath = '',
   Map<String, dynamic>? queryParameters,
+  bool hasToUtf8 = false,
 ]) async {
   try {
     var url = Uri.https(authority, unencodedPath, queryParameters);
@@ -42,7 +43,11 @@ Future<List<dynamic>> getJsJsonResult(
     var body = response.body;
     int contentStartIndex = body.indexOf('[');
     var jsonData = body.substring(contentStartIndex);
-    List<dynamic> stringList = jsonDecode(utf8.decode(jsonData.runes.toList()));
+
+    if (hasToUtf8) {
+      jsonData = utf8.decode(jsonData.runes.toList());
+    }
+    List<dynamic> stringList = jsonDecode(jsonData);
 
     return stringList;
   } on Exception {
@@ -64,6 +69,8 @@ Future<List<City>> getChinaAllCityList() async {
   List<dynamic> list = await getJsJsonResult(
     cfgWeatherApiHost,
     'js/arealist.js',
+    null,
+    true,
   );
   List<City> citys = list.map((city) => City.fromJson(city)).toList();
   // log(citys[0].namecn!);

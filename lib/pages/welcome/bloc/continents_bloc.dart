@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:realm/realm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/api/response.dart';
+import 'package:weather_app/db/areas/area.dart';
+import 'package:weather_app/model/area.dart';
 import 'package:weather_app/model/win_hot_city.dart';
 
 part 'continents_event.dart';
@@ -37,6 +40,42 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
       final WniHotCityNameId wniHotCityNameId =
           WniHotCityNameId.fromJson(wniHotCityList);
       final Map<String, String> continents = wniHotCityNameId.nameIds!;
+
+      final config = Configuration.local(
+        [
+          AreaRealm.schema,
+          CityListRealm.schema,
+          DisListRealm.schema,
+        ],
+        // path: './assets/realm/area.realm',
+      );
+      final Realm areaRealm = Realm(config);
+      // areaRealm.write(() => areaRealm.deleteAll<AreaRealm>());
+
+      RealmResults<AreaRealm> areaResult = areaRealm.all<AreaRealm>();
+      debugPrint("areaResult is empty:${areaResult.isEmpty}");
+      if (areaResult.isEmpty) {
+        final List<Area> areas = await getAreas();
+
+        final List<AreaRealm> areaList = [];
+        for (Area area in areas) {
+          final List<CityListRealm> cityList = [];
+          for (CityList citys in area.cityList!) {
+            final List<DisListRealm> disList = [];
+
+            for (DisList dis in citys.disList!) {
+              disList.add(DisListRealm(dis.district!, dis.stationid!));
+            }
+
+            cityList.add(CityListRealm(citys.city!, disList: disList));
+          }
+
+          areaList.add(AreaRealm(area.province!, cityList: cityList));
+        }
+        areaRealm.write(() {
+          areaRealm.addAll(areaList);
+        });
+      }
 
       emit(
         state.copyWith(

@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:realm/realm.dart';
 import 'package:weather_app/api/response.dart';
+import 'package:weather_app/db/areas/area.dart';
 import 'package:weather_app/model/city_station_dis_data.dart';
 
 class Search extends StatefulWidget {
@@ -14,6 +17,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   late TextEditingController searchController;
+  late Realm areaRealm;
 
   @override
   void initState() {
@@ -21,6 +25,16 @@ class _SearchState extends State<Search> {
 
     searchController = TextEditingController();
     searchController.addListener(() {});
+
+    final config = Configuration.local(
+      [
+        AreaRealm.schema,
+        CityListRealm.schema,
+        DisListRealm.schema,
+      ],
+      // path: './assets/realm/area.realm',
+    );
+    areaRealm = Realm(config);
   }
 
   @override
@@ -74,10 +88,61 @@ class _SearchState extends State<Search> {
     );
   }
 
-  void search(String provcn) {}
+  void search(String provcn) {
+    if (provcn.isEmpty) return;
+
+    debugPrint(provcn);
+
+    createOverly();
+  }
 
   void submit(String provcn) async {
-    CityStationDisDataList citys = await getCityStationDisData(provcn);
-    print(jsonEncode(citys.toJson()));
+    if (provcn.isEmpty) return;
+
+    final cityRes = areaRealm.all<AreaRealm>();
+    final tt = cityRes.query("province LIKE '*$provcn*'");
+
+    List<String> ss = [];
+    tt.forEach((e) {
+      // debugPrint(e.province);
+      e.cityList.forEach((c) {
+        c.disList.forEach((d) {
+          ss.add(d.district);
+        });
+      });
+    });
+
+    debugPrint(ss.join(','));
+  }
+
+  void createOverly() {
+    OverlayEntry overlay = OverlayEntry(
+      builder: (context) {
+        return Positioned(
+          width: 230,
+          top: 220,
+          left: 50,
+          child: CompositedTransformFollower(
+            offset: const Offset(5, 31),
+            link: LayerLink(),
+            child: Material(
+              child: Container(
+                constraints: const BoxConstraints(maxHeight: 180),
+                color: Colors.amber.shade100,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return const ListTile(title: Text('上海'));
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    final over = Overlay.of(context);
+    over.insert(overlay);
   }
 }
