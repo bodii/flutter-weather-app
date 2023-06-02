@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:weather_app/api/response.dart';
+import 'package:weather_app/model/city_station_dis_data.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -59,6 +63,8 @@ class _SearchState extends State<Search> {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(10),
                   ],
+                  onChanged: search,
+                  onSubmitted: submit,
                 ),
               )
             ],
@@ -66,5 +72,12 @@ class _SearchState extends State<Search> {
         ),
       ),
     );
+  }
+
+  void search(String provcn) {}
+
+  void submit(String provcn) async {
+    CityStationDisDataList citys = await getCityStationDisData(provcn);
+    print(jsonEncode(citys.toJson()));
   }
 }
