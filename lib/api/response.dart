@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/model/air_current.dart';
 import 'package:weather_app/model/air_forecast.dart';
@@ -40,6 +41,10 @@ Future<List<dynamic>> getJsJsonResult(
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     });
+    if (response.statusCode != HttpStatus.ok) {
+      throw Exception('connect failure!');
+    }
+
     var body = response.body;
     int contentStartIndex = body.indexOf('[');
     var jsonData = body.substring(contentStartIndex);
@@ -86,6 +91,10 @@ Future<CityInfo> getCityInfo(String cityid) async {
     {'type': 'cityid', 'id': cityid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   CityInfo city = CityInfo.fromJson(resps['data']);

@@ -26,10 +26,7 @@ class WelcomeBlocView extends StatelessWidget {
           previous.status != current.status &&
           current.status == ContinentsStatus.storeSaveSuccess,
       builder: (context, state) {
-        if (state.status == ContinentsStatus.initial) {
-          context.read<ContinentsBloc>().add(const ContinentsLoaded());
-          debugPrint("loaded...");
-        } else if (state.status == ContinentsStatus.httpSuccess) {
+        if (state.status == ContinentsStatus.httpSuccess) {
           context.read<ContinentsBloc>().add(const ContinentsSaved());
           debugPrint("saved...");
         }

@@ -4,7 +4,7 @@ import 'package:weather_app/pages/location/view/index.dart';
 import 'package:weather_app/pages/weather_details/views/weather_detail.dart';
 import 'package:weather_app/pages/weather_details/views/weather_detail_cn.dart';
 import 'package:weather_app/pages/weather_list/view/weather_list.dart';
-import 'package:weather_app/pages/weather_list/widgets/search.dart';
+import 'package:weather_app/pages/search/view/search_page.dart';
 import 'package:weather_app/pages/welcome/views/welcome_page.dart';
 
 class AppRoutes {
@@ -26,7 +26,7 @@ class AppRoutes {
           GoRoute(
             name: '/location/search',
             path: 'search',
-            builder: (context, state) => const Search(),
+            builder: (context, state) => const SearchPage(),
           ),
         ],
       ),

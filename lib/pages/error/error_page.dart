@@ -9,17 +9,18 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Page not found")),
-        body: Center(
-          child: Column(
-            children: [
-              SelectableText(error.toString()),
-              TextButton(
-                onPressed: () => context.go('/welcome'),
-                child: const Text('welcome'),
-              ),
-            ],
-          ),
-        ));
+      appBar: AppBar(title: const Text("Page not found")),
+      body: Center(
+        child: Column(
+          children: [
+            SelectableText(error.toString()),
+            TextButton(
+              onPressed: () => context.go('/welcome'),
+              child: const Text('welcome'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
