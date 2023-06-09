@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:realm/realm.dart';
 import 'package:weather_app/api/response.dart';
 import 'package:weather_app/db/area_formats/area_format.dart';
@@ -142,6 +143,24 @@ class _SearchPageState extends State<SearchPage> {
     search(provcn);
 
     cancelSearchPopup();
+
+    redirectEvent();
+  }
+
+  void redirectEvent() {
+    if (searchController.text.isEmpty) return;
+    if (selectIndex < 0) return;
+
+    AreaFormatRealm result = searchResults[selectIndex];
+    if (!result.isValid) return;
+
+    context.pushNamed(
+      '/weather/detail/china',
+      pathParameters: {
+        'city': result.district,
+        'cityId': result.stationid,
+      },
+    );
   }
 
   void getAreaResult() async {
