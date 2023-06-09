@@ -46,6 +46,18 @@ class LoginWidget extends StatelessWidget {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: TextButton(
+                  onPressed: () {
+                    context.goNamed("/sign_in");
+                  },
+                  child: const Text('sign in?'),
+                ),
+              ),
+            ),
           ],
         ),
       ),

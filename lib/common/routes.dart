@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/pages/error/error_page.dart';
 import 'package:weather_app/pages/location/view/index.dart';
+import 'package:weather_app/pages/sign_in/view/sign_in.dart';
 import 'package:weather_app/pages/weather_details/views/weather_detail.dart';
 import 'package:weather_app/pages/weather_details/views/weather_detail_cn.dart';
 import 'package:weather_app/pages/weather_list/view/weather_list.dart';
@@ -15,6 +16,11 @@ class AppRoutes {
         name: '/welcome',
         path: '/welcome',
         builder: (context, state) => const WelcomePage(),
+      ),
+      GoRoute(
+        name: '/sign_in',
+        path: '/sign_in',
+        builder: (context, state) => const SignIn(),
       ),
       GoRoute(
         name: '/location',
