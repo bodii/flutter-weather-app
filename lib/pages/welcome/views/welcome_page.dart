@@ -55,85 +55,87 @@ class WelcomeBlocListenerView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('欢迎'),
         ),
-        body: Column(
-          children: [
-            const WorldsWidget(),
-            Container(
-              alignment: Alignment.center,
-              width: 350,
-              height: 350,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(45)),
-                color: Colors.white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20.0),
-                    width: 320,
-                    child: const Center(
-                      child: Text(
-                        '四季交迭，草木皆知\n'
-                        '天气冷暖，风云变换\n'
-                        '享受生活中，每一个舒服的温度\n'
-                        '也或者，糟糕的坏天气\n'
-                        '无论何事\n'
-                        '尽在，春夏秋冬的季节里',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        context.pushNamed('/location');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60),
-                        ),
-                        backgroundColor: Theme.of(context).primaryColor,
-                      ),
-                      child: const Text(
-                        '开始',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Already have an account ? '),
-                      TextButton(
-                        onPressed: () {
-                          _dialogLogin(context);
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text(
-                          'Log in',
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const WorldsWidget(),
+              Container(
+                alignment: Alignment.center,
+                width: 350,
+                height: 350,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(45)),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      width: 320,
+                      child: const Center(
+                        child: Text(
+                          '四季交迭，草木皆知\n'
+                          '天气冷暖，风云变换\n'
+                          '享受生活中，每一个舒服的温度\n'
+                          '也或者，糟糕的坏天气\n'
+                          '无论何事\n'
+                          '尽在，春夏秋冬的季节里',
                           style: TextStyle(
-                            color: Colors.blue,
+                            fontSize: 16,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+                    ),
+                    SizedBox(
+                      width: 300,
+                      height: 60,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.pushNamed('/location');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60),
+                          ),
+                          backgroundColor: Theme.of(context).primaryColor,
+                        ),
+                        child: const Text(
+                          '开始',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Already have an account ? '),
+                        TextButton(
+                          onPressed: () {
+                            _dialogLogin(context);
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Text(
+                            'Log in',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

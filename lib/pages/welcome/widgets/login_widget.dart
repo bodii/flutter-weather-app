@@ -52,9 +52,9 @@ class LoginWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: TextButton(
                   onPressed: () {
-                    context.goNamed("/sign_in");
+                    context.goNamed("/user/sign_up");
                   },
-                  child: const Text('sign in?'),
+                  child: const Text('Not registered yet?'),
                 ),
               ),
             ),
