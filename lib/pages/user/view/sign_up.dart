@@ -18,6 +18,15 @@ class _SignUpState extends State<SignUpPage> {
   bool reSend = false;
   bool sendEventing = false;
 
+  late Timer sendTimer;
+
+  @override
+  void dispose() {
+    sendTimer.cancel();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     FormState? formState = _formKey.currentState;
@@ -25,7 +34,7 @@ class _SignUpState extends State<SignUpPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("sign up"),
+          title: const Text("注册"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -196,19 +205,10 @@ class _SignUpState extends State<SignUpPage> {
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                                  if (formState != null &&
-                                      formState.validate()) {
+                                  if (formState != null) {
                                     formState.reset();
                                   }
                                 });
-
-                                /*
-                                if (_formKey.currentState.!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Processing data')),
-                                  );
-                                }
-                                */
                               },
                               child: const Text(
                                 '取消',
@@ -223,7 +223,10 @@ class _SignUpState extends State<SignUpPage> {
                             height: 50.0,
                             child: ElevatedButton(
                               onPressed: () {
-                                debugPrint("取消");
+                                popupMessage(const Text("seccess!"));
+                                // if (formState != null && formState.validate()) {
+                                //   formState.save();
+                                // }
                               },
                               child: const Text(
                                 '提交',
@@ -246,8 +249,20 @@ class _SignUpState extends State<SignUpPage> {
     );
   }
 
+  void popupMessage(Widget widget) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: widget,
+        action: SnackBarAction(
+          label: '取消',
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+
   void sendVerificationCode() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    sendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       sendEventing = true;
       countdown--;
 
