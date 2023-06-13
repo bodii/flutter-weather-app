@@ -1,14 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'dart:async';
 
-class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUpPage> {
+  bool passwdVisible = false;
+  bool rePasswdVisible = false;
+  final _formKey = GlobalKey<FormState>();
+  int countdown = 60;
+  bool reSend = false;
+  bool sendEventing = false;
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey();
-    bool passwdVisible = 1 > 0;
-    bool rePasswdVisible = 1 > 0;
+    FormState? formState = _formKey.currentState;
 
     return SafeArea(
       child: Scaffold(
@@ -29,90 +41,98 @@ class SignUp extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
                         autofocus: true,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
-                          // labelText: "用户名",
                           hintText: "邮箱",
                           prefixIcon: Icon(Icons.person),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
+                          counterStyle: TextStyle(fontSize: 20),
                         ),
                         validator: (String? value) {
                           debugPrint(value);
-                          return value;
+                          return;
                         },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
-                        decoration: const InputDecoration(
-                          // labelText: "密码",
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
                           hintText: "登录密码",
-                          prefixIcon: Icon(Icons.lock),
-                          border: OutlineInputBorder(
+                          prefixIcon: const Icon(Icons.lock),
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           suffixIcon: IconButton(
-                            onPressed: null,
+                            onPressed: () {
+                              setState(() {
+                                passwdVisible = !passwdVisible;
+                              });
+                            },
                             icon: Icon(
-                                // passwdVisible
-                                //     ?
-                                Icons.visibility
-                                //     : Icons.visibility_off,
-                                ),
+                              passwdVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
                           ),
                         ),
-                        obscureText: true,
+                        obscureText: !passwdVisible,
                         validator: (value) {
                           debugPrint(value);
-                          return value;
+                          return;
                         },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
-                        decoration: const InputDecoration(
-                          // labelText: "确认密码",
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
                           hintText: "确认密码",
-                          prefixIcon: Icon(Icons.lock_clock),
-                          border: OutlineInputBorder(
+                          prefixIcon: const Icon(Icons.lock_clock),
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           suffixIcon: IconButton(
-                            onPressed: null,
+                            onPressed: () {
+                              setState(() {
+                                rePasswdVisible = !rePasswdVisible;
+                              });
+                            },
                             icon: Icon(
-                                // rePasswdVisible
-                                //     ?
-                                Icons.visibility
-                                //     :Icons.visibility_off,
-                                ),
+                              rePasswdVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
                           ),
                         ),
-                        obscureText: true,
+                        obscureText: !rePasswdVisible,
                         validator: (value) {
                           debugPrint(value);
-                          return value;
+                          return;
                         },
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
-                          // labelText: "手机号",
                           hintText: "手机号",
                           prefixIcon: Icon(Icons.phone_iphone),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
-                        keyboardType: TextInputType.number,
-                        maxLength: 11,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(11),
+                        ],
                         validator: (value) {
                           debugPrint(value);
-                          return '';
+                          return;
                         },
                       ),
                     ),
@@ -131,25 +151,42 @@ class SignUp extends StatelessWidget {
                                       BorderRadius.all(Radius.circular(10)),
                                 ),
                               ),
-                              maxLength: 6,
-                              // validator: (value) {
-                              //   debugPrint(value);
-                              //   return value;
-                              // },
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(6),
+                              ],
+                              validator: (value) {
+                                debugPrint(value);
+                                return;
+                              },
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 160,
+                        Container(
+                          alignment: Alignment.bottomLeft,
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          width: 100.0,
+                          height: 60.0,
+                          child: Text(
+                            "$countdown's",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Theme.of(context).disabledColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 120,
+                          height: 50,
                           child: OutlinedButton(
-                            onPressed: null,
-                            child: Text("60's 重新发送"),
+                            onPressed:
+                                sendEventing ? null : sendVerificationCode,
+                            child: Text(reSend ? '重新发送' : '发送'),
                           ),
                         ),
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30.0),
+                      padding: const EdgeInsets.only(top: 100.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -158,7 +195,12 @@ class SignUp extends StatelessWidget {
                             height: 50.0,
                             child: ElevatedButton(
                               onPressed: () {
-                                debugPrint("取消");
+                                setState(() {
+                                  if (formState != null &&
+                                      formState.validate()) {
+                                    formState.reset();
+                                  }
+                                });
 
                                 /*
                                 if (_formKey.currentState.!.validate()) {
@@ -202,5 +244,21 @@ class SignUp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void sendVerificationCode() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      sendEventing = true;
+      countdown--;
+
+      if (countdown <= 0) {
+        timer.cancel();
+        sendEventing = false;
+        countdown = 60;
+      }
+      debugPrint(countdown.toString());
+
+      setState(() {});
+    });
   }
 }

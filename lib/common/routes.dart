@@ -20,7 +20,7 @@ class AppRoutes {
       GoRoute(
         name: '/user/sign_up',
         path: '/user/sign_up',
-        builder: (context, state) => const SignUp(),
+        builder: (context, state) => const SignUpPage(),
       ),
       GoRoute(
         name: '/location',
