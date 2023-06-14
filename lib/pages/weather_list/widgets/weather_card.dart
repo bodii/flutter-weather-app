@@ -21,77 +21,69 @@ class WeatherCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 'assets/weather_icon/d00.png';
-    // https: //www.weatherol.cn/images/icon/n00.png;
-
-    return Container(
-      height: 140,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(30),
-        ),
-      ),
+    return Card(
       child: InkWell(
         onTap: () =>
             context.pushNamed('/weather/detail/china', pathParameters: {
           'city': city,
           'cityId': cityId,
         }),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  provcn,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    provcn,
+                    style: TextStyle(
+                      fontSize: Theme.of(context)
+                          .primaryTextTheme
+                          .bodyMedium!
+                          .fontSize,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
-                ),
-                Text(
-                  city,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                  Text(
+                    city,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
-                ),
-                Text(
-                  weather,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
+                  Text(
+                    weather,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
+                ],
+              ),
+              SizedBox(
+                width: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image(
+                      image: AssetImage(pic),
+                    ),
+                    Text(
+                      '$temperature℃',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Image(
-                    image: AssetImage(pic),
-                  ),
-                ),
-                Text(
-                  '$temperature℃',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            )
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

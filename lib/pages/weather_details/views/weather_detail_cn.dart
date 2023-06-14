@@ -126,7 +126,7 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(40),
                         ),
-                        color: Colors.grey[200],
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                       ),
                       child: Row(
                         children: [
@@ -134,8 +134,12 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                             'assets/weather_icon/icons/pm25_icon.svg',
                             width: 45,
                             height: 45,
-                            colorFilter: const ColorFilter.mode(
-                                Colors.purple, BlendMode.srcIn),
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
+                              BlendMode.srcIn,
+                            ),
                           ),
                           Text(air.pm25!),
                         ],
@@ -150,14 +154,18 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(40),
                         ),
-                        color: Colors.grey[200],
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                       ),
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/weather_icon/icons/uv_icon02.svg',
-                            colorFilter: const ColorFilter.mode(
-                                Colors.purple, BlendMode.srcIn),
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
+                              BlendMode.srcIn,
+                            ),
                             width: 60,
                             height: 38,
                           ),
@@ -181,27 +189,27 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                   children: [
                     Text(
                       '${weather.current?.current?.temperature}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 120,
                         height: 0.85,
-                        color: Colors.blueGrey,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           '℃',
                           style: TextStyle(
                             fontSize: 30,
-                            color: Colors.blueGrey,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         Text(
                           "体感温度\n${weather.current?.current?.feelstemperature}℃",
                           style: TextStyle(
-                            color: Colors.grey.shade600,
+                            color: Theme.of(context).colorScheme.tertiary,
                           ),
                         ),
                       ],

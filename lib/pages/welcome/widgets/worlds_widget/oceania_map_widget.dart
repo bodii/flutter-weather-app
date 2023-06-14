@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/common/text_extension.dart';
+import 'set_city_position.dart';
 
 // 亚洲
 class OceaniaMapWidget extends StatelessWidget {
@@ -26,78 +26,15 @@ class OceaniaMapWidget extends StatelessWidget {
           ),
           Stack(
             children: [
-              Positioned(
-                left: 77 * ratio,
-                top: 58 * ratio,
-                child: Text(
-                  '达尔文',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 233 * ratio,
-                top: 20 * ratio,
-                child: Text(
-                  '莫尔斯比港',
-                  style: TextStyle(fontSize: (11 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 195 * ratio,
-                top: 117 * ratio,
-                child: Text(
-                  '布里斯班',
-                  style: TextStyle(fontSize: (13 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 313 * ratio,
-                top: 114 * ratio,
-                child: Text(
-                  '苏瓦',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 28 * ratio,
-                top: 166 * ratio,
-                child: Text(
-                  '珀斯',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 198 * ratio,
-                top: 199 * ratio,
-                child: Text(
-                  '堪培拉',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 238 * ratio,
-                top: 157 * ratio,
-                child: Text(
-                  '悉尼',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 317 * ratio,
-                top: 209 * ratio,
-                child: Text(
-                  '惠灵顿',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 188 * ratio,
-                top: 239 * ratio,
-                child: Text(
-                  '霍巴特',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
+              setCityPosition(context, 77, 58, 14, ratio, '达尔文'),
+              setCityPosition(context, 233, 20, 11, ratio, '莫尔斯比港'),
+              setCityPosition(context, 195, 117, 13, ratio, '布里斯班'),
+              setCityPosition(context, 313, 114, 14, ratio, '苏瓦'),
+              setCityPosition(context, 28, 166, 14, ratio, '珀斯'),
+              setCityPosition(context, 198, 199, 14, ratio, '堪培拉'),
+              setCityPosition(context, 238, 157, 14, ratio, '悉尼'),
+              setCityPosition(context, 317, 209, 14, ratio, '惠灵顿'),
+              setCityPosition(context, 188, 239, 14, ratio, '霍巴特'),
             ],
           ),
         ],

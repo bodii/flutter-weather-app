@@ -30,14 +30,6 @@ class WelcomeBlocView extends StatelessWidget {
           context.read<ContinentsBloc>().add(const ContinentsSaved());
           debugPrint("saved...");
         }
-        //  else if (state.status == ContinentsStatus.storeSaveSuccess) {
-        // context.read<ContinentsBloc>().add(const ContinentsGeted());
-        // debugPrint("geted...");
-        // }
-        // else if (state.status == ContinentsStatus.storeGetSuccess) {
-        //   debugPrint("geted success...");
-        //   debugPrint(state.continents?.toString());
-        // }
         debugPrint(state.status.toString());
         return const WelcomeBlocListenerView();
       },
@@ -63,17 +55,13 @@ class WelcomeBlocListenerView extends StatelessWidget {
                 alignment: Alignment.center,
                 width: 350,
                 height: 350,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(45)),
-                  color: Colors.white,
-                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 20.0),
                       width: 320,
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           '四季交迭，草木皆知\n'
                           '天气冷暖，风云变换\n'
@@ -83,7 +71,7 @@ class WelcomeBlocListenerView extends StatelessWidget {
                           '尽在，春夏秋冬的季节里',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ),
@@ -99,12 +87,13 @@ class WelcomeBlocListenerView extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(60),
                           ),
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                         ),
-                        child: const Text(
+                        child: Text(
                           '开始',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: 18,
                           ),
                         ),
@@ -118,15 +107,8 @@ class WelcomeBlocListenerView extends StatelessWidget {
                           onPressed: () {
                             _dialogLogin(context);
                           },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.white,
-                          ),
                           child: const Text(
                             'Log in',
-                            style: TextStyle(
-                              color: Colors.blue,
-                            ),
                           ),
                         ),
                       ],

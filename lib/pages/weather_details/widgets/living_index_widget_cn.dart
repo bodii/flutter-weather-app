@@ -32,7 +32,7 @@ class LivingIndexCnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.surfaceVariant,
       ),
       child: GridView.count(
         crossAxisCount: 3,
@@ -68,7 +68,10 @@ class LivingIndexCnItem extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 8),
           child: SvgPicture.asset(
             'assets/weather_icon/icons/$icon',
-            colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.tertiary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
         Text(

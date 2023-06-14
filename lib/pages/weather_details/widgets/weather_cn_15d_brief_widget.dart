@@ -44,7 +44,7 @@ class _WeatherCn15DBriefWidgetState extends State<WeatherCn15DBriefWidget> {
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: Column(
         children: [

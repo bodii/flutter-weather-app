@@ -42,7 +42,7 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
       margin: const EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: SizedBox(
         width: double.infinity,

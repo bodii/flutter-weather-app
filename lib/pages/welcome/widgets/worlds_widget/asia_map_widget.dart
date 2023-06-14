@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/common/text_extension.dart';
+import 'set_city_position.dart';
 
 /// AsiaMapWidget
 ///
@@ -28,102 +28,18 @@ class AsiaMapWidget extends StatelessWidget {
           ),
           Stack(
             children: [
-              Positioned(
-                left: 21 * ratio,
-                top: 78 * ratio,
-                child: Text(
-                  '德黑兰',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 91 * ratio,
-                top: 70 * ratio,
-                child: Text(
-                  '塔什干',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 203 * ratio,
-                top: 37 * ratio,
-                child: Text(
-                  '乌兰巴托',
-                  style: TextStyle(fontSize: (13 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 254 * ratio,
-                top: 84 * ratio,
-                child: Text(
-                  '北京',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 323 * ratio,
-                top: 65 * ratio,
-                child: Text(
-                  '首尔',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 332 * ratio,
-                top: 104 * ratio,
-                child: Text(
-                  '东京',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 42 * ratio,
-                top: 153 * ratio,
-                child: Text(
-                  '利雅得',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 117 * ratio,
-                top: 110 * ratio,
-                child: Text(
-                  '新德里',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 120 * ratio,
-                top: 212 * ratio,
-                child: Text(
-                  '马累',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 212 * ratio,
-                top: 157 * ratio,
-                child: Text(
-                  '曼谷',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 292 * ratio,
-                top: 174 * ratio,
-                child: Text(
-                  '马尼拉',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 245 * ratio,
-                top: 233 * ratio,
-                child: Text(
-                  '雅加达',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
+              setCityPosition(context, 21, 78, 14, ratio, '德黑兰'),
+              setCityPosition(context, 91, 70, 14, ratio, '塔什干'),
+              setCityPosition(context, 203, 37, 14, ratio, '乌兰巴托'),
+              setCityPosition(context, 254, 84, 14, ratio, '北京'),
+              setCityPosition(context, 323, 65, 14, ratio, '首尔'),
+              setCityPosition(context, 332, 104, 14, ratio, '东京'),
+              setCityPosition(context, 42, 153, 14, ratio, '利雅得'),
+              setCityPosition(context, 117, 110, 14, ratio, '新德里'),
+              setCityPosition(context, 120, 212, 14, ratio, '马累'),
+              setCityPosition(context, 212, 157, 14, ratio, '曼谷'),
+              setCityPosition(context, 292, 174, 14, ratio, '马尼拉'),
+              setCityPosition(context, 245, 233, 14, ratio, '雅加达'),
             ],
           ),
         ],

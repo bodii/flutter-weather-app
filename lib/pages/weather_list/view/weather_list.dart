@@ -142,7 +142,7 @@ class _WeatherListViewState extends State<WeatherListView> {
     return Column(
       children: [
         SizedBox(
-          height: 150,
+          height: 180,
           child: PageView.builder(
             // 左右滑动
             onPageChanged: (int index) {
@@ -155,16 +155,13 @@ class _WeatherListViewState extends State<WeatherListView> {
             scrollDirection: Axis.horizontal,
             controller: pageController,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: WeatherCardWidget(
-                  provcn: '当前城市',
-                  city: state.cityWeather!.namecn!,
-                  cityId: state.cityWeather!.id!,
-                  weather: state.cityWeather!.winddirAm!,
-                  pic: WeatherListView.weathers[0]['pic'] ?? '',
-                  temperature: state.cityWeather!.temperatureAm!,
-                ),
+              return WeatherCardWidget(
+                provcn: '当前城市',
+                city: state.cityWeather!.namecn!,
+                cityId: state.cityWeather!.id!,
+                weather: state.cityWeather!.winddirAm!,
+                pic: WeatherListView.weathers[0]['pic'] ?? '',
+                temperature: state.cityWeather!.temperatureAm!,
               );
             },
             itemCount: 2,
@@ -180,17 +177,14 @@ class _WeatherListViewState extends State<WeatherListView> {
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: WeatherCardWidget(
-                  provcn: state.province!,
-                  city: state.provinceCitysWeather![index].namecn ?? '',
-                  cityId: state.provinceCitysWeather![index].id ?? '',
-                  weather: state.provinceCitysWeather![index].winddirAm ?? '',
-                  pic: WeatherListView.weathers[0]['pic'] ?? '',
-                  temperature:
-                      state.provinceCitysWeather![index].temperatureAm ?? '',
-                ),
+              return WeatherCardWidget(
+                provcn: state.province!,
+                city: state.provinceCitysWeather![index].namecn ?? '',
+                cityId: state.provinceCitysWeather![index].id ?? '',
+                weather: state.provinceCitysWeather![index].winddirAm ?? '',
+                pic: WeatherListView.weathers[0]['pic'] ?? '',
+                temperature:
+                    state.provinceCitysWeather![index].temperatureAm ?? '',
               );
             },
             itemCount: state.provinceCitysWeather!.length,
@@ -210,7 +204,6 @@ class _WeatherListViewState extends State<WeatherListView> {
   }
 
   Widget clipIndex([bool selected = false]) {
-    // log('seleced: $selected, curr: $currentPage');
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: ClipRRect(
@@ -218,7 +211,9 @@ class _WeatherListViewState extends State<WeatherListView> {
         child: Container(
           width: 10,
           height: 10,
-          color: selected ? Colors.grey : Colors.grey.shade100,
+          color: selected
+              ? Theme.of(context).colorScheme.outline
+              : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );

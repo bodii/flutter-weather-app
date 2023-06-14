@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/common/text_extension.dart';
+import 'set_city_position.dart';
 
 class NorthAmericaMapWidget extends StatelessWidget {
   const NorthAmericaMapWidget({Key? key}) : super(key: key);
@@ -23,94 +23,17 @@ class NorthAmericaMapWidget extends StatelessWidget {
           ),
           Stack(
             children: [
-              Positioned(
-                left: 75 * ratio,
-                top: 92 * ratio,
-                child: Text(
-                  '温哥华',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 133 * ratio,
-                top: 78 * ratio,
-                child: Text(
-                  '埃德蒙顿',
-                  style: TextStyle(fontSize: (13 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 205 * ratio,
-                top: 103 * ratio,
-                child: Text(
-                  '渥太华',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 264 * ratio,
-                top: 79 * ratio,
-                child: Text(
-                  '蒙特利尔',
-                  style: TextStyle(fontSize: (13 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 279 * ratio,
-                top: 123 * ratio,
-                child: Text(
-                  '纽约',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 62 * ratio,
-                top: 138 * ratio,
-                child: Text(
-                  '旧金山',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 172 * ratio,
-                top: 205 * ratio,
-                child: Text(
-                  '休斯敦',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 96 * ratio,
-                top: 182 * ratio,
-                child: Text(
-                  '洛杉矶',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 177 * ratio,
-                top: 155 * ratio,
-                child: Text(
-                  '芝加哥',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 255 * ratio,
-                top: 165 * ratio,
-                child: Text(
-                  '华盛顿',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 260 * ratio,
-                top: 213 * ratio,
-                child: Text(
-                  '迈阿密',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
+              setCityPosition(context, 75, 92, 14, ratio, '温哥华'),
+              setCityPosition(context, 133, 78, 13, ratio, '埃德蒙顿'),
+              setCityPosition(context, 205, 103, 14, ratio, '渥太华'),
+              setCityPosition(context, 264, 79, 13, ratio, '蒙特利尔'),
+              setCityPosition(context, 279, 123, 14, ratio, '纽约'),
+              setCityPosition(context, 62, 138, 14, ratio, '旧金山'),
+              setCityPosition(context, 172, 205, 14, ratio, '休斯敦'),
+              setCityPosition(context, 96, 182, 14, ratio, '洛杉矶'),
+              setCityPosition(context, 177, 155, 14, ratio, '芝加哥'),
+              setCityPosition(context, 255, 165, 14, ratio, '华盛顿'),
+              setCityPosition(context, 260, 213, 14, ratio, '迈阿密'),
             ],
           ),
         ],

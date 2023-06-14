@@ -21,7 +21,7 @@ class AirQualityWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

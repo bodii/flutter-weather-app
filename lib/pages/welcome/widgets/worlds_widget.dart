@@ -85,7 +85,9 @@ class _WorldsWidgetState extends State<WorldsWidget> {
         child: Container(
           width: 10,
           height: 10,
-          color: selected ? Colors.grey : Colors.grey.shade100,
+          color: selected
+              ? Theme.of(context).colorScheme.outline
+              : Theme.of(context).colorScheme.outlineVariant,
         ),
       ),
     );

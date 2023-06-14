@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -18,11 +19,13 @@ class _SignUpState extends State<SignUpPage> {
   bool reSend = false;
   bool sendEventing = false;
 
-  late Timer sendTimer;
+  Timer? sendTimer;
 
   @override
   void dispose() {
-    sendTimer.cancel();
+    if (sendTimer != null) {
+      sendTimer!.cancel();
+    }
 
     super.dispose();
   }
@@ -34,6 +37,12 @@ class _SignUpState extends State<SignUpPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              context.goNamed('/welcome');
+            },
+          ),
           title: const Text("注册"),
           centerTitle: true,
         ),

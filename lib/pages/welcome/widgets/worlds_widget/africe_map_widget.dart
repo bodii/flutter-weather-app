@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/common/text_extension.dart';
+import 'set_city_position.dart';
 
 class AfriceMapWidget extends StatelessWidget {
   const AfriceMapWidget({Key? key}) : super(key: key);
@@ -23,78 +23,15 @@ class AfriceMapWidget extends StatelessWidget {
           ),
           Stack(
             children: [
-              Positioned(
-                left: 115 * ratio,
-                top: 18 * ratio,
-                child: Text(
-                  '突尼斯',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 217 * ratio,
-                top: 22 * ratio,
-                child: Text(
-                  '开罗',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 40 * ratio,
-                top: 79 * ratio,
-                child: Text(
-                  '达喀尔',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 149 * ratio,
-                top: 122 * ratio,
-                child: Text(
-                  '班吉',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 197 * ratio,
-                top: 79 * ratio,
-                child: Text(
-                  '恩贾梅纳',
-                  style: TextStyle(fontSize: (13 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 248 * ratio,
-                top: 133 * ratio,
-                child: Text(
-                  '内罗毕',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 198 * ratio,
-                top: 184 * ratio,
-                child: Text(
-                  '哈拉雷',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 147 * ratio,
-                top: 242 * ratio,
-                child: Text(
-                  '开普敦',
-                  style: TextStyle(fontSize: (14 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
-              Positioned(
-                left: 288 * ratio,
-                top: 218 * ratio,
-                child: Text(
-                  '塔那那利佛',
-                  style: TextStyle(fontSize: (10 * ratio)),
-                ).inkWellToWeatherInternational(context),
-              ),
+              setCityPosition(context, 115, 18, 14, ratio, '突尼斯'),
+              setCityPosition(context, 217, 22, 14, ratio, '开罗'),
+              setCityPosition(context, 40, 79, 14, ratio, '达喀尔'),
+              setCityPosition(context, 149, 122, 14, ratio, '班吉'),
+              setCityPosition(context, 197, 79, 13, ratio, '恩贾梅纳'),
+              setCityPosition(context, 248, 133, 14, ratio, '内罗毕'),
+              setCityPosition(context, 198, 184, 14, ratio, '哈拉雷'),
+              setCityPosition(context, 147, 242, 14, ratio, '开普敦'),
+              setCityPosition(context, 288, 218, 10, ratio, '塔那那利佛'),
             ],
           ),
         ],
