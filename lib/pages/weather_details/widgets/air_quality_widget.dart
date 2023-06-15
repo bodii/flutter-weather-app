@@ -21,7 +21,7 @@ class AirQualityWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -48,8 +48,8 @@ class AirQualityWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            Colors.green,
-                            Colors.orange.shade900,
+                            Theme.of(context).colorScheme.inversePrimary,
+                            Theme.of(context).colorScheme.error,
                           ],
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
@@ -61,7 +61,7 @@ class AirQualityWidget extends StatelessWidget {
                       child: Container(
                         width: 320 - 320 * (no2Int / 300),
                         height: 6,
-                        color: Colors.grey.shade300,
+                        color: Theme.of(context).colorScheme.outlineVariant,
                       ),
                     ),
                   ],
@@ -125,8 +125,8 @@ class AirItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.green,
-                      Colors.orange.shade900,
+                      Theme.of(context).colorScheme.inversePrimary,
+                      Theme.of(context).colorScheme.error,
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -138,7 +138,7 @@ class AirItem extends StatelessWidget {
                 child: Container(
                   width: emptyWidth,
                   height: 6,
-                  color: Colors.grey.shade300,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                 ),
               ),
             ],

@@ -42,7 +42,7 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
       margin: const EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: SizedBox(
         width: double.infinity,
@@ -69,7 +69,11 @@ class _WeatherCn24HBriefWidgetState extends State<WeatherCn24HBriefWidget> {
                   ),
                   Text(
                     forecast24h[index].forecasttime!,
-                    style: const TextStyle(fontSize: 15),
+                    style: TextStyle(
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium!.fontSize,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                 ],
               );

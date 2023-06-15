@@ -90,6 +90,10 @@ class WeatherDetailsWidget extends StatelessWidget {
 
     final WniHotCountryData weather = weatherState.weather!;
     final List<WniHotCountryIndex> wniIndexs = weatherState.wniIndexs!;
+
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -109,38 +113,39 @@ class WeatherDetailsWidget extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/weather_icon/d00.png',
-                width: 200,
-                height: 200,
+                width: screenWidth * 0.5,
+                height: screenWidth * 0.5,
               ),
               SizedBox(
-                width: 195,
-                height: 100,
+                width: screenWidth * 0.54,
+                height: screenWidth * 0.27,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       '${weather.current?.temp}',
-                      style: const TextStyle(
-                        fontSize: 120,
+                      style: TextStyle(
+                        fontSize: 125,
                         height: 0.85,
-                        color: Colors.blueGrey,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           '℃',
                           style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.blueGrey,
+                            fontSize: 40,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         Text(
                           "体感温度\n${weather.current?.feelsLike}℃",
                           style: TextStyle(
-                            color: Colors.grey.shade600,
+                            color: Theme.of(context).colorScheme.tertiary,
                           ),
                         ),
                       ],
@@ -152,7 +157,7 @@ class WeatherDetailsWidget extends StatelessWidget {
                 "${weather.current?.iconDecoder} "
                 "${weather.current?.tempMin24} - "
                 "${weather.current?.tempMax24}℃",
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: screenWidth * 0.05),
               ),
               Weather24HBriefWidget(forecast24h: weather.forecast72H!),
               Weather15DBriefWidget(forecast15d: weather.forecast15D!),

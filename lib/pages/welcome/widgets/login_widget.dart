@@ -17,29 +17,30 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     FormState? signinFormState = signinFormKey.currentState;
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenHeight = screenSize.height;
 
     return AlertDialog(
       title: const Text('登录'),
       content: SizedBox(
-        height: 150,
+        height: screenHeight * 0.15,
         child: SingleChildScrollView(
           child: Form(
             key: signinFormKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
+                Container(
                   width: double.infinity,
-                  height: 45,
+                  height: screenHeight * 0.05,
+                  margin: const EdgeInsets.only(top: 5),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "邮箱",
-                      border: const OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                       prefixIcon: Icon(
                         Icons.mail,
-                        color: Theme.of(context).primaryColor,
-                        size: 18.0,
                       ),
                     ),
                     autofocus: true,
@@ -47,7 +48,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 45,
+                  height: screenHeight * 0.05,
                   margin: const EdgeInsets.only(top: 10),
                   child: TextFormField(
                     keyboardType: TextInputType.visiblePassword,
@@ -55,10 +56,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     decoration: InputDecoration(
                       labelText: "密码",
                       border: const OutlineInputBorder(),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.lock,
-                        color: Theme.of(context).primaryColor,
-                        size: 18.0,
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(passwdVisible
@@ -76,7 +75,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextButton(
                       onPressed: () {
                         context.goNamed("/user/sign_up");
@@ -101,10 +100,16 @@ class _LoginWidgetState extends State<LoginWidget> {
           },
         ),
         ElevatedButton(
-          child: const Text("确定"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+          ),
           onPressed: () {
             context.pop(true);
           },
+          child: const Text(
+            "确定",
+          ),
         ),
       ],
     );

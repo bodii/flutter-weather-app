@@ -142,7 +142,7 @@ class _WeatherListViewState extends State<WeatherListView> {
     return Column(
       children: [
         SizedBox(
-          height: 180,
+          height: 190,
           child: PageView.builder(
             // 左右滑动
             onPageChanged: (int index) {
@@ -168,7 +168,7 @@ class _WeatherListViewState extends State<WeatherListView> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 30),
+          padding: const EdgeInsets.only(top: 10, bottom: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: clips(),
@@ -205,16 +205,12 @@ class _WeatherListViewState extends State<WeatherListView> {
 
   Widget clipIndex([bool selected = false]) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          width: 10,
-          height: 10,
-          color: selected
-              ? Theme.of(context).colorScheme.outline
-              : Theme.of(context).colorScheme.outlineVariant,
-        ),
+      padding: const EdgeInsets.all(2.0),
+      child: CircleAvatar(
+        radius: 5,
+        backgroundColor: selected
+            ? Theme.of(context).colorScheme.outline
+            : Theme.of(context).colorScheme.outlineVariant,
       ),
     );
   }

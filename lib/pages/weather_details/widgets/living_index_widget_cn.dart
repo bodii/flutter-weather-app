@@ -32,7 +32,7 @@ class LivingIndexCnWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: GridView.count(
         crossAxisCount: 3,
@@ -69,23 +69,23 @@ class LivingIndexCnItem extends StatelessWidget {
           child: SvgPicture.asset(
             'assets/weather_icon/icons/$icon',
             colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.tertiary,
+              Theme.of(context).colorScheme.inversePrimary,
               BlendMode.srcIn,
             ),
           ),
         ),
         Text(
           item.indexTypeCh!,
-          style: const TextStyle(
-            fontSize: 13,
-            color: Colors.black45,
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+            color: Theme.of(context).colorScheme.tertiary.withOpacity(0.7),
           ),
         ),
         Text(
           item.indexLevel!,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.black87,
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
       ],

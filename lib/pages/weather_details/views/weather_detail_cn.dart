@@ -93,6 +93,10 @@ class WeatherCnDetailsWidget extends StatelessWidget {
     final AirCurrent air = weatherState.air!;
     final Weather weather = weatherState.weather!;
     final SunAndMoonAndIndex smi = weatherState.sunAndMoonAndIndex!;
+
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -178,19 +182,19 @@ class WeatherCnDetailsWidget extends StatelessWidget {
               ),
               Image.asset(
                 'assets/weather_icon/d00.png',
-                width: 200,
-                height: 200,
+                width: screenWidth * 0.5,
+                height: screenWidth * 0.5,
               ),
               SizedBox(
-                width: 195,
-                height: 100,
+                width: screenWidth * 0.54,
+                height: screenWidth * 0.27,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '${weather.current?.current?.temperature}',
                       style: TextStyle(
-                        fontSize: 120,
+                        fontSize: 125,
                         height: 0.85,
                         color: Theme.of(context).colorScheme.primary,
                       ),
@@ -202,7 +206,7 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                         Text(
                           '℃',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 40,
                             color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),

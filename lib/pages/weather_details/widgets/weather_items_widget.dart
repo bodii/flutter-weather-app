@@ -20,7 +20,7 @@ class WeatherItemsWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         // backgroundBlendMode: BlendMode.colorBurn,
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: GridView.count(
         crossAxisCount: 3,
@@ -87,20 +87,23 @@ class WeatherItem extends StatelessWidget {
               'assets/weather_icon/icons/$icon',
               width: 45,
               height: 45,
-              colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.inversePrimary,
+                BlendMode.srcIn,
+              ),
             ),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.7),
               ),
             ),
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.green,
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                color: Theme.of(context).colorScheme.tertiary,
                 height: 1,
               ),
             ),

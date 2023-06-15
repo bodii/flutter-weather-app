@@ -42,6 +42,10 @@ class WelcomeBlocListenerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+    final double screenHeight = screenSize.height;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -53,14 +57,14 @@ class WelcomeBlocListenerView extends StatelessWidget {
               const WorldsWidget(),
               Container(
                 alignment: Alignment.center,
-                width: 350,
-                height: 350,
+                width: screenWidth * 0.8,
+                height: screenWidth * 0.8,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 20.0),
-                      width: 320,
+                      width: screenWidth * 0.8,
                       child: Center(
                         child: Text(
                           '四季交迭，草木皆知\n'
@@ -70,34 +74,33 @@ class WelcomeBlocListenerView extends StatelessWidget {
                           '无论何事\n'
                           '尽在，春夏秋冬的季节里',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize:
+                                Theme.of(context).textTheme.bodyLarge!.fontSize,
                             color: Theme.of(context).colorScheme.outline,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 300,
-                      height: 60,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context.pushNamed('/location');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(60),
+                    ElevatedButton(
+                      onPressed: () {
+                        context.pushNamed('/location');
+                      },
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.28,
+                            vertical: screenHeight * 0.015,
                           ),
                           backgroundColor:
                               Theme.of(context).colorScheme.primary,
-                        ),
-                        child: Text(
-                          '开始',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          textStyle: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .fontSize,
+                          )),
+                      child: const Text('开始'),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -22,6 +22,9 @@ class WeatherCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.surface,
+      elevation: 3,
+      margin: const EdgeInsets.only(bottom: 20),
       child: InkWell(
         onTap: () =>
             context.pushNamed('/weather/detail/china', pathParameters: {

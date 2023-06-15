@@ -35,11 +35,14 @@ class _WorldsWidgetState extends State<WorldsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double screenWidth = screenSize.width;
+
     return Column(
       children: [
         SizedBox(
-          width: double.infinity,
-          height: 320,
+          width: screenWidth,
+          height: screenWidth * 0.8,
           child: PageView.builder(
             onPageChanged: (int index) {
               setState(() {

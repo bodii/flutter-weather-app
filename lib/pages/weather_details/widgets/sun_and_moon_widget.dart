@@ -44,7 +44,7 @@ class SunAndMoonWidget extends StatelessWidget {
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: Column(
         children: [
@@ -86,12 +86,16 @@ class SunAndMoonWidget extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/weather_icon/icons/sunrise.svg',
                       colorFilter: ColorFilter.mode(
-                          Colors.orange.shade200, BlendMode.srcIn),
+                        Theme.of(context).colorScheme.inversePrimary,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       smi.sunAndMoon!.sun!.sunrise!,
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                     ),
                   ],
                 ),
@@ -100,13 +104,17 @@ class SunAndMoonWidget extends StatelessWidget {
                   children: [
                     Text(
                       smi.sunAndMoon!.sun!.sunset!,
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                     ),
                     const SizedBox(width: 8),
                     SvgPicture.asset(
                       'assets/weather_icon/icons/sunset.svg',
                       colorFilter: ColorFilter.mode(
-                          Colors.orange.shade200, BlendMode.srcIn),
+                        Theme.of(context).colorScheme.inversePrimary,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ],
                 ),

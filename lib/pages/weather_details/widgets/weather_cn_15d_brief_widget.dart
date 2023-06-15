@@ -44,7 +44,7 @@ class _WeatherCn15DBriefWidgetState extends State<WeatherCn15DBriefWidget> {
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: Theme.of(context).colorScheme.outline.withOpacity(.1),
       ),
       child: Column(
         children: [
@@ -87,9 +87,9 @@ class _WeatherCn15DBriefWidgetState extends State<WeatherCn15DBriefWidget> {
               },
               icon: RotatedBox(
                 quarterTurns: hasCheckAdd ? 1 : 3,
-                child: const Icon(
+                child: Icon(
                   Icons.chevron_left,
-                  color: Colors.black26,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
               ),
             ),
