@@ -41,17 +41,7 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
           WniHotCityNameId.fromJson(wniHotCityList);
       final Map<String, String> continents = wniHotCityNameId.nameIds!;
 
-      final config = Configuration.local(
-        [
-          AreaRealm.schema,
-          CityListRealm.schema,
-          DisListRealm.schema,
-        ],
-        // path: './assets/realm/area.realm',
-      );
-      final Realm areaRealm = Realm(config);
-      // areaRealm.write(() => areaRealm.deleteAll<AreaRealm>());
-
+      final Realm areaRealm = generateAreaRealm();
       RealmResults<AreaRealm> areaResult = areaRealm.all<AreaRealm>();
       debugPrint("areaResult is empty:${areaResult.isEmpty}");
       if (areaResult.isEmpty) {

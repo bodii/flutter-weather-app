@@ -44,13 +44,7 @@ class _SearchPageState extends State<SearchPage> {
     });
 
     // 设置realm存储对象
-    final config = Configuration.local(
-      [
-        AreaFormatRealm.schema,
-      ],
-      // path: './assets/realm/area.realm',
-    );
-    areaRealm = Realm(config);
+    areaRealm = generateAreaFormatRealm();
     areaResult = areaRealm.all<AreaFormatRealm>();
     getAreaResult();
   }
@@ -89,9 +83,8 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       gapPadding: 30.0,
                     ),
-                    suffixIcon: IconButton(
+                    suffixIcon: CloseButton(
                       onPressed: cancelSearchContent,
-                      icon: const Icon(Icons.close),
                     ),
                   ),
                   inputFormatters: [

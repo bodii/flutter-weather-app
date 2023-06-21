@@ -13,3 +13,16 @@ class _AreaFormatRealm {
   // 城区或乡镇id
   late String stationid;
 }
+
+Realm generateAreaFormatRealm() {
+// 设置realm存储对象
+  final config = Configuration.local(
+    [
+      AreaFormatRealm.schema,
+    ],
+    // path: './assets/realm/area.realm',
+  );
+  final Realm areaRealm = Realm(config);
+
+  return areaRealm;
+}

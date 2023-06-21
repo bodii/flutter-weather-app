@@ -23,7 +23,12 @@ class WeatherCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Theme.of(context).colorScheme.surface,
-      elevation: 3,
+      elevation: 8,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(16),
+        ),
+      ),
       margin: const EdgeInsets.only(bottom: 20),
       child: InkWell(
         onTap: () =>

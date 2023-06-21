@@ -25,3 +25,18 @@ class _DisListRealm {
   // 城区或乡镇id
   late String stationid;
 }
+
+Realm generateAreaRealm() {
+// 设置realm存储对象
+  final config = Configuration.local(
+    [
+      AreaRealm.schema,
+      CityListRealm.schema,
+      DisListRealm.schema,
+    ],
+    // path: './assets/realm/area.realm',
+  );
+  final Realm areaRealm = Realm(config);
+
+  return areaRealm;
+}

@@ -37,8 +37,7 @@ class _SignUpState extends State<SignUpPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+          leading: BackButton(
             onPressed: () {
               context.goNamed('/welcome');
             },
@@ -211,7 +210,7 @@ class _SignUpState extends State<SignUpPage> {
                           SizedBox(
                             width: 160.0,
                             height: 50.0,
-                            child: ElevatedButton(
+                            child: FilledButton(
                               onPressed: () {
                                 setState(() {
                                   if (formState != null) {
@@ -230,7 +229,7 @@ class _SignUpState extends State<SignUpPage> {
                           SizedBox(
                             width: 160.0,
                             height: 50.0,
-                            child: ElevatedButton(
+                            child: FilledButton(
                               onPressed: () {
                                 popupMessage(const Text("seccess!"));
                                 // if (formState != null && formState.validate()) {
@@ -247,7 +246,7 @@ class _SignUpState extends State<SignUpPage> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

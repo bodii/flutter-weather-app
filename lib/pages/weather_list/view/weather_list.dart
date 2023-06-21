@@ -139,55 +139,60 @@ class _WeatherListViewState extends State<WeatherListView> {
   }
 
   Widget listView(BuildContext context, WeatherListState state) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 190,
-          child: PageView.builder(
-            // 左右滑动
-            onPageChanged: (int index) {
-              setState(() {
-                currentPage = index;
-              });
-            },
-            reverse: false,
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            controller: pageController,
-            itemBuilder: (BuildContext context, int index) {
-              return WeatherCardWidget(
-                provcn: '当前城市',
-                city: state.cityWeather!.namecn!,
-                cityId: state.cityWeather!.id!,
-                weather: state.cityWeather!.winddirAm!,
-                pic: WeatherListView.weathers[0]['pic'] ?? '',
-                temperature: state.cityWeather!.temperatureAm!,
-              );
-            },
-            itemCount: 2,
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 190,
+            child: PageView.builder(
+              // 左右滑动
+              onPageChanged: (int index) {
+                setState(() {
+                  currentPage = index;
+                });
+              },
+              reverse: false,
+              scrollDirection: Axis.horizontal,
+              controller: pageController,
+              itemBuilder: (BuildContext context, int index) {
+                return WeatherCardWidget(
+                  provcn: '当前城市',
+                  city: state.cityWeather!.namecn!,
+                  cityId: state.cityWeather!.id!,
+                  weather: state.cityWeather!.winddirAm!,
+                  pic: WeatherListView.weathers[0]['pic'] ?? '',
+                  temperature: state.cityWeather!.temperatureAm!,
+                );
+              },
+              itemCount: 2,
+            ),
           ),
         ),
-        Padding(
+        SliverPadding(
           padding: const EdgeInsets.only(top: 10, bottom: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: clips(),
+          sliver: SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: clips(),
+            ),
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return WeatherCardWidget(
-                provcn: state.province!,
-                city: state.provinceCitysWeather![index].namecn ?? '',
-                cityId: state.provinceCitysWeather![index].id ?? '',
-                weather: state.provinceCitysWeather![index].winddirAm ?? '',
-                pic: WeatherListView.weathers[0]['pic'] ?? '',
-                temperature:
-                    state.provinceCitysWeather![index].temperatureAm ?? '',
-              );
-            },
-            itemCount: state.provinceCitysWeather!.length,
+          child: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return WeatherCardWidget(
+                  provcn: state.province!,
+                  city: state.provinceCitysWeather![index].namecn ?? '',
+                  cityId: state.provinceCitysWeather![index].id ?? '',
+                  weather: state.provinceCitysWeather![index].winddirAm ?? '',
+                  pic: WeatherListView.weathers[0]['pic'] ?? '',
+                  temperature:
+                      state.provinceCitysWeather![index].temperatureAm ?? '',
+                );
+              },
+              childCount: state.provinceCitysWeather!.length,
+            ),
           ),
         ),
       ],

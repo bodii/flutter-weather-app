@@ -102,7 +102,7 @@ class LocationPermissionView extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(
+              FilledButton(
                 onPressed: () {
                   context.read<LocationCubit>().changePermission();
                   // context.read<LocationCubit>().getCityInfo();
@@ -114,7 +114,6 @@ class LocationPermissionView extends StatelessWidget {
                     horizontal: screenWidth * 0.28,
                     vertical: screenHeight * 0.017,
                   ),
-                  backgroundColor: Theme.of(context).primaryColor,
                 ),
                 child: Text(
                   '同意',

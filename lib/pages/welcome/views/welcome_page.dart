@@ -81,19 +81,15 @@ class WelcomeBlocListenerView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ElevatedButton(
+                    FilledButton(
                       onPressed: () {
                         context.pushNamed('/location');
                       },
-                      style: ElevatedButton.styleFrom(
+                      style: FilledButton.styleFrom(
                           padding: EdgeInsets.symmetric(
                             horizontal: screenWidth * 0.28,
                             vertical: screenHeight * 0.015,
                           ),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onPrimary,
                           textStyle: TextStyle(
                             fontSize: Theme.of(context)
                                 .textTheme

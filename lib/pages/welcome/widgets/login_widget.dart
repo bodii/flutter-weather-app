@@ -90,7 +90,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       ),
       actions: [
-        ElevatedButton(
+        FilledButton(
           child: const Text("取消"),
           onPressed: () {
             if (signinFormState != null) {
@@ -99,11 +99,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             context.pop(false);
           },
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            foregroundColor: Theme.of(context).colorScheme.onPrimary,
-          ),
+        FilledButton(
           onPressed: () {
             context.pop(true);
           },
