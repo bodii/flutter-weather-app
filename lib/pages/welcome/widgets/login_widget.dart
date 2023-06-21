@@ -23,7 +23,7 @@ class _LoginWidgetState extends State<LoginWidget> {
     return AlertDialog(
       title: const Text('登录'),
       content: SizedBox(
-        height: screenHeight * 0.15,
+        height: screenHeight * 0.152,
         child: SingleChildScrollView(
           child: Form(
             key: signinFormKey,
