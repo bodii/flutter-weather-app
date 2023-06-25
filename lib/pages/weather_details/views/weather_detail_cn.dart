@@ -181,9 +181,9 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                'assets/weather_icon/d00.png',
-                width: screenWidth * 0.5,
-                height: screenWidth * 0.5,
+                getLocalIcon(weather.current?.current?.weatherPic ?? ''),
+                width: screenWidth * 0.25,
+                height: screenWidth * 0.25,
               ),
               SizedBox(
                 width: screenWidth * 0.54,
@@ -243,4 +243,8 @@ class WeatherCnDetailsWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+String getLocalIcon(String name) {
+  return 'assets/weather_icon/weathers/$name.png';
 }

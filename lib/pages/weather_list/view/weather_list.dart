@@ -89,7 +89,7 @@ class WeatherListView extends StatefulWidget {
       'provcn': '当前城市',
       'city': '北京',
       'weather': '晴',
-      'pic': 'assets/weather_icon/d00.png',
+      'pic': 'assets/weather_icon/weathers/d00.png',
       'temperature': '5',
     }
   ];
@@ -160,7 +160,7 @@ class _WeatherListViewState extends State<WeatherListView> {
                   city: state.cityWeather!.namecn!,
                   cityId: state.cityWeather!.id!,
                   weather: state.cityWeather!.winddirAm!,
-                  pic: WeatherListView.weathers[0]['pic'] ?? '',
+                  pic: getLocalIcon(state.cityWeather!.weatherAmPic!),
                   temperature: state.cityWeather!.temperatureAm!,
                 );
               },
@@ -186,7 +186,8 @@ class _WeatherListViewState extends State<WeatherListView> {
                   city: state.provinceCitysWeather![index].namecn ?? '',
                   cityId: state.provinceCitysWeather![index].id ?? '',
                   weather: state.provinceCitysWeather![index].winddirAm ?? '',
-                  pic: WeatherListView.weathers[0]['pic'] ?? '',
+                  pic: getLocalIcon(
+                      state.provinceCitysWeather![index].weatherAmPic!),
                   temperature:
                       state.provinceCitysWeather![index].temperatureAm ?? '',
                 );
@@ -219,4 +220,8 @@ class _WeatherListViewState extends State<WeatherListView> {
       ),
     );
   }
+}
+
+String getLocalIcon(String name) {
+  return 'assets/weather_icon/weathers/$name.png';
 }

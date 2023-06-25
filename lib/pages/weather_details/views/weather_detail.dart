@@ -112,7 +112,7 @@ class WeatherDetailsWidget extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(
-                'assets/weather_icon/d00.png',
+                getLocalIcon(weather.current?.iconPic ?? ''),
                 width: screenWidth * 0.5,
                 height: screenWidth * 0.5,
               ),
@@ -175,4 +175,8 @@ class WeatherDetailsWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+String getLocalIcon(String name) {
+  return 'assets/weather_icon/weathers/$name.png';
 }
