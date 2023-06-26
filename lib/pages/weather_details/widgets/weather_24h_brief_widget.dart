@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/common/asset.dart';
 import 'package:weather_app/model/wni_hot_country_data.dart';
 
 class Weather24HBriefWidget extends StatefulWidget {
@@ -60,7 +61,7 @@ class _Weather24HBriefWidgetState extends State<Weather24HBriefWidget> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Image.asset(
-                      'assets/weather_icon/weathers/${values[index].iconPic}.png',
+                      getLocalWeatherIconPath(values[index].iconPic!),
                       width: 20,
                       height: 20,
                     ),

@@ -8,5 +8,7 @@ const amapApiHost = 'ditu.amap.com';
 const amapLocationApiKey = '';
 // 百度地图api host
 const bdMapApiHost = 'api.map.baidu.com';
+// 百度地图api key
+const bdMapApiKey = '';
 // 获取ip host
 const ipCnHost = 'ip.cn';

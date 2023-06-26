@@ -16,14 +16,9 @@ class SunAndMoonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double percent = getCurrentTimeInDayPercentage(smi.sunAndMoon!.sun!);
-    // final double y = percent > 0.5 ? percent - 0.5 : 1 - percent;
-    // final double y2 = y;
-    // percent = .5;
 
     final num angle = 180 * percent;
     final num radians = degToRad(angle);
-
-    // debugPrint("angle: $angle  percent: $percent  radians: $radians");
 
     debugPrint('sin: ${sin(radians)} cos: ${cos(radians)}');
 
@@ -35,7 +30,6 @@ class SunAndMoonWidget extends StatelessWidget {
     final double y = cosRadians.abs();
 
     debugPrint("x1: $x1 percent: $percent cosRadians: $cosRadians");
-    // debugPrint("x: $x y: $y");
 
     return Container(
       width: 380,

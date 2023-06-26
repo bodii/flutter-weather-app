@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/common/asset.dart';
 import 'package:weather_app/model/wni_hot_country_data.dart';
 import 'package:weather_app/model/wni_hot_country_index.dart';
 import 'package:weather_app/pages/weather_details/bloc/weather_response_bloc.dart';
@@ -112,7 +113,7 @@ class WeatherDetailsWidget extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(
-                getLocalIcon(weather.current?.iconPic ?? ''),
+                getLocalWeatherIconPath(weather.current?.iconPic ?? ''),
                 width: screenWidth * 0.5,
                 height: screenWidth * 0.5,
               ),
@@ -175,8 +176,4 @@ class WeatherDetailsWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-String getLocalIcon(String name) {
-  return 'assets/weather_icon/weathers/$name.png';
 }

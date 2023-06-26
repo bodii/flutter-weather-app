@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/model/air_current.dart';
@@ -78,7 +77,6 @@ Future<List<City>> getChinaAllCityList() async {
     true,
   );
   List<City> citys = list.map((city) => City.fromJson(city)).toList();
-  // log(citys[0].namecn!);
 
   return citys;
 }
@@ -98,7 +96,6 @@ Future<CityInfo> getCityInfo(String cityid) async {
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   CityInfo city = CityInfo.fromJson(resps['data']);
-  log(city.namecn!);
 
   return city;
 }
@@ -111,6 +108,10 @@ Future<Weather> getCurrAnd15dAnd24h(String cityid) async {
     {'cityid': cityid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   Weather weather = Weather.fromJson(resps['data']);
@@ -126,6 +127,10 @@ Future<AirCurrent> getAirCurrent(String stationid) async {
     {'stationid': stationid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   AirCurrent airCurrent = AirCurrent.fromJson(resps['data']);
@@ -141,6 +146,10 @@ Future<AirForecast> getAirForecast(String stationid) async {
     {'stationid': stationid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   AirForecast airForecast = AirForecast.fromJson(resps['data']);
@@ -156,6 +165,10 @@ Future<AirPoint> getAirPoint(String stationid) async {
     {'stationid': stationid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   AirPoint airPoint = AirPoint.fromJson(resps['data']);
@@ -171,6 +184,10 @@ Future<RelatedWeather> getRelatedWeather(String cityid) async {
     {'cityid': cityid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   RelatedWeather relatedWeather = RelatedWeather.fromJson(resps['data']);
@@ -186,10 +203,13 @@ Future<SunAndMoonAndIndex> getSunMoonAndIndex(String cityid) async {
     {'cityid': cityid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   SunAndMoonAndIndex data = SunAndMoonAndIndex.fromJson(resps['data']);
-  log(data.index!.length.toString());
 
   return data;
 }
@@ -202,10 +222,13 @@ Future<AirQuality> getAirOrder([String ordery = 'ASC']) async {
     {'order': ordery, 'number': 10},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   AirQuality data = AirQuality.fromJson(resps['data']);
-  log(data.districtcn!);
 
   return data;
 }
@@ -218,6 +241,10 @@ Future<CityStationDisDataList> getCityStationDisData(String provcn) async {
     {'provcn': provcn},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   String body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   CityStationDisDataList data = CityStationDisDataList.fromJson(resps['data']);
@@ -233,10 +260,13 @@ Future<CityidToAttractions> getD3aJQStation(String cityid) async {
     {'id': cityid},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   CityidToAttractions data = CityidToAttractions.fromJson(resps['data']);
-  log(data.areaid!);
 
   return data;
 }
@@ -249,10 +279,13 @@ Future<WeatherNews> getWeatherNews() async {
     {'tag': '', 'subject': '', 'limit': 8, 'page': 1, 'type': '1'},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WeatherNews data = WeatherNews.fromJson(resps['data']);
-  log(data.totalCount!.bitLength.toString());
 
   return data;
 }
@@ -265,10 +298,13 @@ Future<WeatherVideo> getVideoList() async {
     {'stationid': '', 'weather': '00', 'type': '', 'videopar': ''},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WeatherVideo data = WeatherVideo.fromJson(resps['data']);
-  log(data.lbvideo!.beforeYesterday!.vidDate!);
 
   return data;
 }
@@ -281,10 +317,13 @@ Future<WeatherVideo> getVideoDataByType() async {
     {'limit': 9, 'page': 1, 'type': ''},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WeatherVideo data = WeatherVideo.fromJson(resps['data']);
-  log(data.lbvideo!.beforeYesterday!.vidDate!);
 
   return data;
 }
@@ -297,10 +336,13 @@ Future<Recommend> getSubjectOnLine() async {
     {'banner': 'Y'},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   Recommend data = Recommend.fromJson(resps['data']);
-  log(data.bannerImg!);
 
   return data;
 }
@@ -317,6 +359,10 @@ Future<WniHotCountryList> getWniHotCountryGroupBy() async {
     "Access-Control-Allow-Headers": "Access-Control-Allow-Origin, Accept"
   });
 
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WniHotCountryList data = WniHotCountryList.fromJson(resps['data']);
@@ -330,6 +376,10 @@ Future<WniHotCityList> getWniHotCity() async {
     'js/json/wni_hotCity.json',
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   List<dynamic> resps = jsonDecode(utf8.decode(body.runes.toList()));
   WniHotCityList data = WniHotCityList.fromJson(resps);
@@ -345,6 +395,10 @@ Future<WniHotCountryObsCapl> getWniHotCountryOBSCaplData(String ids) async {
     {'ids': ids},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WniHotCountryObsCapl data = WniHotCountryObsCapl.fromJson(resps['data']);
@@ -360,6 +414,10 @@ Future<WniHotCountryData> getWniHotCountryData(String id) async {
     {'id': id},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   WniHotCountryData data = WniHotCountryData.fromJson(resps['data']);
@@ -375,6 +433,10 @@ Future<List<WniHotCountryIndex>> getWniHotCountryIndex(String id) async {
     {'id': id},
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   List<dynamic> data = resps['data'] as List<dynamic>;
@@ -399,6 +461,10 @@ Future<AmapGeoToAddress> getAmapGeoToAddress(
     },
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   AmapGeoToAddress data = AmapGeoToAddress.fromJson(resps);
@@ -414,10 +480,14 @@ Future<BGeoToAddress> getGeoToAddress(double latitude, double longitude) async {
     {
       'output': 'json',
       'location': '$latitude,$longitude',
-      'key': '37492c0ee6f924cb5e934fa08c6b1676',
+      'key': bdMapApiKey,
     },
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   BGeoToAddress data = BGeoToAddress.fromJson(resps['result']);
@@ -434,10 +504,14 @@ Future<BGeoToAddress> getAddressToGeo(String address) async {
       'output': 'json',
       'address': address,
       'city': '',
-      'key': '37492c0ee6f924cb5e934fa08c6b1676',
+      'key': bdMapApiKey,
     },
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   BGeoToAddress data = BGeoToAddress.fromJson(resps['result']);
@@ -455,6 +529,10 @@ Future<IpAndAddress> getIpAndAddress() async {
     },
   );
   var response = await http.get(url);
+  if (response.statusCode != HttpStatus.ok) {
+    throw Exception('connect failure!');
+  }
+
   var body = response.body;
   Map<String, dynamic> resps = jsonDecode(body);
   IpAndAddress data = IpAndAddress.fromJson(resps['result']);

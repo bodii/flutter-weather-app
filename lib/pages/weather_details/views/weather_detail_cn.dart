@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/common/asset.dart';
 import 'package:weather_app/model/air_current.dart';
 import 'package:weather_app/model/sun_and_moon.dart';
 import 'package:weather_app/model/weather.dart';
@@ -181,7 +182,8 @@ class WeatherCnDetailsWidget extends StatelessWidget {
                 ),
               ),
               Image.asset(
-                getLocalIcon(weather.current?.current?.weatherPic ?? ''),
+                getLocalWeatherIconPath(
+                    weather.current?.current?.weatherPic ?? ''),
                 width: screenWidth * 0.25,
                 height: screenWidth * 0.25,
               ),
@@ -243,8 +245,4 @@ class WeatherCnDetailsWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-String getLocalIcon(String name) {
-  return 'assets/weather_icon/weathers/$name.png';
 }

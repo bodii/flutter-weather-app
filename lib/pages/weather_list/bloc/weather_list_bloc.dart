@@ -26,10 +26,6 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       emit(state.copyWith(status: WeatherListStatus.failure));
       throw Exception("store get address info failure");
     }
-    // List<String> keys = store.getKeys().toList();
-    // print(keys);
-
-    // print(addressStr);
 
     AmapAddressData address = AmapAddressData.fromJson(jsonDecode(addressStr));
 
@@ -46,9 +42,6 @@ class WeatherListBloc extends Bloc<WeatherListEvent, WeatherListState> {
       addressCity = addressCity.substring(0, addressCity.length - 1);
     }
     emit(state.copyWith(cityName: addressCity));
-
-    // print(addressProvince);
-    // print(addressCity);
 
     CityStationDisDataList cityList =
         await getCityStationDisData(addressProvince);

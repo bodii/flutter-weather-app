@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/common/asset.dart';
 import 'package:weather_app/pages/error/error_page.dart';
 import 'package:weather_app/pages/weather_list/bloc/weather_list_bloc.dart';
 import 'package:weather_app/pages/weather_list/widgets/weather_card.dart';
@@ -155,13 +156,17 @@ class _WeatherListViewState extends State<WeatherListView> {
               scrollDirection: Axis.horizontal,
               controller: pageController,
               itemBuilder: (BuildContext context, int index) {
-                return WeatherCardWidget(
-                  provcn: '当前城市',
-                  city: state.cityWeather!.namecn!,
-                  cityId: state.cityWeather!.id!,
-                  weather: state.cityWeather!.winddirAm!,
-                  pic: getLocalIcon(state.cityWeather!.weatherAmPic!),
-                  temperature: state.cityWeather!.temperatureAm!,
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: WeatherCardWidget(
+                    provcn: '当前城市',
+                    city: state.cityWeather!.namecn!,
+                    cityId: state.cityWeather!.id!,
+                    weather: state.cityWeather!.winddirAm!,
+                    pic: getLocalWeatherIconPath(
+                        state.cityWeather!.weatherAmPic!),
+                    temperature: state.cityWeather!.temperatureAm!,
+                  ),
                 );
               },
               itemCount: 2,
@@ -186,7 +191,7 @@ class _WeatherListViewState extends State<WeatherListView> {
                   city: state.provinceCitysWeather![index].namecn ?? '',
                   cityId: state.provinceCitysWeather![index].id ?? '',
                   weather: state.provinceCitysWeather![index].winddirAm ?? '',
-                  pic: getLocalIcon(
+                  pic: getLocalWeatherIconPath(
                       state.provinceCitysWeather![index].weatherAmPic!),
                   temperature:
                       state.provinceCitysWeather![index].temperatureAm ?? '',
@@ -220,8 +225,4 @@ class _WeatherListViewState extends State<WeatherListView> {
       ),
     );
   }
-}
-
-String getLocalIcon(String name) {
-  return 'assets/weather_icon/weathers/$name.png';
 }

@@ -47,15 +47,6 @@ class WeatherResponseBloc
             status: WeatherResponseStatus.httpFailure,
           ));
         } else {
-          // debugPrint("air");
-          // debugPrint(jsonEncode(air.toJson()));
-
-          // debugPrint("weather");
-          // debugPrint(jsonEncode(weather.toJson()));
-
-          // debugPrint("sunAndMoonAndIndex");
-          // debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
-
           emit(state.copyWith(
             status: WeatherResponseStatus.httpSuccess,
             weather: weather,

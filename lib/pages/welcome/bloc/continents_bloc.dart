@@ -33,7 +33,6 @@ class ContinentsBloc extends Bloc<ContinentsEvent, ContinentsState> {
     // }
 
     emit(state.copyWith(status: ContinentsStatus.httpLoading));
-    debugPrint("current status: 001");
     debugPrint(state.status.toString());
     try {
       final WniHotCityList wniHotCityList = await getWniHotCity();

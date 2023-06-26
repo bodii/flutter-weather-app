@@ -31,7 +31,6 @@ class WeatherResponseCnBloc
       cityId: cityId,
       city: city,
     ));
-    debugPrint("http loading cityId: $cityId");
 
     try {
       String stationid = cityId;
@@ -46,20 +45,10 @@ class WeatherResponseCnBloc
         if (air.dataTime == null ||
             weather.current == null ||
             sunAndMoonAndIndex.sunAndMoon == null) {
-          debugPrint("air or weather or sunAndMoonAndIndex is null");
           emit(state.copyWith(
             status: WeatherResponseCnStatus.httpFailure,
           ));
         } else {
-          // debugPrint("air");
-          // debugPrint(jsonEncode(air.toJson()));
-
-          // debugPrint("weather");
-          // debugPrint(jsonEncode(weather.toJson()));
-
-          // debugPrint("sunAndMoonAndIndex");
-          // debugPrint(jsonEncode(sunAndMoonAndIndex.toJson()));
-
           emit(state.copyWith(
             status: WeatherResponseCnStatus.httpSuccess,
             air: air,
