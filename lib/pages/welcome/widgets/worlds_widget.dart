@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/pages/welcome/widgets/worlds_widget/index.dart';
 
@@ -21,16 +22,31 @@ class _WorldsWidgetState extends State<WorldsWidget> {
   PageController worldsPage = PageController();
   int currentIndex = 0;
 
+  late String networkStateText;
+
   @override
   void initState() {
     super.initState();
     worldsPage.addListener(() {});
+    // checkNetworkConn();
   }
 
   @override
   void dispose() {
     worldsPage.dispose();
     super.dispose();
+  }
+
+  Future checkNetworkConn() async {
+    final ConnectivityResult connectionstate =
+        await Connectivity().checkConnectivity();
+    if (connectionstate == ConnectivityResult.wifi) {
+      networkStateText = '当前处于wifi网络';
+    } else if (connectionstate == ConnectivityResult.mobile) {
+      networkStateText = '当前处于数据流量网络';
+    } else {
+      networkStateText = '网络链接失败';
+    }
   }
 
   @override
