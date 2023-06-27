@@ -9,7 +9,7 @@
 
 ![flutter-3.0.0](https://img.shields.io/badge/flutter-%3E=3.0.0-52c6f9.svg?sanitize=true)
 ![android✔](https://img.shields.io/badge/android✔-brightgreen.svg?sanitize=true)
-![ios✔](https://img.shields.io/badge/ios✔-green.svg?sanitize=true)
+![ios❔](https://img.shields.io/badge/ios❔-green.svg?sanitize=true)
 
 </div>
 
